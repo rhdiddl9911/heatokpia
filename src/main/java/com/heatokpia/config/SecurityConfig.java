@@ -9,7 +9,6 @@ import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 
 @EnableWebSecurity
@@ -18,17 +17,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		// 로그인 1명만 되게, 나중에 로그인한 사람이 로그인됨
 		http.sessionManagement()
 			.maximumSessions(1)
-			.maxSessionsPreventsLogin(false).sessionRegistry(sessinoRegistry());
+			.maxSessionsPreventsLogin(false)
+			.sessionRegistry(sessinoRegistry());
+		
+		// 권한 접근 url 설정
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/member/**").authenticated();
-		http.authorizeRequests().antMatchers("/admin/**").authenticated();
-		//http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
+		//http.authorizeRequests().antMatchers("/member/**").authenticated();
+		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 
 		http.csrf().disable();
 		//http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-		http.formLogin();
+		
+		// 기본 로그인과 기본 로그아웃 사용
+		http.formLogin().and().logout();
 		
 	}
 	
