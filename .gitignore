@@ -36,5 +36,4 @@ mvnw
 .mvn/wrapper/MavenWrapperDownloader.java
 .mvn/wrapper/maven-wrapper.properties
 .mvn/wrapper/maven-wrapper.jar
-src/main/java/com/heatokpia/config/AppConfigForJasyptStarter.java
-src/main/java/com/heatokpia/config/AppConfigForJasyptStarter.java
+src/main/java/com/heatokpia/config/AppConfigForJasyptStarter
