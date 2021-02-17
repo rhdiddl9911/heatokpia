@@ -2,12 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.heatokpia.mapper.MemberMapper">
-	<select id="readMemberById" parameterType="String" resultType="Member">
-		SELECT * FROM member WHERE member_id = #{member_id}
+	<select id="findById" parameterType="String" resultType="Member">
+	 <![CDATA[
+			SELECT * 
+			FROM member 
+			WHERE member_id = #{member_id}
+		]]>
 	</select>
 	
-	<insert id="insertTestAdminMember">
-		INSERT INTO member(member_id, password, name, role)
-		VALUES('amdin','1234', '관리자', 'ROLE_ADMIN')
+	<insert id="save" parameterType="Member">
+		<![CDATA[
+			INSERT INTO member
+			VALUES(
+			#{member_id},
+			#{password},
+			#{email, jdbcType=VARCHAR},
+			#{name},
+			#{satus, jdbcType=VARCHAR},
+			#{role}
+			)
+		]]>
 	</insert>
+	
+	
 </mapper>
