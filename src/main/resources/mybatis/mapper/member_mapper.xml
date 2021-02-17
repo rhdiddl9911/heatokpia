@@ -6,7 +6,7 @@
 	 <![CDATA[
 			SELECT * 
 			FROM member 
-			WHERE member_id = #{member_id}
+			WHERE id = #{id}
 		]]>
 	</select>
 	
@@ -14,12 +14,12 @@
 		<![CDATA[
 			INSERT INTO member
 			VALUES(
-			#{member_id},
+			#{id},
 			#{password},
 			#{email, jdbcType=VARCHAR},
 			#{name},
 			#{satus, jdbcType=VARCHAR},
-			#{role}
+			#{role, jdbcType=VARCHAR}
 			)
 		]]>
 	</insert>

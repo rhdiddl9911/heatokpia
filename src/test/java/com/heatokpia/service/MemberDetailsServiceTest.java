@@ -17,7 +17,7 @@ public class MemberDetailsServiceTest {
 	@Test
 	public void addAdminTest() {
 		Member testAdmin = new Member();
-		testAdmin.setMember_id("admin");
+		testAdmin.setId("admin");
 		testAdmin.setName("관리자");
 		testAdmin.setPassword("1234");
 		testAdmin.setRole(MemberRole.ROLE_ADMIN);

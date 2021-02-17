@@ -1,14 +1,14 @@
 DROP TABLE Member;
 
 CREATE TABLE Member (
-       member_id            VARCHAR(20) NOT NULL,
+       id            		VARCHAR(20) NOT NULL,
        password             VARCHAR(100) NOT NULL,
        email                VARCHAR(50) NULL,
        name                 VARCHAR(20) NOT NULL,
        satus                VARCHAR(1) NULL,
        role                 VARCHAR(10) NULL
 );
-ALTER TABLE Member ADD  ( PRIMARY KEY (member_id) ) ;
+ALTER TABLE Member ADD  ( PRIMARY KEY (id) ) ;
 
 
 DROP TABLE board;

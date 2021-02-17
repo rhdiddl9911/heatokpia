@@ -17,7 +17,7 @@ public class Member implements UserDetails{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String member_id;
+	private String id;
 	private String password;
 	private String email;
 	private String name;
@@ -30,7 +30,7 @@ public class Member implements UserDetails{
 	}
 	@Override
 	public String getUsername() {
-		return member_id;
+		return id;
 	}
 	
 	// 권한 리턴

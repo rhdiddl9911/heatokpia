@@ -13,14 +13,17 @@ public class MemberMapperTest {
 	MemberMapper memMapper;
 	
 	@Test
-	public void insertTestAdminTest() {
-		memMapper.insertTestAdminMember();
+	public void insertTest() {
+		Member mem = new Member();
+		mem.setId("test");
+		mem.setPassword("1234");
+		mem.setName("테스터");
+		memMapper.save(mem);
 	}
 	
 	@Test
-	public void selectBYid() {
-		//Member mem = memMapper.readMemberById("admin");
-		// d안넘어옴 ;
-		//System.out.println(mem.getUsername());
+	public void selectByid() {
+		Member member = memMapper.findById("test");
+		System.out.println(member.toString());
 	}
 }
