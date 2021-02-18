@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heatokpia.mapper.BoardMapper">
+	<select id="findById" parameterType="String" resultType="Board">
+	 <![CDATA[
+		]]>
+	</select>
+	
+	<insert id="save" parameterType="com.heatokpia.dto.BoardNonMember">
+		<![CDATA[
+			INSERT INTO board
+			VALUES (
+				seq_board.NEXTVAL,
+				#{content},
+				SYSDATE,
+				NULL,
+				NULL,
+				#{name},
+				#{ip},
+				#{password},
+				#{category},
+				NULL,
+				NULL,
+				NULL,
+				#{title}
+			)
+		]]>
+	</insert>
+	
+	
+	
+</mapper>
