@@ -1,6 +1,21 @@
 -- ON DELETE CASCADE
 -- ON DELETE SET NULL
 
+CREATE TABLE Member (
+       id                   VARCHAR2(20) NOT NULL,
+       password             VARCHAR2(100) NOT NULL,
+       email                VARCHAR2(100) NOT NULL,
+       name                 VARCHAR2(20) NOT NULL,
+       satus                VARCHAR2(1) NULL,
+       role                 VARCHAR2(10) NULL,
+       PRIMARY KEY (id)
+);
+
+
+
+
+
+
 CREATE TABLE board (
        seq                  INTEGER NOT NULL,
        content              VARCHAR2(1000) NULL,
