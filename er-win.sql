@@ -26,7 +26,7 @@ CREATE TABLE board (
 );
 
 
-CREATE TABLE comment (
+CREATE TABLE board_comment (
        seq                  INTEGER NOT NULL,
        board_seq            INTEGER NOT NULL,
        password             VARCHAR2(50) NULL,
@@ -120,12 +120,12 @@ ALTER TABLE board
                              REFERENCES Member ) ;
 
 
-ALTER TABLE comment
+ALTER TABLE board_comment
        ADD  ( FOREIGN KEY (id)
                              REFERENCES Member ) ;
 
 
-ALTER TABLE comment
+ALTER TABLE board_comment
        ADD  ( FOREIGN KEY (board_seq)
                              REFERENCES board ) ;
 
@@ -276,15 +276,15 @@ begin
     /* ERwin Builtin Thu Feb 18 13:36:45 2021 */
     /* board R/6 comment ON PARENT DELETE RESTRICT */
     select count(*) into numrows
-      from comment
+      from board_comment
       where
         /*  comment.board_seq = :old.seq */
-        comment.board_seq = :old.seq;
+        board_comment.board_seq = :old.seq;
     if (numrows > 0)
     then
       raise_application_error(
         -20001,
-        'Cannot DELETE board because comment exists.'
+        'Cannot DELETE board because board_comment exists.'
       );
     end if;
 
@@ -345,21 +345,21 @@ begin
   end if;
 
   /* ERwin Builtin Thu Feb 18 13:36:45 2021 */
-  /* board R/6 comment ON PARENT UPDATE RESTRICT */
+  /* board R/6 board_comment ON PARENT UPDATE RESTRICT */
   if
     /* :old.seq <> :new.seq */
     :old.seq <> :new.seq
   then
     select count(*) into numrows
-      from comment
+      from board_comment
       where
-        /*  comment.board_seq = :old.seq */
-        comment.board_seq = :old.seq;
+        /*  board_comment.board_seq = :old.seq */
+        board_comment.board_seq = :old.seq;
     if (numrows > 0)
     then 
       raise_application_error(
         -20005,
-        'Cannot UPDATE board because comment exists.'
+        'Cannot UPDATE board because board_comment exists.'
       );
     end if;
   end if;
@@ -385,17 +385,17 @@ begin
 end;
 /
 
-create trigger tI_comment after INSERT on comment for each row
+create trigger tI_board_comment after INSERT on board_comment for each row
 -- ERwin Builtin Thu Feb 18 13:36:45 2021
--- INSERT trigger on comment 
+-- INSERT trigger on board_comment 
 declare numrows INTEGER;
 begin
     /* ERwin Builtin Thu Feb 18 13:36:45 2021 */
-    /* Member R/16 comment ON CHILD INSERT SET NULL */
-    update comment
+    /* Member R/16 board_comment ON CHILD INSERT SET NULL */
+    update board_comment
       set
-        /* comment.id = NULL */
-        comment.id = NULL
+        /* board_comment.id = NULL */
+        board_comment.id = NULL
       where
         not exists (
           select * from Member
@@ -403,11 +403,11 @@ begin
               /* :new.id = Member.id */
               :new.id = Member.id
         ) and
-        /* comment.seq = :new.seq */
-        comment.seq = :new.seq;
+        /* board_comment.seq = :new.seq */
+        board_comment.seq = :new.seq;
 
     /* ERwin Builtin Thu Feb 18 13:36:45 2021 */
-    /* board R/6 comment ON CHILD INSERT RESTRICT */
+    /* board R/6 board_comment ON CHILD INSERT RESTRICT */
     select count(*) into numrows
       from board
       where
@@ -421,7 +421,7 @@ begin
     then
       raise_application_error(
         -20002,
-        'Cannot INSERT comment because board does not exist.'
+        'Cannot INSERT board_comment because board does not exist.'
       );
     end if;
 
@@ -430,17 +430,17 @@ begin
 end;
 /
 
-create trigger tU_comment after UPDATE on comment for each row
+create trigger tU_board_comment after UPDATE on board_comment for each row
 -- ERwin Builtin Thu Feb 18 13:36:45 2021
--- UPDATE trigger on comment 
+-- UPDATE trigger on board_comment 
 declare numrows INTEGER;
 begin
     /* ERwin Builtin Thu Feb 18 13:36:45 2021 */
-    /* Member R/16 comment ON CHILD UPDATE SET NULL */
-    update comment
+    /* Member R/16 board_comment ON CHILD UPDATE SET NULL */
+    update board_comment
       set
-        /* comment.id = NULL */
-        comment.id = NULL
+        /* board_comment.id = NULL */
+        board_comment.id = NULL
       where
         not exists (
           select * from Member
@@ -448,11 +448,11 @@ begin
               /* :new.id = Member.id */
               :new.id = Member.id
         ) and
-        /* comment.seq = :new.seq */
-        comment.seq = :new.seq;
+        /* board_comment.seq = :new.seq */
+        board_comment.seq = :new.seq;
 
   /* ERwin Builtin Thu Feb 18 13:36:45 2021 */
-  /* board R/6 comment ON CHILD UPDATE RESTRICT */
+  /* board R/6 board_comment ON CHILD UPDATE RESTRICT */
   select count(*) into numrows
     from board
     where
@@ -466,7 +466,7 @@ begin
   then
     raise_application_error(
       -20007,
-      'Cannot UPDATE comment because board does not exist.'
+      'Cannot UPDATE board_comment because board does not exist.'
     );
   end if;
 
@@ -662,13 +662,13 @@ begin
 
     /* ERwin Builtin Thu Feb 18 13:36:45 2021 */
     /* Member R/16 comment ON PARENT DELETE SET NULL */
-    update comment
+    update board_comment
       set
         /* comment.id = NULL */
-        comment.id = NULL
+        board_comment.id = NULL
       where
-        /* comment.id = :old.id */
-        comment.id = :old.id;
+        /* board_comment.id = :old.id */
+        board_comment.id = :old.id;
 
     /* ERwin Builtin Thu Feb 18 13:36:45 2021 */
     /* Member R/8 board ON PARENT DELETE SET NULL */
@@ -789,13 +789,13 @@ begin
     /* :old.id <> :new.id */
     :old.id <> :new.id
   then
-    update comment
+    update board_comment
       set
-        /* comment.id = NULL */
-        comment.id = NULL
+        /* board_comment.id = NULL */
+        board_comment.id = NULL
       where
-        /* comment.id = :old.id */
-        comment.id = :old.id;
+        /* board_comment.id = :old.id */
+        board_comment.id = :old.id;
   end if;
 
   /* Member R/8 board ON PARENT UPDATE SET NULL */
