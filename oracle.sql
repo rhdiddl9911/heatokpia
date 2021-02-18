@@ -69,7 +69,7 @@ CREATE TABLE like (
 
 
 ALTER TABLE like
-       ADD  ( PRIMARY KEY (board_seq) ) ;
+       ADD  ( PRIMARY KEY (board_seq, ip) ) ;
 
 
 CREATE TABLE Member (
@@ -183,11 +183,11 @@ ALTER TABLE q_board
 
 
 create trigger tI_a_board after INSERT on a_board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- INSERT trigger on a_board 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* q_board R/30 a_board ON CHILD INSERT RESTRICT */
     select count(*) into numrows
       from q_board
@@ -206,7 +206,7 @@ begin
       );
     end if;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/29 a_board ON CHILD INSERT RESTRICT */
     select count(*) into numrows
       from Member
@@ -226,16 +226,16 @@ begin
     end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_a_board after UPDATE on a_board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on a_board 
 declare numrows INTEGER;
 begin
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* q_board R/30 a_board ON CHILD UPDATE RESTRICT */
   select count(*) into numrows
     from q_board
@@ -254,7 +254,7 @@ begin
     );
   end if;
 
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* Member R/29 a_board ON CHILD UPDATE RESTRICT */
   select count(*) into numrows
     from Member
@@ -274,16 +274,16 @@ begin
   end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tD_board after DELETE on board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- DELETE trigger on board 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* board R/31 like ON PARENT DELETE RESTRICT */
     select count(*) into numrows
       from like
@@ -298,7 +298,7 @@ begin
       );
     end if;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* board R/6 coment ON PARENT DELETE RESTRICT */
     select count(*) into numrows
       from coment
@@ -314,16 +314,16 @@ begin
     end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tI_board after INSERT on board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- INSERT trigger on board 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/8 board ON CHILD INSERT SET NULL */
     update board
       set
@@ -340,16 +340,16 @@ begin
         board.board_seq = :new.board_seq;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_board after UPDATE on board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on board 
 declare numrows INTEGER;
 begin
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* board R/31 like ON PARENT UPDATE RESTRICT */
   if
     /* :old.board_seq <> :new.board_seq */
@@ -369,7 +369,7 @@ begin
     end if;
   end if;
 
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* board R/6 coment ON PARENT UPDATE RESTRICT */
   if
     /* :old.board_seq <> :new.board_seq */
@@ -389,7 +389,7 @@ begin
     end if;
   end if;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/8 board ON CHILD UPDATE SET NULL */
     update board
       set
@@ -406,16 +406,16 @@ begin
         board.board_seq = :new.board_seq;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tI_coment after INSERT on coment for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- INSERT trigger on coment 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/16 coment ON CHILD INSERT SET NULL */
     update coment
       set
@@ -431,7 +431,7 @@ begin
         /* coment.coment_seq = :new.coment_seq */
         coment.coment_seq = :new.coment_seq;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* board R/6 coment ON CHILD INSERT RESTRICT */
     select count(*) into numrows
       from board
@@ -451,16 +451,16 @@ begin
     end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_coment after UPDATE on coment for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on coment 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/16 coment ON CHILD UPDATE SET NULL */
     update coment
       set
@@ -476,7 +476,7 @@ begin
         /* coment.coment_seq = :new.coment_seq */
         coment.coment_seq = :new.coment_seq;
 
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* board R/6 coment ON CHILD UPDATE RESTRICT */
   select count(*) into numrows
     from board
@@ -496,16 +496,16 @@ begin
   end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tI_finance_coment after INSERT on finance_coment for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- INSERT trigger on finance_coment 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/18 finance_coment ON CHILD INSERT SET NULL */
     update finance_coment
       set
@@ -522,16 +522,16 @@ begin
         finance_coment.seq = :new.seq;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_finance_coment after UPDATE on finance_coment for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on finance_coment 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/18 finance_coment ON CHILD UPDATE SET NULL */
     update finance_coment
       set
@@ -548,16 +548,16 @@ begin
         finance_coment.seq = :new.seq;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tI_like after INSERT on like for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- INSERT trigger on like 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* board R/31 like ON CHILD INSERT RESTRICT */
     select count(*) into numrows
       from board
@@ -577,16 +577,16 @@ begin
     end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_like after UPDATE on like for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on like 
 declare numrows INTEGER;
 begin
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* board R/31 like ON CHILD UPDATE RESTRICT */
   select count(*) into numrows
     from board
@@ -606,16 +606,16 @@ begin
   end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tD_Member after DELETE on Member for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- DELETE trigger on Member 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/29 a_board ON PARENT DELETE RESTRICT */
     select count(*) into numrows
       from a_board
@@ -630,7 +630,7 @@ begin
       );
     end if;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/27 news ON PARENT DELETE RESTRICT */
     select count(*) into numrows
       from news
@@ -645,7 +645,7 @@ begin
       );
     end if;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/26 notice_board ON PARENT DELETE RESTRICT */
     select count(*) into numrows
       from notice_board
@@ -660,7 +660,7 @@ begin
       );
     end if;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/23 q_board ON PARENT DELETE RESTRICT */
     select count(*) into numrows
       from q_board
@@ -675,7 +675,7 @@ begin
       );
     end if;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/18 finance_coment ON PARENT DELETE SET NULL */
     update finance_coment
       set
@@ -685,7 +685,7 @@ begin
         /* finance_coment.id = :old.id */
         finance_coment.id = :old.id;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/16 coment ON PARENT DELETE SET NULL */
     update coment
       set
@@ -695,7 +695,7 @@ begin
         /* coment.id = :old.id */
         coment.id = :old.id;
 
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/8 board ON PARENT DELETE SET NULL */
     update board
       set
@@ -706,16 +706,16 @@ begin
         board.id = :old.id;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_Member after UPDATE on Member for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on Member 
 declare numrows INTEGER;
 begin
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* Member R/29 a_board ON PARENT UPDATE RESTRICT */
   if
     /* :old.id <> :new.id */
@@ -735,7 +735,7 @@ begin
     end if;
   end if;
 
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* Member R/27 news ON PARENT UPDATE RESTRICT */
   if
     /* :old.id <> :new.id */
@@ -755,7 +755,7 @@ begin
     end if;
   end if;
 
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* Member R/26 notice_board ON PARENT UPDATE RESTRICT */
   if
     /* :old.id <> :new.id */
@@ -775,7 +775,7 @@ begin
     end if;
   end if;
 
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* Member R/23 q_board ON PARENT UPDATE RESTRICT */
   if
     /* :old.id <> :new.id */
@@ -838,16 +838,16 @@ begin
   end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tI_news after INSERT on news for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- INSERT trigger on news 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/27 news ON CHILD INSERT RESTRICT */
     select count(*) into numrows
       from Member
@@ -867,16 +867,16 @@ begin
     end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_news after UPDATE on news for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on news 
 declare numrows INTEGER;
 begin
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* Member R/27 news ON CHILD UPDATE RESTRICT */
   select count(*) into numrows
     from Member
@@ -896,16 +896,16 @@ begin
   end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tI_notice_board after INSERT on notice_board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- INSERT trigger on notice_board 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/26 notice_board ON CHILD INSERT RESTRICT */
     select count(*) into numrows
       from Member
@@ -925,16 +925,16 @@ begin
     end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_notice_board after UPDATE on notice_board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on notice_board 
 declare numrows INTEGER;
 begin
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* Member R/26 notice_board ON CHILD UPDATE RESTRICT */
   select count(*) into numrows
     from Member
@@ -954,16 +954,16 @@ begin
   end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tD_q_board after DELETE on q_board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- DELETE trigger on q_board 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* q_board R/30 a_board ON PARENT DELETE RESTRICT */
     select count(*) into numrows
       from a_board
@@ -979,16 +979,16 @@ begin
     end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tI_q_board after INSERT on q_board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- INSERT trigger on q_board 
 declare numrows INTEGER;
 begin
-    /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+    /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
     /* Member R/23 q_board ON CHILD INSERT RESTRICT */
     select count(*) into numrows
       from Member
@@ -1008,16 +1008,16 @@ begin
     end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
 create trigger tU_q_board after UPDATE on q_board for each row
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 -- UPDATE trigger on q_board 
 declare numrows INTEGER;
 begin
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* q_board R/30 a_board ON PARENT UPDATE RESTRICT */
   if
     /* :old.seq <> :new.seq */
@@ -1037,7 +1037,7 @@ begin
     end if;
   end if;
 
-  /* ERwin Builtin Thu Feb 18 10:47:20 2021 */
+  /* ERwin Builtin Thu Feb 18 10:53:12 2021 */
   /* Member R/23 q_board ON CHILD UPDATE RESTRICT */
   select count(*) into numrows
     from Member
@@ -1057,7 +1057,7 @@ begin
   end if;
 
 
--- ERwin Builtin Thu Feb 18 10:47:20 2021
+-- ERwin Builtin Thu Feb 18 10:53:12 2021
 end;
 /
 
