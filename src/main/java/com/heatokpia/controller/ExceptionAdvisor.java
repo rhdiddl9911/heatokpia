@@ -25,7 +25,7 @@ public class ExceptionAdvisor {
 	public ResponseEntity<Map<String, String>> validationError(MethodArgumentNotValidException exception) {
 		BindingResult bindingResult = exception.getBindingResult();
 		Map<String, String> errorList = new HashMap<String, String>();
-		logger.info(errorList.toString());
+		logger.warn("유효성 검사 실패:"+errorList.toString());
 		for (FieldError filedError : bindingResult.getFieldErrors()) {
 			errorList.put(filedError.getField(), filedError.getDefaultMessage());
 		}
