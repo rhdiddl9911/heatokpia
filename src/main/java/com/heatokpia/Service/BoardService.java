@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
 import com.heatokpia.dto.BoardNonMemberDTO;
-import com.heatokpia.dto.BoardTitleDTO;
 import com.heatokpia.mapper.BoardMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -32,8 +32,8 @@ public class BoardService {
 	}
 	
 	// 글 리스트 반환
-	public List<BoardTitleDTO> getBoardList(BoardCategory category){
-		List<BoardTitleDTO> resultList = boardMapper.findAllByCategory(category.getCategoryNum());
+	public List<Board> getBoardList(BoardCategory category){
+		List<Board> resultList = boardMapper.findAllByCategory(category.getCategoryNum());
 		return resultList;
 	}
 }

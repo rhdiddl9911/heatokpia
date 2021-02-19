@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
-import com.heatokpia.dto.BoardTitleDTO;
 import com.heatokpia.dto.BoardNonMemberDTO;
 
 @SpringBootTest
@@ -31,8 +31,8 @@ public class BoardMapperTest {
 	
 	@Test
 	public void selectListTest() {
-		List<BoardTitleDTO> freeList = boardMapper.findAllByCategory(BoardCategory.free.getCategoryNum());
-		List<BoardTitleDTO> infoList = boardMapper.findAllByCategory(BoardCategory.info.getCategoryNum());
+		List<Board> freeList = boardMapper.findAllByCategory(BoardCategory.free.getCategoryNum());
+		List<Board> infoList = boardMapper.findAllByCategory(BoardCategory.info.getCategoryNum());
 		
 		System.out.println(freeList.toString());
 		System.out.println(infoList.toString());

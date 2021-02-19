@@ -5,6 +5,7 @@
 
 	<select id="findById" parameterType="String" resultType="Board">
 	 <![CDATA[
+	 		SELECT 
 		]]>
 	</select>
 	
@@ -29,7 +30,7 @@
 		]]>
 	</insert>
 	
-	<select id="findAllByCategory" parameterType="int" resultType="com.heatokpia.dto.BoardTitleDTO">
+	<select id="findAllByCategory" parameterType="int" resultType="Board">
 		<![CDATA[
 			SELECT seq, title, name, createdate
 			FROM board
