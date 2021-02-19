@@ -36,4 +36,10 @@ public class BoardService {
 		List<Board> resultList = boardMapper.findAllByCategory(category.getCategoryNum());
 		return resultList;
 	}
+	
+	// seq에 따른 글 하나 반환
+	public Board getBoardData(int seq) {
+		Board resultData = boardMapper.findById(seq);
+		return resultData;
+	}
 }
