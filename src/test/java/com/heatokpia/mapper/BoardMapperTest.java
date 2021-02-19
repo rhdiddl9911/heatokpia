@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.heatokpia.domain.BoardCategory;
-import com.heatokpia.dto.BoardNonMember;
+import com.heatokpia.dto.BoardNonMemberDTO;
 
 @SpringBootTest
 public class BoardMapperTest {
@@ -15,12 +15,12 @@ public class BoardMapperTest {
 	
 	@Test
 	public void insertTest() {
-		BoardNonMember data = new BoardNonMember();
+		BoardNonMemberDTO data = new BoardNonMemberDTO();
 		data.setName("테스트");
 		data.setTitle("제목");
 		data.setContent("내용");
 		data.setIp("127.0.0.1");
-		data.setCategory(BoardCategory.free.getBoolType());
+		data.setCategory(BoardCategory.free.getCategoryNum());
 		data.setPassword("1234");
 		
 		boardMapper.save(data);

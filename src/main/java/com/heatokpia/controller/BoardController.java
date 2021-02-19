@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.heatokpia.Service.BoardService;
 import com.heatokpia.domain.BoardCategory;
-import com.heatokpia.dto.BoardNonMember;
+import com.heatokpia.dto.BoardNonMemberDTO;
 import com.heatokpia.utils.ClientIP;
 
 import lombok.RequiredArgsConstructor;
@@ -49,7 +49,7 @@ public class BoardController {
 	@PostMapping("/{category}/new")
 	public @ResponseBody ResponseEntity<?> boardWriteDo(
 			@PathVariable BoardCategory category,
-			@RequestBody @Valid BoardNonMember data,
+			@RequestBody @Valid BoardNonMemberDTO data,
 			@ClientIP String ip) {
 		
 		logger.info("boardWriteDo");

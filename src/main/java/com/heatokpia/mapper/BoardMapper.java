@@ -6,14 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.heatokpia.domain.BoardCategory;
 import com.heatokpia.dto.BoardForListDTO;
-import com.heatokpia.dto.BoardNonMember;
+import com.heatokpia.dto.BoardNonMemberDTO;
 
 @Mapper
 public interface BoardMapper {
-
-	//public List<BoardForListDTO> findTitleAllByCategory(BoardCategory categorynum);
-	
 	// 익명유저 글작성
-	public void save(BoardNonMember data);
+	public void save(BoardNonMemberDTO data);
+	
 	
 }
