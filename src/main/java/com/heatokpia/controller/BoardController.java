@@ -67,4 +67,15 @@ public class BoardController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	// 글 Detail반환
+	@GetMapping("/{category}/{seq}")
+	public ModelAndView boardDetail(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq) {
+		ModelAndView model = new ModelAndView("board/boardDetail");
+		model.addObject("category", category);
+		model.addObject("boardData", service.getBoardData(seq));
+		return model;
+	}
+	
 }
