@@ -19,7 +19,7 @@ public class BoardService {
 	// 글 입력
 	public void write(BoardNonMemberDTO data, String ip, BoardCategory category) {
 		data.setIp(ip);
-		data.setCategory(category.getBoolType());
+		data.setCategory(category.getCategoryNum());
 		data.setPassword(passEncoder.encode(data.getPassword()));
 		boardMapper.save(data);
 	}

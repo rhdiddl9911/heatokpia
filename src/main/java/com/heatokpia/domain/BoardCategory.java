@@ -2,15 +2,15 @@ package com.heatokpia.domain;
 
 public enum BoardCategory {
 
-	free(false),info(true);
+	free(0),info(1);
 	
-	private boolean categorybool;
+	private int categoryNum;
 	
-	private BoardCategory(boolean categorybool) {
-		this.categorybool = categorybool;
+	private BoardCategory(int categoryNum) {
+		this.categoryNum = categoryNum;
 	}
 	
-	public boolean getBoolType() {
-		return categorybool;
+	public int getCategoryNum() {
+		return categoryNum;
 	}
 }
