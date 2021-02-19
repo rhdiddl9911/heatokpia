@@ -1,5 +1,7 @@
 package com.heatokpia.Service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.heatokpia.domain.BoardCategory;
 import com.heatokpia.dto.BoardNonMemberDTO;
+import com.heatokpia.dto.BoardTitleDTO;
 import com.heatokpia.mapper.BoardMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -26,5 +29,11 @@ public class BoardService {
 		data.setPassword(passEncoder.encode(data.getPassword()));
 		boardMapper.save(data);
 		logger.info("write:"+data.toString());
+	}
+	
+	// 글 리스트 반환
+	public List<BoardTitleDTO> getBoardList(BoardCategory category){
+		List<BoardTitleDTO> resultList = boardMapper.findAllByCategory(category.getCategoryNum());
+		return resultList;
 	}
 }
