@@ -19,7 +19,7 @@
 		</tr>
 		
 		<c:forEach var="boardData" items="${boardList}">
-		<tr>
+		<tr onclick="location.href='/board/${category}/${boardData.seq}'">
 			<td><c:out value="${boardData.title}"></c:out></td>
 			<td><c:out value="${boardData.name}"></c:out></td>
 			<td><c:out value="${boardData.createdate}"></c:out></td>
