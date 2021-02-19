@@ -19,8 +19,8 @@ CREATE TABLE Member (
 CREATE TABLE board (
        seq                  INTEGER NOT NULL,
        content              VARCHAR2(3000) NULL,
-       createdate           VARCHAR2(30) NULL,
-       updatedate           VARCHAR2(30) NULL,
+       createdate           DATE NULL,
+       updatedate           DATE NULL,
        like_count           INTEGER NULL,
        name                 VARCHAR2(30) NULL,
        ip                   VARCHAR2(15) NULL,
@@ -45,6 +45,7 @@ CREATE SEQUENCE seq_board
 INCREMENT BY 1
 MINVALUE 1
 NOCYCLE;
+
 
 
 CREATE TABLE board_comment (
