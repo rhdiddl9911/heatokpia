@@ -30,12 +30,16 @@ public class BoardController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private final BoardService service;
 
+	// 카테고리에 따른 보드 리스트, 뷰 반환
 	@GetMapping("/{category}")
-	public void boardListReturn(@PathVariable String category) {
-		
+	public ModelAndView boardListReturn(@PathVariable BoardCategory category) {
+		ModelAndView model = new ModelAndView("board/boardList");
+		model.addObject("category", category);
+		model.addObject("boardList", service.getBoardList(category));
+		return model;
 	}
 	
-	// 카테고리에 따른 보드 리스트 , 뷰 반환 예정
+	// 카테고리에따른 글쓰기 폼 반환
 	@GetMapping("/{category}/new")
 	public ModelAndView boardWriteView(
 			@PathVariable BoardCategory category) {
