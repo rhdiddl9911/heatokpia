@@ -3,9 +3,11 @@
 
 <mapper namespace="com.heatokpia.mapper.BoardMapper">
 
-	<select id="findById" parameterType="String" resultType="Board">
+	<select id="findById" parameterType="int" resultType="Board">
 	 <![CDATA[
-	 		SELECT 
+	 		SELECT *
+	 		FROM board
+	 		WHERE seq = #{seq}
 		]]>
 	</select>
 	

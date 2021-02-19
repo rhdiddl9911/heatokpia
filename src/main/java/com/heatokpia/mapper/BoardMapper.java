@@ -3,7 +3,6 @@ package com.heatokpia.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.heatokpia.domain.Board;
 import com.heatokpia.dto.BoardNonMemberDTO;
@@ -14,6 +13,8 @@ public interface BoardMapper {
 	public void save(BoardNonMemberDTO data);
 	
 	// 글 목록 불러오기
-	public List<Board> findAllByCategory(@Param("categorynum") int categorynum);
+	public List<Board> findAllByCategory(int categorynum);
 	
+	// 글 하나 가져오기
+	public Board findById(int seq);
 }

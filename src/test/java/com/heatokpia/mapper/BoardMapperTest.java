@@ -10,6 +10,8 @@ import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
 import com.heatokpia.dto.BoardNonMemberDTO;
 
+import lombok.Data;
+
 @SpringBootTest
 public class BoardMapperTest {
 
@@ -36,5 +38,11 @@ public class BoardMapperTest {
 		
 		System.out.println(freeList.toString());
 		System.out.println(infoList.toString());
+	}
+	
+	@Test
+	public void selectOneTest() {
+		Board data = boardMapper.findById(1);
+		System.out.println(data.toString());
 	}
 }
