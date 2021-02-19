@@ -29,6 +29,15 @@
 		]]>
 	</insert>
 	
+	<select id="findAllByCategory" parameterType="int" resultType="com.heatokpia.dto.BoardForListDTO">
+		<![CDATA[
+			SELECT seq, title, 	createdate
+			FROM board
+			WHERE category = #{categorynum}
+			ORDER BY seq DESC
+		]]>
+	</select>
+	
 	
 	
 </mapper>
