@@ -31,7 +31,7 @@
 	
 	<select id="findAllByCategory" parameterType="int" resultType="com.heatokpia.dto.BoardTitleDTO">
 		<![CDATA[
-			SELECT seq, title, 	createdate
+			SELECT seq, title, name, createdate
 			FROM board
 			WHERE category = #{categorynum}
 			ORDER BY seq DESC

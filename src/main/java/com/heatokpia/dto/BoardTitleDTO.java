@@ -8,7 +8,7 @@ public class BoardTitleDTO {
 
 	private int seq;
 	private String title;
-	
+	private String name;
 	private String createdate;
 	
 	// 나중에 댓글수, like
