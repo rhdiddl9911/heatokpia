@@ -29,7 +29,7 @@
 		]]>
 	</insert>
 	
-	<select id="findAllByCategory" parameterType="int" resultType="com.heatokpia.dto.BoardForListDTO">
+	<select id="findAllByCategory" parameterType="int" resultType="com.heatokpia.dto.BoardTitleDTO">
 		<![CDATA[
 			SELECT seq, title, 	createdate
 			FROM board

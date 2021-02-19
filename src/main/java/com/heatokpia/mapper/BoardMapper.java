@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.heatokpia.dto.BoardForListDTO;
+import com.heatokpia.dto.BoardTitleDTO;
 import com.heatokpia.dto.BoardNonMemberDTO;
 
 @Mapper
@@ -14,6 +14,6 @@ public interface BoardMapper {
 	public void save(BoardNonMemberDTO data);
 	
 	// 글 목록 불러오기
-	public List<BoardForListDTO> findAllByCategory(@Param("categorynum") int categorynum);
+	public List<BoardTitleDTO> findAllByCategory(@Param("categorynum") int categorynum);
 	
 }
