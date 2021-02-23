@@ -41,6 +41,36 @@
 		]]>
 	</select>
 	
+	<select id="findPasswordById" parameterType="int" resultType="String">
+		<![CDATA[
+			SELECT password
+			FROM board
+			WHERE seq = #{seq}
+		]]>
+	</select>
 	
+	<update id="update" parameterType="Board">
+	<![CDATA[
+		UPDATE board
+		
+		SET 
+		title=#{title},
+		content=#{content},
+		ip=#{ip},
+		name=#{name},
+		password=#{password},
+		updatedate=SYSDATE
+		
+		WHERE seq=#{seq}
+	]]>
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+	<![CDATA[
+		DELETE 
+		FROM board
+		WHERE seq=#{seq}
+	]]>
+	</delete>
 	
 </mapper>

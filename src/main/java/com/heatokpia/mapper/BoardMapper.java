@@ -17,4 +17,13 @@ public interface BoardMapper {
 	
 	// 글 하나 가져오기
 	public Board findById(int seq);
+	
+	// 글번호로 비밀번호 가져오기
+	public String findPasswordById(int seq);
+	
+	// 글 번호로 업데이트 하기
+	public void update(BoardNonMemberDTO data);
+	
+	// 글 번호로 글 삭제하기
+	public void deleteById(int seq);
 }
