@@ -23,5 +23,21 @@
 	<div class="content">
 		<c:out value="${boardData.content}"/>
 	</div>
+	
+	<div>
+	
+	<form action="/board/${category}/${seq}" method="post" name="passcheck">
+		<input type="hidden" name="method" id="method">
+		<button onclick="javascript:goPass('up')" type="button">수정</button><button onclick="javascript:goPass('del')" type="button">삭제</button>
+	</form>
+	
+	</div>
+	
+	<script type="text/javascript">
+		function goPass(method){
+			document.getElementById('method').value = method;
+			document.passcheck.submit();
+		}
+	</script>
 </body>
 </html>
