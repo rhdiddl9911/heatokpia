@@ -1,5 +1,6 @@
 package com.heatokpia.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +14,7 @@ public interface BoardMapper {
 	public void save(BoardNonMemberDTO data);
 	
 	// 글 목록 불러오기
-	public List<Board> findAllByCategory(int categorynum);
+	public List<Board> findAllByCategory(HashMap<String, Integer> categoryPage);
 	
 	// 글 하나 가져오기
 	public Board findById(int seq);
@@ -26,4 +27,7 @@ public interface BoardMapper {
 	
 	// 글 번호로 글 삭제하기
 	public void deleteById(int seq);
+	
+	// 카테고리에 따른 페이지 최대 수 가져오기
+	public int findMaxPage(int categorynum);
 }

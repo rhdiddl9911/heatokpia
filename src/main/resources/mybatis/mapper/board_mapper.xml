@@ -32,11 +32,14 @@
 		]]>
 	</insert>
 	
-	<select id="findAllByCategory" parameterType="int" resultType="Board">
+	<select id="findAllByCategory" parameterType="HashMap" resultType="Board">
 		<![CDATA[
-			SELECT seq, title, name, createdate
-			FROM board
-			WHERE category = #{categorynum}
+			SELECT *
+			FROM (SELECT seq, title, name, createdate, ceil(rownum / 10) as page
+					FROM board
+					WHERE category=#{categorynum}
+					ORDER BY seq DESC)
+			WHERE page = #{page}
 			ORDER BY seq DESC
 		]]>
 	</select>
@@ -72,5 +75,13 @@
 		WHERE seq=#{seq}
 	]]>
 	</delete>
+	
+	<select id="findMaxPage" parameterType="int" resultType="int">
+	<![CDATA[
+		SELECT ceil(count(1) / 10)
+		FROM board
+		WHERE category = #{categorynum}
+	]]>
+	</select>
 	
 </mapper>

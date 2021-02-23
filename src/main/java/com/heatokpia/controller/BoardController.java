@@ -33,10 +33,24 @@ public class BoardController {
 
 	// 카테고리에 따른 보드 리스트, 뷰 반환
 	@GetMapping("/{category}")
-	public ModelAndView boardListReturn(@PathVariable BoardCategory category) {
+	public ModelAndView boardListReturn(
+			@PathVariable BoardCategory category,
+			@RequestParam(defaultValue = "1", required = false) int page) {
 		ModelAndView model = new ModelAndView("board/boardList");
+		
+		// 해당 카테고리 보드 리스트 최대 페이지 크기
+		int maxPage = service.getBoardListMaxPage(category.getCategoryNum());
+		
+		// 입력된 페이지 크기가 MaxPage보다 크면 redirect
+		if(page > maxPage) {
+			model.setViewName("redirect:/board/"+category);
+			model.addObject("page", maxPage);
+			return model;
+		}
+		
 		model.addObject("category", category);
-		model.addObject("boardList", service.getBoardList(category));
+		model.addObject("boardList", service.getBoardList(category, page));
+		model.addObject("maxPage", maxPage);
 		return model;
 	}
 	

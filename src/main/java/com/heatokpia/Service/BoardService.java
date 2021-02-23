@@ -1,5 +1,6 @@
 package com.heatokpia.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,8 +33,12 @@ public class BoardService {
 	}
 	
 	// 글 리스트 반환
-	public List<Board> getBoardList(BoardCategory category){
-		List<Board> resultList = boardMapper.findAllByCategory(category.getCategoryNum());
+	public List<Board> getBoardList(BoardCategory category, int page){
+		HashMap<String, Integer> categoryPage = new HashMap<String, Integer>();
+		categoryPage.put("categorynum", category.getCategoryNum());
+		categoryPage.put("page", page);
+		
+		List<Board> resultList = boardMapper.findAllByCategory(categoryPage);
 		return resultList;
 	}
 	
@@ -59,5 +64,10 @@ public class BoardService {
 	// seq에 따른 글 삭제
 	public void deleteBoardData(int seq) {
 		boardMapper.deleteById(seq);
+	}
+	
+	// 카테고리에 따른 Board page 최대값
+	public int getBoardListMaxPage(int categorynum) {
+		return boardMapper.findMaxPage(categorynum);
 	}
 }
