@@ -16,6 +16,9 @@ public interface BoardMapper {
 	// 글 목록 불러오기
 	public List<Board> findAllByCategory(HashMap<String, Integer> categoryPage);
 	
+	// 검색 글 목록 불러오기 
+	public List<Board> findSearchByCategoryAndSearch(HashMap<String, Object> map);
+	
 	// 글 하나 가져오기
 	public Board findById(int seq);
 	
@@ -30,4 +33,7 @@ public interface BoardMapper {
 	
 	// 카테고리에 따른 페이지 최대 수 가져오기
 	public int findMaxPage(int categorynum);
+	
+	// 검색 수에 따른 페이지 최대 수 가져오기
+	public int findSearchMaxPage(HashMap<String, Object> map);
 }

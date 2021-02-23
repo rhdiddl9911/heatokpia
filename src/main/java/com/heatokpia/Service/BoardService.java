@@ -32,16 +32,6 @@ public class BoardService {
 		logger.info("write:"+data.toString());
 	}
 	
-	// 글 리스트 반환
-	public List<Board> getBoardList(BoardCategory category, int page){
-		HashMap<String, Integer> categoryPage = new HashMap<String, Integer>();
-		categoryPage.put("categorynum", category.getCategoryNum());
-		categoryPage.put("page", page);
-		
-		List<Board> resultList = boardMapper.findAllByCategory(categoryPage);
-		return resultList;
-	}
-	
 	// seq에 따른 글 하나 반환
 	public Board getBoardData(int seq) {
 		Board resultData = boardMapper.findById(seq);
@@ -66,8 +56,39 @@ public class BoardService {
 		boardMapper.deleteById(seq);
 	}
 	
+	// 일반 글 리스트 반환
+	public List<Board> getBoardList(BoardCategory category, int page){
+		HashMap<String, Integer> categoryPage = new HashMap<String, Integer>();
+		categoryPage.put("categorynum", category.getCategoryNum());
+		categoryPage.put("page", page);
+		
+		List<Board> resultList = boardMapper.findAllByCategory(categoryPage);
+		return resultList;
+	}
+	
+	// 검색 글 리스트 반환
+	public List<Board> getBoardList(BoardCategory category, int page, String searchArea, String search){
+		HashMap<String, Object> mapperParam = new HashMap<String, Object>();
+		mapperParam.put("categorynum", category.getCategoryNum());
+		mapperParam.put("page", page);
+		mapperParam.put("searchArea", searchArea);
+		mapperParam.put("search", search);
+		
+		List<Board> resultList = boardMapper.findSearchByCategoryAndSearch(mapperParam);
+		return resultList;
+	}
+	
 	// 카테고리에 따른 Board page 최대값
 	public int getBoardListMaxPage(int categorynum) {
 		return boardMapper.findMaxPage(categorynum);
+	}
+	
+	// 카테고리 & 검색 페이지 최대값
+	public int getBoardListMaxPage(int categorynum, String searchArea, String search) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("categorynum", categorynum);
+		map.put("searchArea", searchArea);
+		map.put("search", search);
+		return boardMapper.findSearchMaxPage(map);
 	}
 }

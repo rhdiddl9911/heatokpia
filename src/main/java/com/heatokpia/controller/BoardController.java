@@ -1,5 +1,7 @@
 package com.heatokpia.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.heatokpia.Service.BoardService;
+import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
 import com.heatokpia.dto.BoardNonMemberDTO;
 import com.heatokpia.utils.ClientIP;
@@ -35,11 +38,33 @@ public class BoardController {
 	@GetMapping("/{category}")
 	public ModelAndView boardListReturn(
 			@PathVariable BoardCategory category,
-			@RequestParam(defaultValue = "1", required = false) int page) {
+			@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) String searchArea,
+			@RequestParam(required = false) String search) {
 		ModelAndView model = new ModelAndView("board/boardList");
 		
-		// 해당 카테고리 보드 리스트 최대 페이지 크기
-		int maxPage = service.getBoardListMaxPage(category.getCategoryNum());
+		// page 없이 접근 하였을 때 1번 페이지로 redirect
+		if(page == null) {
+			model.setViewName("redirect:/board/"+category);
+			model.addObject("page", 1);
+			return model;
+		}
+		
+		// 최대 페이지 크기
+		int maxPage;
+		
+		//최대 페이지 구하기 
+		//검색 여부에 따라 동작 달라짐
+		if(searchArea == null) {
+			maxPage = service.getBoardListMaxPage(category.getCategoryNum());
+		}else {
+			// 검색 영역은 있는데 검색어가 없으면 return 후에 view에서도 막기
+			if(search == null || search.isEmpty()) {
+				model.setViewName("redirect:/board/"+category);
+				return model;
+			}
+			maxPage = service.getBoardListMaxPage(category.getCategoryNum(), searchArea, search);
+		}
 		
 		// 입력된 페이지 크기가 MaxPage보다 크면 redirect
 		if(page > maxPage) {
@@ -48,8 +73,18 @@ public class BoardController {
 			return model;
 		}
 		
+		// boardList 구하기
+		List<Board> boardList;
+		
+		// 검색 여부에 따라 List 달리 가져옴
+		if (searchArea == null) {
+			boardList = service.getBoardList(category, page);
+		}else {
+			boardList = service.getBoardList(category, page, searchArea, search);
+		}
+		
 		model.addObject("category", category);
-		model.addObject("boardList", service.getBoardList(category, page));
+		model.addObject("boardList", boardList);
 		model.addObject("maxPage", maxPage);
 		return model;
 	}
