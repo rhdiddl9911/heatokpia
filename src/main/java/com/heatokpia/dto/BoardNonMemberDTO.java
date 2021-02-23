@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardNonMemberDTO {
-
+	private int seq;
+	
 	@Size(max = 1000, message = "내용이 너무 깁니다.")
 	@NotBlank(message = "내용을 입력해주세요") // null, "", " " 허용x
 	private String content;
