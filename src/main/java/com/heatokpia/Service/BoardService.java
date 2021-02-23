@@ -42,4 +42,22 @@ public class BoardService {
 		Board resultData = boardMapper.findById(seq);
 		return resultData;
 	}
+	
+	// seq에 따른 password 체크 수행
+	public boolean passCheck(int seq, String password) {
+		return passEncoder.matches(password, boardMapper.findPasswordById(seq));
+	}
+	
+	// Board Update 실행
+	public void updateBoardData(int seq, BoardNonMemberDTO data, String ip) {
+		data.setSeq(seq);
+		data.setIp(ip);
+		data.setPassword(passEncoder.encode(data.getPassword()));
+		boardMapper.update(data);
+	}
+	
+	// seq에 따른 글 삭제
+	public void deleteBoardData(int seq) {
+		boardMapper.deleteById(seq);
+	}
 }
