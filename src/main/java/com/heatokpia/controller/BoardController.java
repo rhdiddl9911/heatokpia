@@ -1,7 +1,6 @@
 package com.heatokpia.controller;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -146,7 +145,6 @@ public class BoardController {
 			service.deleteBoardData(seq);
 			
 			model.setViewName("redirect:/board/"+category);
-			model.addObject("category", category);
 			return model;
 		}else {
 			// 비밀번호 틀리면
