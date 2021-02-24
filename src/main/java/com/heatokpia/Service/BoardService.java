@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
+import com.heatokpia.domain.BoardComment;
 import com.heatokpia.dto.BoardNonMemberDTO;
+import com.heatokpia.mapper.BoardCommentMapper;
 import com.heatokpia.mapper.BoardMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class BoardService {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	private final BoardMapper boardMapper;
+	private final BoardCommentMapper commentMapper;
 	private final PasswordEncoder passEncoder;
 	
 	// 글 입력
@@ -90,5 +93,18 @@ public class BoardService {
 		map.put("searchArea", searchArea);
 		map.put("search", search);
 		return boardMapper.findSearchMaxPage(map);
+	}
+	
+	// 댓글 입력
+	public void writeComment(BoardComment data, String ip, int boardSeq) {
+		data.setPassword(passEncoder.encode(data.getPassword()));
+		data.setIp(ip);
+		data.setBoardSeq(boardSeq);
+		commentMapper.save(data);
+	}
+	
+	// 글 번호에 따른 댓글 리스트반환
+	public List<BoardComment> getCommentList(int boardSeq){
+		return commentMapper.findByBoardSeq(boardSeq);
 	}
 }

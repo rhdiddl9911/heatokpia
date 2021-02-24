@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.heatokpia.Service.BoardService;
 import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
+import com.heatokpia.domain.BoardComment;
 import com.heatokpia.dto.BoardNonMemberDTO;
 import com.heatokpia.utils.ClientIP;
 
@@ -130,6 +131,7 @@ public class BoardController {
 		ModelAndView model = new ModelAndView("board/boardDetail");
 		model.addObject("category", category);
 		model.addObject("boardData", service.getBoardData(seq));
+		model.addObject("commentList", service.getCommentList(seq));
 		return model;
 	}
 	
@@ -205,6 +207,25 @@ public class BoardController {
 			model.setViewName("redirect:/board/"+category+"/"+seq);
 			return model;
 		}
+	}
+	
+	// 댓글 추가
+	@PostMapping("/{category}/{seq}/new")
+	public @ResponseBody ResponseEntity<?> boardCommentWriteDo(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq,
+			@RequestBody @Valid BoardComment data,
+			@ClientIP String ip) {
+		
+		logger.info("boardCommentWriteDo");
+		
+		if(ip == null && category == null) {
+			return new ResponseEntity<>("다시 시도해 주세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		// 데이터 입력 시도
+		service.writeComment(data, ip, seq);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 }
