@@ -5,9 +5,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
+import com.heatokpia.domain.BoardComment;
 import com.heatokpia.dto.BoardNonMemberDTO;
 
 import lombok.Data;
@@ -17,6 +19,10 @@ public class BoardMapperTest {
 
 	@Autowired
 	private BoardMapper boardMapper;
+	@Autowired
+	private BoardCommentMapper commentMapper;
+	@Autowired
+	private PasswordEncoder passEncoder;
 	
 	@Test
 	public void insertTest() {
@@ -33,16 +39,27 @@ public class BoardMapperTest {
 	
 	@Test
 	public void selectListTest() {
-		List<Board> freeList = boardMapper.findAllByCategory(BoardCategory.free.getCategoryNum());
-		List<Board> infoList = boardMapper.findAllByCategory(BoardCategory.info.getCategoryNum());
-		
-		System.out.println(freeList.toString());
-		System.out.println(infoList.toString());
 	}
 	
 	@Test
 	public void selectOneTest() {
 		Board data = boardMapper.findById(1);
 		System.out.println(data.toString());
+	}
+	
+	@Test
+	public void insertCommentTest() {
+
+		BoardComment comment = new BoardComment();
+		
+		for (int i = 2; i< 30 ; i++) {
+			comment.setBoardSeq(2);
+			comment.setContent(i+" 번째 comment");
+			comment.setName("Nick");
+			comment.setPassword(passEncoder.encode("1234"));
+			comment.setIp("127.0.0.1");
+			
+			commentMapper.save(comment);
+		}
 	}
 }
