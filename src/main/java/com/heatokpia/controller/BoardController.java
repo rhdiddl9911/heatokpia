@@ -43,8 +43,8 @@ public class BoardController {
 			@RequestParam(required = false) String search) {
 		ModelAndView model = new ModelAndView("board/boardList");
 		
-		// page 없이 접근 하였을 때 1번 페이지로 redirect
-		if(page == null) {
+		// page 없이, page 0 보다 작게 접근 하였을 때 1번 페이지로 redirect
+		if(page == null || page <= 0) {
 			model.setViewName("redirect:/board/"+category);
 			model.addObject("page", 1);
 			return model;
@@ -64,6 +64,11 @@ public class BoardController {
 				return model;
 			}
 			maxPage = service.getBoardListMaxPage(category.getCategoryNum(), searchArea, search);
+		}
+
+		// 데이터가 없어서 maxPage가 0일때!
+		if(maxPage == 0) {
+			maxPage = 1;
 		}
 		
 		// 입력된 페이지 크기가 MaxPage보다 크면 redirect
