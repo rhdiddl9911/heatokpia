@@ -129,8 +129,14 @@ public class BoardController {
 			@PathVariable BoardCategory category,
 			@PathVariable int seq) {
 		ModelAndView model = new ModelAndView("board/boardDetail");
+		Board data = service.getBoardData(seq);
+		// 글 번호 정보가 없으면
+		if(data == null) {
+			model.setViewName("redirect:/board/"+category);
+			return model;
+		}
 		model.addObject("category", category);
-		model.addObject("boardData", service.getBoardData(seq));
+		model.addObject("boardData", data);
 		model.addObject("commentList", service.getCommentList(seq));
 		model.addObject("likeCount", service.getLikeCount(seq));
 		return model;
