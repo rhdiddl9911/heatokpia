@@ -76,14 +76,14 @@ INCREMENT BY 1
 MINVALUE 1
 NOCYCLE;
 
-CREATE TABLE board_like (
+CREATE TABLE board_thislike (
        board_seq            INTEGER NOT NULL,
        ip                   VARCHAR2(15) NOT NULL,
        createDate           DATE NULL,
        PRIMARY KEY (board_seq, ip)
 );
 
-ALTER TABLE board_like
+ALTER TABLE board_thislike
        ADD  ( FOREIGN KEY (board_seq)
                              REFERENCES board ) ;
 
