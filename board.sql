@@ -62,12 +62,12 @@ CREATE TABLE board_comment (
 
 ALTER TABLE board_comment
        ADD  ( FOREIGN KEY (id)
-                             REFERENCES Member ) ;
+                             REFERENCES Member  ) ;
 
 
 ALTER TABLE board_comment
        ADD  ( FOREIGN KEY (board_seq)
-                             REFERENCES board ) ;
+                             REFERENCES board ON DELETE CASCADE)  ;
 
 DROP SEQUENCE seq_board_comment;
 
@@ -85,5 +85,5 @@ CREATE TABLE board_thislike (
 
 ALTER TABLE board_thislike
        ADD  ( FOREIGN KEY (board_seq)
-                             REFERENCES board ) ;
+                             REFERENCES board ON DELETE CASCADE) ;
 
