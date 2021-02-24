@@ -47,15 +47,15 @@ MINVALUE 1
 NOCYCLE;
 
 
-
 CREATE TABLE board_comment (
        seq                  INTEGER NOT NULL,
        board_seq            INTEGER NOT NULL,
-       password             VARCHAR2(50) NULL,
-       name                 VARCHAR2(20) NOT NULL,
-       createdate           VARCHAR2(30) NOT NULL,
+       password             VARCHAR2(100) NULL,
+       name                 VARCHAR2(30) NOT NULL,
+       createdate           DATE NOT NULL,
        id                   VARCHAR2(20) NULL,
-       content              VARCHAR2(300) NOT NULL,
+       ip			        VARCHAR2(15) NOT NULL,
+       content              VARCHAR2(900) NOT NULL,
        PRIMARY KEY (seq)
 );
 
