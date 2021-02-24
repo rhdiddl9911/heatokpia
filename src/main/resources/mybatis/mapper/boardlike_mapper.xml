@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heatokpia.mapper.BoardLikeMapper">
+	
+	<insert id="save" parameterType="BoardLike">
+		<![CDATA[
+			INSERT INTO board_thislike
+			VALUES(
+				#{boardSeq},
+				#{ip},
+				SYSDATE
+			)
+		]]>
+	</insert>
+	
+	<select id="findByBoardSeqAndIp" parameterType="HashMap" resultType="BoardLike">
+	 <![CDATA[
+			SELECT *
+			FROM board_thislike
+			WHERE board_seq = #{boardSeq}
+			AND ip = #{ip}
+		]]>
+	</select>
+	
+	<select id="findCount" parameterType="int" resultType="int">
+		<![CDATA[
+	 		SELECT COUNT(1)
+	 		FROM board_thislike
+	 		WHERE board_seq = #{boardSeq}
+	 	]]>
+	</select>
+	
+	<delete id="deleteByBoardSeqAndIp" parameterType="HashMap">
+		<![CDATA[
+			DELETE FROM board_thislike
+			WHERE board_seq = #{boardSeq}
+				AND ip = #{ip}
+		]]>
+	</delete>
+	
+</mapper>
