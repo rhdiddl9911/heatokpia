@@ -76,14 +76,14 @@ INCREMENT BY 1
 MINVALUE 1
 NOCYCLE;
 
-CREATE TABLE likepost (
+CREATE TABLE board_like (
        board_seq            INTEGER NOT NULL,
        ip                   VARCHAR2(15) NOT NULL,
-       createDate           VARCHAR2(30) NULL,
+       createDate           DATE NULL,
        PRIMARY KEY (board_seq, ip)
 );
 
-ALTER TABLE likepost
+ALTER TABLE board_like
        ADD  ( FOREIGN KEY (board_seq)
                              REFERENCES board ) ;
 
