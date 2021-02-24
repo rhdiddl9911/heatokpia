@@ -3,7 +3,7 @@
 
 <mapper namespace="com.heatokpia.mapper.BoardLikeMapper">
 	
-	<insert id="save" parameterType="BoardLike">
+	<insert id="save" parameterType="HashMap">
 		<![CDATA[
 			INSERT INTO board_thislike
 			VALUES(
@@ -14,7 +14,7 @@
 		]]>
 	</insert>
 	
-	<select id="findByBoardSeqAndIp" parameterType="HashMap" resultType="BoardLike">
+	<select id="findByBoardSeqAndIp" parameterType="HashMap" resultType="boolean">
 	 <![CDATA[
 			SELECT *
 			FROM board_thislike

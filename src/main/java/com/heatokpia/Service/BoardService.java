@@ -13,6 +13,7 @@ import com.heatokpia.domain.BoardCategory;
 import com.heatokpia.domain.BoardComment;
 import com.heatokpia.dto.BoardNonMemberDTO;
 import com.heatokpia.mapper.BoardCommentMapper;
+import com.heatokpia.mapper.BoardLikeMapper;
 import com.heatokpia.mapper.BoardMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class BoardService {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	private final BoardMapper boardMapper;
 	private final BoardCommentMapper commentMapper;
+	private final BoardLikeMapper likeMapper;
 	private final PasswordEncoder passEncoder;
 	
 	// 글 입력
@@ -106,5 +108,30 @@ public class BoardService {
 	// 글 번호에 따른 댓글 리스트반환
 	public List<BoardComment> getCommentList(int boardSeq){
 		return commentMapper.findByBoardSeq(boardSeq);
+	}
+	
+	// 좋아요 버튼 눌렀을때 이미 있으면 삭제 없으면 추가 동작 후 동작한 내용 반환
+	public String likeDo(String ip, int boardSeq) {
+		String resultCount;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ip", ip);
+		map.put("boardSeq", boardSeq);
+		
+		// find로 안하고 일단 try catch함
+		try {
+			likeMapper.save(map);
+			resultCount = "+1";
+		}catch (Exception e) {
+			likeMapper.deleteByBoardSeqAndIp(map);
+			resultCount = "-1";
+		}
+		
+		return resultCount;
+	}
+	
+	// 글 번호에 따른 좋아요 갯수 반환
+	public int getLikeCount(int boardSeq) {
+		return likeMapper.findCount(boardSeq);
 	}
 }

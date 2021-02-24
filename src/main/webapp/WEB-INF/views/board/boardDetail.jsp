@@ -25,6 +25,10 @@
 	</div>
 	
 	<div>
+		<c:out value="${likeCount}"/><button onclick="javascript:likeThis('${category}',${seq})">좋아요</button>
+	</div>
+	
+	<div>
 	<form action="/board/${category}/${seq}" method="post" name="passcheck">
 		<input type="hidden" name="method" id="method">
 		<button onclick="javascript:goPass('up')" type="button">수정</button><button onclick="javascript:goPass('del')" type="button">삭제</button>
@@ -60,7 +64,6 @@
 	<script src="/js/jquery.serializeObject.min.js"></script>
 	<script type="text/javascript">
 		function commentWrite(category, seq){
-			console.log(category+""+seq);
 			sendData = $("#commentForm").serializeObject();
 			
 			$.ajax({
@@ -70,6 +73,35 @@
 				data: JSON.stringify(sendData)
 			}).done(function(){
 				 location.reload();
+			}).fail(function(error){
+				var errorMessege ="";
+
+				if(error.responseJSON == null){
+					errorMessege += error.responseText;
+					alert(errorMessege);
+					return;
+				}
+				
+				$.each(error.responseJSON, function(key, value){
+					errorMessege += value+"\n";
+				});
+				alert(errorMessege);
+				return;
+				
+			});
+		}
+	</script>
+	
+	<script type="text/javascript">
+		function likeThis(category, seq){
+			
+			$.ajax({
+				url: "/board/"+category+"/"+seq+"/like",
+				method: "POST",
+				contentType: "application/json; charset=utf-8"
+			}).done(function(text){
+				alert(text);
+				location.reload();
 			}).fail(function(error){
 				var errorMessege ="";
 

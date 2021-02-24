@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.heatokpia.domain.BoardLike;
 
 @Mapper
 public interface BoardLikeMapper {
@@ -13,7 +12,7 @@ public interface BoardLikeMapper {
 	public void save(HashMap<String, Object> map);
 	
 	// 좋아요 찾기
-	public BoardLike findByBoardSeqAndIp(HashMap<String, Object> map);
+	public boolean findByBoardSeqAndIp(HashMap<String, Object> map);
 	
 	// 글번호에 따른 좋아요 전체 카운트
 	public int findCount(int boardSeq);

@@ -132,6 +132,7 @@ public class BoardController {
 		model.addObject("category", category);
 		model.addObject("boardData", service.getBoardData(seq));
 		model.addObject("commentList", service.getCommentList(seq));
+		model.addObject("likeCount", service.getLikeCount(seq));
 		return model;
 	}
 	
@@ -226,6 +227,24 @@ public class BoardController {
 		// 데이터 입력 시도
 		service.writeComment(data, ip, seq);
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	// 좋아요 동작
+	@PostMapping("/{category}/{seq}/like")
+	public @ResponseBody ResponseEntity<?> boardLikeDo(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq,
+			@ClientIP String ip) {
+		
+		logger.info("boardLikeDo");
+		
+		if(ip == null && category == null) {
+			return new ResponseEntity<>("다시 시도해 주세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		// 데이터 입력 시도
+		String result = service.likeDo(ip, seq);
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
 }

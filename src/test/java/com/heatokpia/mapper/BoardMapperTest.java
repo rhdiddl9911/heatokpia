@@ -1,5 +1,6 @@
 package com.heatokpia.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,8 @@ public class BoardMapperTest {
 	private BoardMapper boardMapper;
 	@Autowired
 	private BoardCommentMapper commentMapper;
+	@Autowired
+	private BoardLikeMapper likeMapper;
 	@Autowired
 	private PasswordEncoder passEncoder;
 	
@@ -61,5 +64,25 @@ public class BoardMapperTest {
 			
 			commentMapper.save(comment);
 		}
+	}
+	
+	@Test
+	public void findLikeCount() {
+		int i = 2;
+		System.out.println("가져온 값 ::::: "+likeMapper.findCount(i));
+	}
+	
+	@Test
+	public void likeSaveTest() {
+		
+		for(int i =0; i<5; i++) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("boardSeq", 2);
+			map.put("ip", "172.1.0."+i);
+			
+			likeMapper.save(map);
+		}
+		
 	}
 }
