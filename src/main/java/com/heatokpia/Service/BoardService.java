@@ -134,4 +134,14 @@ public class BoardService {
 	public int getLikeCount(int boardSeq) {
 		return likeMapper.findCount(boardSeq);
 	}
+	
+	// 댓글 번호에 따른 삭제 성공 true, 실패 false
+	public boolean deleteBoardComment(int seq, String password) {
+		if(passEncoder.matches(password, commentMapper.findPasswordBySeq(seq))) {
+			commentMapper.deleteBoardComment(seq);
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

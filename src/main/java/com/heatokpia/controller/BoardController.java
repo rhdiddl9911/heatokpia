@@ -253,4 +253,28 @@ public class BoardController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	// 댓글 삭제
+	@PostMapping("/{category}/{seq}/{commentseq}")
+	public ModelAndView boardCommentWriteDo(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq,
+			@PathVariable int commentseq,
+			@RequestParam String password) {
+		
+		logger.info("boardCommentWriteDo");
+		
+		ModelAndView model = new ModelAndView();
+		
+		// 데이터 삭제 시도
+		if(service.deleteBoardComment(commentseq, password)) {
+			// 성공하면
+			model.setViewName("redirect:/board/"+category+"/"+seq);
+			return model;
+		}else {
+			// 실패하면 그냥 화면 다시보여줌
+			model.setViewName("redirect:/board/"+category+"/"+seq);
+			return model;
+		}
+	}
+	
 }

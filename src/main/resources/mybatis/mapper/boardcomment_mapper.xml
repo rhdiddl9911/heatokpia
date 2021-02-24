@@ -28,4 +28,19 @@
 		]]>
 	</select>
 	
+	<select id="findPasswordBySeq" parameterType="int" resultType="String">
+	<![CDATA[
+			SELECT password
+			FROM board_comment
+			WHERE seq = #{seq}
+		]]>
+	</select>
+	
+	<delete id="deleteBoardComment" parameterType="int">
+	<![CDATA[
+		DELETE FROM board_comment
+		WHERE seq = #{seq}
+		]]>
+	</delete>
+	
 </mapper>

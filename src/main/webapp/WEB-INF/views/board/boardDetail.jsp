@@ -47,7 +47,7 @@
 	<c:forEach var="comment" items="${commentList}">
 	<div>
 		<label><strong><c:out value="${comment.name}"/></strong></label><br>
-		<c:out value="${comment.content}"/><input type="button" value="삭제">
+		<c:out value="${comment.content}"/><input type="button" onclick="javascript:goPass('${comment.seq}')" value="삭제">
 		<hr>
 	</div>
 	</c:forEach>
