@@ -36,4 +36,7 @@ public interface BoardMapper {
 	
 	// 검색 수에 따른 페이지 최대 수 가져오기
 	public int findSearchMaxPage(HashMap<String, Object> map);
+	
+	// 글 조회수 1만큼 올리기
+	public void updateHit(int seq);
 }

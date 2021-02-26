@@ -20,6 +20,9 @@
 		</c:if>
 		</span>
 	</div>
+	<div>
+		<label>조회수: </label><c:out value="${boardData.hit}"/>
+	</div>
 	<div class="content">
 		<c:out value="${boardData.content}"/>
 	</div>

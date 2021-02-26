@@ -5,7 +5,7 @@
 
 	<select id="findById" parameterType="int" resultType="Board">
 	 <![CDATA[
-	 		SELECT seq, title, name, createdate, id, content
+	 		SELECT seq, title, name, createdate, id, content, hit
 	 		FROM board
 	 		WHERE seq = #{seq}
 		]]>
@@ -35,7 +35,7 @@
 	<select id="findAllByCategory" parameterType="HashMap" resultType="Board">
 		<![CDATA[
 			SELECT *
-			FROM (SELECT seq, title, name, createdate, ceil(rownum / 10) as page
+			FROM (SELECT seq, title, name, hit, createdate, ceil(rownum / 10) as page
 					FROM board
 					WHERE category=#{categorynum}
 					ORDER BY seq DESC)
@@ -104,5 +104,13 @@
 				 AND ${searchArea} LIKE '%'||#{search}||'%' )
 	]]>
 	</select>
+	
+	<update id="updateHit" parameterType="_int">
+	<![CDATA[
+		UPDATE board
+		SET hit = NVL(hit,0) + 1
+		WHERE seq = #{seq}
+	]]>
+	</update>
 	
 </mapper>

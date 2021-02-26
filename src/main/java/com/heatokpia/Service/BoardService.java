@@ -36,9 +36,11 @@ public class BoardService {
 		boardMapper.save(data);
 		logger.info("write:"+data.toString());
 	}
-	
+
+	// seq에 따른 조회수 올리기
 	// seq에 따른 글 하나 반환
 	public Board getBoardData(int seq) {
+		boardMapper.updateHit(seq);
 		Board resultData = boardMapper.findById(seq);
 		return resultData;
 	}
