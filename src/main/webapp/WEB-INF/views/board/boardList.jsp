@@ -45,8 +45,8 @@
 		</form>
 	</span>
 	<span>
-		<fmf:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
-		<fmf:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
+		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
+		<fmt:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
 		
 		<c:if test="${start-10>0}">
 			<c:if test="${param.search == null}">
