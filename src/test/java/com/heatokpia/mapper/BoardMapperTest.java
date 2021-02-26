@@ -6,9 +6,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
+import com.heatokpia.domain.BoardComment;
 import com.heatokpia.dto.BoardNonMemberDTO;
 
 import lombok.Data;
@@ -18,6 +20,12 @@ public class BoardMapperTest {
 
 	@Autowired
 	private BoardMapper boardMapper;
+	@Autowired
+	private BoardCommentMapper commentMapper;
+	@Autowired
+	private BoardLikeMapper likeMapper;
+	@Autowired
+	private PasswordEncoder passEncoder;
 	
 	@Test
 	public void insertTest() {
@@ -34,13 +42,6 @@ public class BoardMapperTest {
 	
 	@Test
 	public void selectListTest() {
-		HashMap<String, Integer> test = new HashMap<String, Integer>();
-		test.put("categorynum", BoardCategory.free.getCategoryNum());
-		test.put("page", 1);
-		
-		List<Board> freeList = boardMapper.findAllByCategory(test);
-		
-		System.out.println(freeList.toString());
 	}
 	
 	@Test
@@ -50,18 +51,38 @@ public class BoardMapperTest {
 	}
 	
 	@Test
-	public void insertManyTest() {
-		BoardNonMemberDTO data = new BoardNonMemberDTO();
-		data.setName("테스트");
-		data.setTitle("제목");
-		data.setContent("내용");
-		data.setIp("127.0.0.1");
-		data.setCategory(BoardCategory.free.getCategoryNum());
-		data.setPassword("1234");
+	public void insertCommentTest() {
+
+		BoardComment comment = new BoardComment();
 		
-		for(int i = 0; i<24; i++) {
-			data.setTitle("제목:::"+i);
-			boardMapper.save(data);
+		for (int i = 2; i< 30 ; i++) {
+			comment.setBoardSeq(2);
+			comment.setContent(i+" 번째 comment");
+			comment.setName("Nick");
+			comment.setPassword(passEncoder.encode("1234"));
+			comment.setIp("127.0.0.1");
+			
+			commentMapper.save(comment);
 		}
+	}
+	
+	@Test
+	public void findLikeCount() {
+		int i = 2;
+		System.out.println("가져온 값 ::::: "+likeMapper.findCount(i));
+	}
+	
+	@Test
+	public void likeSaveTest() {
+		
+		for(int i =0; i<5; i++) {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("boardSeq", 2);
+			map.put("ip", "172.1.0."+i);
+			
+			likeMapper.save(map);
+		}
+		
 	}
 }

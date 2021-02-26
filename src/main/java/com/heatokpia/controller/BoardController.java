@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.heatokpia.Service.BoardService;
 import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
+import com.heatokpia.domain.BoardComment;
 import com.heatokpia.dto.BoardNonMemberDTO;
 import com.heatokpia.utils.ClientIP;
 
@@ -43,8 +44,8 @@ public class BoardController {
 			@RequestParam(required = false) String search) {
 		ModelAndView model = new ModelAndView("board/boardList");
 		
-		// page 없이 접근 하였을 때 1번 페이지로 redirect
-		if(page == null) {
+		// page 없이, page 0 보다 작게 접근 하였을 때 1번 페이지로 redirect
+		if(page == null || page <= 0) {
 			model.setViewName("redirect:/board/"+category);
 			model.addObject("page", 1);
 			return model;
@@ -64,6 +65,11 @@ public class BoardController {
 				return model;
 			}
 			maxPage = service.getBoardListMaxPage(category.getCategoryNum(), searchArea, search);
+		}
+
+		// 데이터가 없어서 maxPage가 0일때!
+		if(maxPage == 0) {
+			maxPage = 1;
 		}
 		
 		// 입력된 페이지 크기가 MaxPage보다 크면 redirect
@@ -123,8 +129,16 @@ public class BoardController {
 			@PathVariable BoardCategory category,
 			@PathVariable int seq) {
 		ModelAndView model = new ModelAndView("board/boardDetail");
+		Board data = service.getBoardData(seq);
+		// 글 번호 정보가 없으면
+		if(data == null) {
+			model.setViewName("redirect:/board/"+category);
+			return model;
+		}
 		model.addObject("category", category);
-		model.addObject("boardData", service.getBoardData(seq));
+		model.addObject("boardData", data);
+		model.addObject("commentList", service.getCommentList(seq));
+		model.addObject("likeCount", service.getLikeCount(seq));
 		return model;
 	}
 	
@@ -197,6 +211,67 @@ public class BoardController {
 			return model;
 		}else {
 			// 비밀번호 틀리면
+			model.setViewName("redirect:/board/"+category+"/"+seq);
+			return model;
+		}
+	}
+	
+	// 댓글 추가
+	@PostMapping("/{category}/{seq}/new")
+	public @ResponseBody ResponseEntity<?> boardCommentWriteDo(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq,
+			@RequestBody @Valid BoardComment data,
+			@ClientIP String ip) {
+		
+		logger.info("boardCommentWriteDo");
+		
+		if(ip == null && category == null) {
+			return new ResponseEntity<>("다시 시도해 주세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		// 데이터 입력 시도
+		service.writeComment(data, ip, seq);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	// 좋아요 동작
+	@PostMapping("/{category}/{seq}/like")
+	public @ResponseBody ResponseEntity<?> boardLikeDo(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq,
+			@ClientIP String ip) {
+		
+		logger.info("boardLikeDo");
+		
+		if(ip == null && category == null) {
+			return new ResponseEntity<>("다시 시도해 주세요", HttpStatus.BAD_REQUEST);
+		}
+		
+		// 데이터 입력 시도
+		String result = service.likeDo(ip, seq);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
+	// 댓글 삭제
+	@PostMapping("/{category}/{seq}/{commentseq}")
+	public ModelAndView boardCommentWriteDo(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq,
+			@PathVariable int commentseq,
+			@RequestParam String password) {
+		
+		logger.info("boardCommentWriteDo");
+		
+		ModelAndView model = new ModelAndView();
+		
+		// 데이터 삭제 시도
+		if(service.deleteBoardComment(commentseq, password)) {
+			// 성공하면
+			model.setViewName("redirect:/board/"+category+"/"+seq);
+			return model;
+		}else {
+			// 실패하면 그냥 화면 다시보여줌
 			model.setViewName("redirect:/board/"+category+"/"+seq);
 			return model;
 		}

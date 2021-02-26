@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heatokpia.mapper.BoardCommentMapper">
+	
+	<insert id="save" parameterType="BoardComment">
+		<![CDATA[
+			INSERT INTO board_comment
+			VALUES(
+				seq_board_comment.NEXTVAL,
+				#{boardSeq},
+				#{password},
+				#{name},
+				SYSDATE,
+				#{id, jdbcType=VARCHAR},
+				#{ip},
+				#{content}
+			)
+		]]>
+	</insert>
+	
+	<select id="findByBoardSeq" parameterType="int" resultType="BoardComment">
+	 <![CDATA[
+			SELECT seq, content, createdate, id, name, ip
+			FROM board_comment
+			WHERE board_seq = #{boardSeq}
+			ORDER BY seq DESC
+		]]>
+	</select>
+	
+	<select id="findPasswordBySeq" parameterType="int" resultType="String">
+	<![CDATA[
+			SELECT password
+			FROM board_comment
+			WHERE seq = #{seq}
+		]]>
+	</select>
+	
+	<delete id="deleteBoardComment" parameterType="int">
+	<![CDATA[
+		DELETE FROM board_comment
+		WHERE seq = #{seq}
+		]]>
+	</delete>
+	
+</mapper>

@@ -47,27 +47,27 @@ MINVALUE 1
 NOCYCLE;
 
 
-
 CREATE TABLE board_comment (
        seq                  INTEGER NOT NULL,
        board_seq            INTEGER NOT NULL,
-       password             VARCHAR2(50) NULL,
-       name                 VARCHAR2(20) NOT NULL,
-       createdate           VARCHAR2(30) NOT NULL,
+       password             VARCHAR2(100) NULL,
+       name                 VARCHAR2(30) NOT NULL,
+       createdate           DATE NOT NULL,
        id                   VARCHAR2(20) NULL,
-       content              VARCHAR2(300) NOT NULL,
+       ip			        VARCHAR2(15) NOT NULL,
+       content              VARCHAR2(900) NOT NULL,
        PRIMARY KEY (seq)
 );
 
 
 ALTER TABLE board_comment
        ADD  ( FOREIGN KEY (id)
-                             REFERENCES Member ) ;
+                             REFERENCES Member  ) ;
 
 
 ALTER TABLE board_comment
        ADD  ( FOREIGN KEY (board_seq)
-                             REFERENCES board ) ;
+                             REFERENCES board ON DELETE CASCADE)  ;
 
 DROP SEQUENCE seq_board_comment;
 
@@ -76,14 +76,14 @@ INCREMENT BY 1
 MINVALUE 1
 NOCYCLE;
 
-CREATE TABLE likepost (
+CREATE TABLE board_thislike (
        board_seq            INTEGER NOT NULL,
        ip                   VARCHAR2(15) NOT NULL,
-       createDate           VARCHAR2(30) NULL,
+       createDate           DATE NULL,
        PRIMARY KEY (board_seq, ip)
 );
 
-ALTER TABLE likepost
+ALTER TABLE board_thislike
        ADD  ( FOREIGN KEY (board_seq)
-                             REFERENCES board ) ;
+                             REFERENCES board ON DELETE CASCADE) ;
 
