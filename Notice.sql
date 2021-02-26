@@ -14,3 +14,10 @@ CREATE TABLE notice_board (
 ALTER TABLE notice_board
        ADD  ( FOREIGN KEY (id)
                              REFERENCES Member ) ;
+                             
+DROP SEQUENCE seq_notice_board;
+
+CREATE SEQUENCE seq_notice_board
+INCREMENT BY 1
+MINVALUE 1
+NOCYCLE;
