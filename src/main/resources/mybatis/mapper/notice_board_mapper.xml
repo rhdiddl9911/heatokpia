@@ -100,4 +100,12 @@
 			WHERE ${searchArea} LIKE '%'||#{search}||'%'
 		]]>
 	</select>
+	
+	<select id="findById" parameterType="_int" resultType="NoticeBoard">
+		<![CDATA[
+			SELECT seq, title, content, createdate, updatedate, category
+			FROM notice_board
+			WHERE seq = #{seq}
+		]]>
+	</select>
 </mapper>

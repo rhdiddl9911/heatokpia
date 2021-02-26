@@ -2,6 +2,7 @@ package com.heatokpia.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,6 +41,14 @@ public class NoticeController {
 		
 		model.addObject("maxPage", maxPage);
 		model.addObject("noticeList", service.getNoticeList(page, category, searchArea, search));
+		return model;
+	}
+	
+	@GetMapping("/{seq}")
+	public ModelAndView noticeDetail(
+			@PathVariable int seq) {
+		ModelAndView model = new ModelAndView("notice/noticeDetail");
+		model.addObject("noticeData", service.getNoticeData(seq));
 		return model;
 	}
 	

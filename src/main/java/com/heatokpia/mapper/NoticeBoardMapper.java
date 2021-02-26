@@ -37,4 +37,7 @@ public interface NoticeBoardMapper {
 	
 	// 전체 & 검색
 	public int findMaxPageBySearch(HashMap<String, Object> map);
+	
+	// 글하나 반환
+	public NoticeBoard findById(int seq);
 }

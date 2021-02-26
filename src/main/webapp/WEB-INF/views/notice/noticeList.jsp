@@ -38,7 +38,7 @@
 		</tr>
 		
 		<c:forEach var="noticeData" items="${noticeList}">
-		<tr onclick="location.href='#'">
+		<tr onclick="location.href='/notice/${noticeData.seq}'">
 			<td><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></td>
 			<td><c:out value="${noticeData.title}"></c:out></td>
 			<td><c:out value="${noticeData.createdate}"></c:out></td>
