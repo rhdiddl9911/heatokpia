@@ -21,6 +21,7 @@ public class MemberDetailsServiceTest {
 		testAdmin.setName("관리자");
 		testAdmin.setPassword("1234");
 		testAdmin.setRole(MemberRole.ROLE_ADMIN);
+		testAdmin.setEmail("123@1233.com");
 		
 		service.save(testAdmin);
 	}
