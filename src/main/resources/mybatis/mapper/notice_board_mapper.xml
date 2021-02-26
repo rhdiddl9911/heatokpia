@@ -5,22 +5,24 @@
 	
 	<insert id="save" parameterType="NoticeBoard">
 		<![CDATA[
-			INSERT INTO notice_board(SEQ, TITLE, CONTENT, CREATEDATE, ID)
+			INSERT INTO notice_board(SEQ, TITLE, CONTENT, CREATEDATE, ID, CATEGORY)
 			VALUES (
 			seq_notice_board.NEXTVAL,
 			#{title},
 			#{content},
 			SYSDATE,
-			#{id}
+			#{id},
+			#{category}
 			)
 		]]>
 	</insert>
 	
 	<select id="findTitleList" resultType="NoticeBoard">
 		<![CDATA[
-			SELECT seq, title, createdate
+			SELECT seq, title, createdate, category
 			FROM notice_board
 		]]>
 	</select>
+	
 	
 </mapper>

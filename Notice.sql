@@ -1,4 +1,4 @@
---DROP TABLE NOTICE_BOARD CASCADE CONSTRAINTS;
+DROP TABLE NOTICE_BOARD CASCADE CONSTRAINTS;
 select * from NOTICE_BOARD;
 CREATE TABLE notice_board (
        seq                  INTEGER NOT NULL,
@@ -8,6 +8,7 @@ CREATE TABLE notice_board (
        updatedate           DATE NULL,
        hit                  INTEGER NULL,
        id                   VARCHAR2(20) NOT NULL,
+       category	    		VARCHAR2(1) NOT NULL,
        PRIMARY KEY (seq)
 );
 

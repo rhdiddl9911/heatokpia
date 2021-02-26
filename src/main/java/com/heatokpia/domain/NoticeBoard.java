@@ -16,5 +16,6 @@ public class NoticeBoard {
 	private String updatedate;
 	private int hit;
 	private String id;
+	private int category;
 	
 }

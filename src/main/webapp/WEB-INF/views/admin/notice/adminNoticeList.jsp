@@ -9,13 +9,14 @@
 </head>
 <body>
 <div>
-<button onclick="location.href='/admin/notice/write'">글쓰기</button>
+<button onclick="location.href='/admin/notice/write'">작성</button>
 </div>
 
 <div class="board wrap">
 	<table class="board">
 		<tr>
 			<th><input type="checkbox" id="chk_all"></th>
+			<th>카테고리</th>
 			<th>제목</th>
 			<th>생성날짜</th>
 		</tr>
@@ -23,6 +24,7 @@
 		<c:forEach var="noticeData" items="${noticeList}">
 		<tr onclick="location.href='#'">
 			<td><input type="checkbox" name="chk"></td>
+			<td><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></td>
 			<td><c:out value="${noticeData.title}"></c:out></td>
 			<td><c:out value="${noticeData.createdate}"></c:out></td>
 		</tr>
