@@ -28,9 +28,7 @@
 	<option value="/admin/notice?page=1&category=이벤트" <c:if test="${param.category == '이벤트'}"><c:out value="selected"/></c:if>>이벤트</option>
 </select>
 
-<button onclick="location.href='/admin/notice/write'">작성</button>
 </div>
-
 <div class="board wrap">
 	<table class="board">
 		<tr>
@@ -41,7 +39,7 @@
 		</tr>
 		
 		<c:forEach var="noticeData" items="${noticeList}">
-		<tr onclick="location.href='#'">
+		<tr onclick="location.href='/admin/notice/${noticeData.seq}'">
 			<td><input type="checkbox" name="chk"></td>
 			<td><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></td>
 			<td><c:out value="${noticeData.title}"></c:out></td>
@@ -85,6 +83,9 @@
 		</c:forEach>
 	</span>
 	</div>
+	
+	
+	<button onclick="location.href='/admin/notice/write'">작성</button>
 	
 </div>
 <%@include file="../../footer.jsp" %>

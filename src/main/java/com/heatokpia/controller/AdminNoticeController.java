@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,5 +69,12 @@ public class AdminNoticeController {
 		return model;
 	}
 	
+	@GetMapping("/{seq}")
+	public ModelAndView noticeDetail(
+			@PathVariable int seq) {
+		ModelAndView model = new ModelAndView("admin/notice/adminNoticeDetail");
+		model.addObject("noticeData", service.getNoticeData(seq));
+		return model;
+	}
 			
 }
