@@ -1,5 +1,7 @@
 package com.heatokpia.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.heatokpia.domain.NoticeBoard;
@@ -15,5 +17,9 @@ public class NoticeService {
 	
 	public void insertBoard(NoticeBoard data) {
 		noticeMapper.save(data);
+	}
+	
+	public List<NoticeBoard> getNoticeList(){
+		return noticeMapper.findTitleList();
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +15,14 @@
 <div class="board wrap">
 	<table class="board">
 		<tr>
+			<th><input type="checkbox" id="chk_all"></th>
 			<th>제목</th>
 			<th>생성날짜</th>
 		</tr>
 		
 		<c:forEach var="noticeData" items="${noticeList}">
 		<tr onclick="location.href='#'">
+			<td><input type="checkbox" name="chk"></td>
 			<td><c:out value="${noticeData.title}"></c:out></td>
 			<td><c:out value="${noticeData.createdate}"></c:out></td>
 		</tr>
@@ -27,5 +30,7 @@
 	</table>
 	
 </div>
+<%@include file="../../footer.jsp" %>
+<script src="/js/check_all.js"></script>
 </body>
 </html>

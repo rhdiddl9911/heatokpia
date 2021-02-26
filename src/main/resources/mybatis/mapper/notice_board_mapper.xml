@@ -16,4 +16,11 @@
 		]]>
 	</insert>
 	
+	<select id="findTitleList" resultType="NoticeBoard">
+		<![CDATA[
+			SELECT seq, title, createdate
+			FROM notice_board
+		]]>
+	</select>
+	
 </mapper>

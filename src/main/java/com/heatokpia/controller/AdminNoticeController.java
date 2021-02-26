@@ -27,9 +27,8 @@ public class AdminNoticeController {
 	
 	@GetMapping()
 	public ModelAndView noticeList() {
-		ModelAndView model = new ModelAndView("admin/notice/list");
-		
-		model.addObject("noticeList", attributeValue);
+		ModelAndView model = new ModelAndView("admin/notice/adminNoticeList");
+		model.addObject("noticeList", service.getNoticeList());
 		return model;
 	}
 	
