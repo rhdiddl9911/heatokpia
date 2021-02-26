@@ -18,7 +18,7 @@
 	<a href="/logout">로그아웃</a>
 	</sec:authorize>
 	
-	<a href="/admin/adminIndex"> 어드민 접근해보기 </a>
+	<a href="/admin"> 어드민 접근해보기 </a>
 	
 </body>
 </html>
