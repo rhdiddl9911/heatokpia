@@ -80,6 +80,6 @@ public class NoticeService {
 	}
 	
 	public NoticeBoard getNoticeData(int seq) {
-		return noticeMapper.findById(seq);
+		return noticeMapper.findBySeq(seq);
 	}
 }

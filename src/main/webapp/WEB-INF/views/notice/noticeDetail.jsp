@@ -21,6 +21,9 @@
 		</c:if>
 		</span>
 	</div>
+	<div>
+		<c:out value="${noticeData.member.name}"/>
+	</div>
 	<div class="content">
 		<c:out value="${noticeData.content}"/>
 	</div>

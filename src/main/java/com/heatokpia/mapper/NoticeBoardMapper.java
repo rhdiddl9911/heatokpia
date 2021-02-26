@@ -39,5 +39,5 @@ public interface NoticeBoardMapper {
 	public int findMaxPageBySearch(HashMap<String, Object> map);
 	
 	// 글하나 반환
-	public NoticeBoard findById(int seq);
+	public NoticeBoard findBySeq(int seq);
 }

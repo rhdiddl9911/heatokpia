@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.heatokpia.Service.NoticeService;
+import com.heatokpia.domain.Member;
 import com.heatokpia.domain.NoticeBoard;
 
 import lombok.RequiredArgsConstructor;
@@ -39,9 +41,10 @@ public class AdminNoticeController {
 	}
 	
 	@PostMapping("/write")
-	public ModelAndView noticeWriteDo(NoticeBoard data, Principal principal) {
+	public ModelAndView noticeWriteDo(NoticeBoard data, @AuthenticationPrincipal Member member) {
 		ModelAndView model = new ModelAndView("redirect:/admin/notice");
-		data.setId(principal.getName());
+		System.out.println(member.toString());
+		data.setMember(member);
 		service.insertBoard(data);
 		return model;
 	}

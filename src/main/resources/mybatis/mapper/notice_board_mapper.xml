@@ -2,7 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.heatokpia.mapper.NoticeBoardMapper">
-	
+
+	<resultMap type="Member" id="Member">
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	</resultMap>
+
+	<resultMap type="NoticeBoard" id="NoticeBoard">
+		<result column="seq" property="seq"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="createdate" property="createdate"/>
+		<result column="updatedate" property="updatedate"/>
+		<result column="category" property="category"/>
+		<collection property="member" resultMap="Member"/>
+	</resultMap>
+
 	<insert id="save" parameterType="NoticeBoard">
 		<![CDATA[
 			INSERT INTO notice_board(SEQ, TITLE, CONTENT, CREATEDATE, ID, CATEGORY)
@@ -11,7 +26,7 @@
 			#{title},
 			#{content},
 			SYSDATE,
-			#{id},
+			#{member.id},
 			#{category}
 			)
 		]]>
@@ -101,11 +116,14 @@
 		]]>
 	</select>
 	
-	<select id="findById" parameterType="_int" resultType="NoticeBoard">
+	<select id="findBySeq" parameterType="_int" resultMap="NoticeBoard">
 		<![CDATA[
-			SELECT seq, title, content, createdate, updatedate, category
-			FROM notice_board
-			WHERE seq = #{seq}
+			SELECT n.seq, n.title, n.content, n.createdate, n.updatedate, n.category,
+					n.id, m.name
+			FROM notice_board n
+				JOIN member m
+					ON n.id = m.id
+			WHERE n.seq = #{seq}
 		]]>
 	</select>
 </mapper>
