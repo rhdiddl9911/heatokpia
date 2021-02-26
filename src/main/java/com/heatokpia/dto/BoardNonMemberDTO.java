@@ -26,8 +26,8 @@ public class BoardNonMemberDTO {
 	
 	
 	@Size(max = 60, message = "비밀번호가 너무 깁니다.")
-	@NotBlank(message = "비밀번호를 입력해주세요")
 	@Pattern(regexp = "^[A-Za-z0-9]+$", message = "비밀번호는 영문, 숫자만 가능합니다.")
+	@NotBlank(message = "비밀번호를 입력해주세요")
 	private String password;
 	
 	private int category;
