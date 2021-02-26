@@ -17,18 +17,35 @@
 		]]>
 	</insert>
 	
-	<select id="findTitleList" resultType="NoticeBoard">
+	<select id="findTitleList" parameterType="_int" resultType="NoticeBoard">
 		<![CDATA[
-			SELECT seq, title, createdate, category
-			FROM notice_board
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
+					FROM (SELECT * 
+							FROM notice_board 
+							ORDER BY seq DESC) Z
+				)
+			WHERE PAGE = #{page}
 		]]>
 	</select>
 	
 	<select id="findTitleListByCategory" parameterType="_int" resultType="NoticeBoard">
 		<![CDATA[
-			SELECT seq, title, createdate, category
-			FROM notice_board
-			WHERE category = #{category}
+		SELECT *
+			FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
+					FROM (SELECT * 
+							FROM notice_board 
+							WHERE category = #{category}
+							ORDER BY seq DESC) Z
+				)
+			WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findMaxPage" resultType="_int">
+	<![CDATA[
+		SELECT ceil(count(1)/10)
+		FROM notice_board
 		]]>
 	</select>
 </mapper>

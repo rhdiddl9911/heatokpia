@@ -19,14 +19,23 @@ public class NoticeService {
 		noticeMapper.save(data);
 	}
 	
-	public List<NoticeBoard> getNoticeList(String category){
+	public List<NoticeBoard> getNoticeList(int page, String category){
 		if(category == null) {
-			return noticeMapper.findTitleList();
+			return noticeMapper.findTitleList(page);
 		}
+		// 공지사항 : 0
+		// 이벤트 : 1
 		if(category.equals("공지사항")) {
-			return noticeMapper.findTitleListByCategory(0);
+			return noticeMapper.findTitleListByCategory(page, 0);
 		}else {
-			return noticeMapper.findTitleListByCategory(1);
+			return noticeMapper.findTitleListByCategory(page, 1);
 		}
+	}
+	
+	public int getMaxPage(String category) {
+		if(category == null) {
+			return noticeMapper.findMaxPage();
+		}
+		return 0;
 	}
 }
