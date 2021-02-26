@@ -35,10 +35,12 @@
 	<select id="findAllByCategory" parameterType="HashMap" resultType="Board">
 		<![CDATA[
 			SELECT *
-			FROM (SELECT seq, title, name, hit, createdate, ceil(rownum / 10) as page
-					FROM board
-					WHERE category=#{categorynum}
-					ORDER BY seq DESC)
+			FROM (SELECT ceil(rownum / 10) as page, B.*
+					FROM (SELECT seq, title, name, hit, createdate
+							FROM board
+							WHERE category=#{categorynum}
+							ORDER BY seq DESC) B
+					)
 			WHERE page = #{page}
 		]]>
 	</select>
@@ -86,11 +88,13 @@
 	<select id="findSearchByCategoryAndSearch" parameterType="HashMap" resultType="Board">
 	<![CDATA[
 		SELECT *
-			FROM (SELECT seq, title, name, createdate, ceil(rownum / 10) as page
-					FROM board
-					WHERE category=#{categorynum}
-						AND ${searchArea} like '%'||#{search}||'%'
-					ORDER BY seq DESC)
+			FROM (SELECT ceil(rownum / 10) as page, B.*
+					FROM (SELECT seq, title, name, createdate
+							FROM board
+							WHERE category=#{categorynum}
+							AND ${searchArea} like '%'||#{search}||'%'
+							ORDER BY seq DESC) B
+					)
 			WHERE page = #{page}
 	]]>
 	</select>
