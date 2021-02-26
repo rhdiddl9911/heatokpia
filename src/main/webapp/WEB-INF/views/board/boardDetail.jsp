@@ -25,11 +25,11 @@
 	</div>
 	
 	<div>
-		<c:out value="${likeCount}"/><button onclick="javascript:likeThis('${category}',${seq})">좋아요</button>
+		<c:out value="${likeCount}"/><button onclick="javascript:likeThis()">좋아요</button>
 	</div>
 	
 	<div>
-	<form action="/board/${category}/${seq}" method="post" name="passcheck">
+	<form action="/board/${category}/${seq}/pass" method="post" name="passcheck">
 		<input type="hidden" name="method" id="method">
 		<button onclick="javascript:goPass('up')" type="button">수정</button><button onclick="javascript:goPass('del')" type="button">삭제</button>
 	</form>
@@ -41,7 +41,7 @@
 		<input type="text" name="name" placeholder="닉네임">
 		<input type="password" name="password" placeholder="비밀번호"><br>
 		<input type="text" name="content">
-		<input type="button" value="댓글 입력" onclick="javascript:commentWrite('${category}',${seq})">
+		<input type="button" value="댓글 입력" onclick="javascript:commentWrite()">
 	</form>
 	<hr>
 	<c:forEach var="comment" items="${commentList}">
@@ -53,17 +53,35 @@
 	</c:forEach>
 	</div>
 	
+	<%@include file="../footer.jsp" %>
 	
-	<script type="text/javascript">
+	<script>
+	var category = "<c:out value='${category}'/>";
+	var seq = "<c:out value='${seq}'/>";
+	</script>
+	
+
+	<script src="/js/jquery.serializeObject.min.js"></script>
+	<script>
+	//비번체크 화면으로 이동 method넘김
 		function goPass(method){
-			document.getElementById('method').value = method;
-			document.passcheck.submit();
+			$.ajax({
+				url: "/board/"+category+"/"+seq+"/pass",
+				method: "POST",
+				data: {
+					"method": method
+				}
+			}).done(function(page){
+				$("body").html(page);
+			}).fail(function(){
+				alert('화면을 불러오는데 실패하였습니다.');
+			});
 		}
 	</script>
-	<script src="/js/jquery-3.5.1.js"></script>
-	<script src="/js/jquery.serializeObject.min.js"></script>
+	
 	<script type="text/javascript">
-		function commentWrite(category, seq){
+	//코멘트 작성시
+		function commentWrite(){
 			sendData = $("#commentForm").serializeObject();
 			
 			$.ajax({
@@ -72,7 +90,7 @@
 				contentType: "application/json; charset=utf-8",
 				data: JSON.stringify(sendData)
 			}).done(function(){
-				 location.reload();
+				 location.reload();	// 나중에 부분 교체로 변경하면 좋을듯
 			}).fail(function(error){
 				var errorMessege ="";
 
@@ -93,7 +111,8 @@
 	</script>
 	
 	<script type="text/javascript">
-		function likeThis(category, seq){
+	// 좋아요 누름
+		function likeThis(){
 			
 			$.ajax({
 				url: "/board/"+category+"/"+seq+"/like",
@@ -101,7 +120,7 @@
 				contentType: "application/json; charset=utf-8"
 			}).done(function(text){
 				alert(text);
-				location.reload();
+				location.reload();	// 나중에 부분만 교체로 변경하면 좋을듯
 			}).fail(function(error){
 				var errorMessege ="";
 

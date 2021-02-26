@@ -13,7 +13,7 @@
 	<input type="password" name="password" placeholder="PW"><br>
 	<input type="text" name="title" placeholder="제목" value="${boardData.title}"><br>
 	<input type="text" name="content" placeholder="내용" value="${boardData.content}"><br>
-	<input type="button" onclick="location.replace('/board/${category}')" value="취소">
+	<input type="button" onclick="javascript:location.reload()" value="취소">
 	<input type="button" onclick="javascript:writeDo('${category}', ${seq})" value="글쓰기">
 	</form>
 	

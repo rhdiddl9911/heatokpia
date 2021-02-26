@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.heatokpia.Service.BoardService;
 import com.heatokpia.domain.Board;
@@ -27,7 +28,7 @@ import com.heatokpia.utils.ClientIP;
 
 import lombok.RequiredArgsConstructor;
 
-@RestController
+@Controller
 @RequestMapping("/board")
 @RequiredArgsConstructor
 public class BoardController {
@@ -74,8 +75,12 @@ public class BoardController {
 		
 		// 입력된 페이지 크기가 MaxPage보다 크면 redirect
 		if(page > maxPage) {
-			model.setViewName("redirect:/board/"+category);
-			model.addObject("page", maxPage);
+			RedirectView review = new RedirectView("/board/"+category+"?page="+maxPage);
+			review.setContextRelative(true); 
+			// RedirectView 사용 해봄
+			//model.setViewName();
+			//model.addObject("page", maxPage);
+			model.setView(review);
 			return model;
 		}
 		
@@ -144,11 +149,11 @@ public class BoardController {
 	
 	
 	// PassCheck
-	@PostMapping("/{category}/{seq}")
+	@PostMapping("/{category}/{seq}/pass")
 	public ModelAndView boardPassCheckView(
 			@PathVariable BoardCategory category,
 			@PathVariable int seq,
-			@RequestParam String method) {
+			@RequestParam("method") String method) {
 		ModelAndView model = new ModelAndView("board/boardPassCheck");
 		model.addObject("category", category);
 		model.addObject("seq", seq);
@@ -156,30 +161,32 @@ public class BoardController {
 		return model;
 	}
 	
-	// 글 수정
+	// 글 수정 화면반환
 	@PostMapping("/{category}/{seq}/up")
 	public ModelAndView boardUpdateView(
 			@PathVariable BoardCategory category,
 			@PathVariable int seq,
-			@RequestParam String password) {
-		
+			@RequestParam("password") String password) {
+
 		ModelAndView model = new ModelAndView();
 		
-		if(service.passCheck(seq, password)) {
-			// 비밀번호 맞으면
-			model.setViewName("board/boardUpdate");
-			model.addObject("category", category);
-			model.addObject("seq", seq);
-			model.addObject("boardData", service.getBoardData(seq));
-			return model;
-		}else {
-			// 비밀번호 틀리면
-			model.setViewName("redirect:/board/"+category+"/"+seq);
-			return model;
+		if(password == null || !service.passCheck(seq, password)) {
+			// 비밀번호 틀리면 null 반환하고 view에서 처리 
+			// --------------------------------- 더 좋은 방법?
+			//model.addObject("back", true);
+			//return model;
+			return null;
 		}
+		// 비밀번호 맞으면 수정화면 반환
+		model.setViewName("board/boardUpdate");
+		model.addObject("category", category);
+		model.addObject("seq", seq);
+		model.addObject("boardData", service.getBoardData(seq));
+		return model;
+		
 	}
 	
-	// 글 수정
+	// 글 수정 시도
 	@PostMapping("/{category}/{seq}/up/do")
 	public @ResponseBody ResponseEntity<?> boardDataUpdate(
 			@PathVariable BoardCategory category,
@@ -196,24 +203,19 @@ public class BoardController {
 	
 	// 글 삭제
 	@PostMapping("/{category}/{seq}/del")
-	public ModelAndView boardDataDel(
+	public @ResponseBody ResponseEntity<?> boardDataDel(
 			@PathVariable BoardCategory category,
 			@PathVariable int seq,
 			@RequestParam String password) {
 		
-		ModelAndView model = new ModelAndView();
-		
-		if(service.passCheck(seq, password)) {
-			// 비밀번호 맞으면
-			service.deleteBoardData(seq);
-			
-			model.setViewName("redirect:/board/"+category);
-			return model;
-		}else {
+		if(password == null || !service.passCheck(seq, password)) {
 			// 비밀번호 틀리면
-			model.setViewName("redirect:/board/"+category+"/"+seq);
-			return model;
+			return new ResponseEntity<>("맞지 않습니다", HttpStatus.BAD_REQUEST);
 		}
+		
+		// 비밀번호 맞으면
+		service.deleteBoardData(seq);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	// 댓글 추가
@@ -255,25 +257,20 @@ public class BoardController {
 	
 	// 댓글 삭제
 	@PostMapping("/{category}/{seq}/{commentseq}")
-	public ModelAndView boardCommentWriteDo(
+	public @ResponseBody ResponseEntity<?> boardCommentDelDo(
 			@PathVariable BoardCategory category,
 			@PathVariable int seq,
 			@PathVariable int commentseq,
 			@RequestParam String password) {
 		
-		logger.info("boardCommentWriteDo");
-		
-		ModelAndView model = new ModelAndView();
-		
+		logger.info("boardCommentDelDo");
 		// 데이터 삭제 시도
 		if(service.deleteBoardComment(commentseq, password)) {
 			// 성공하면
-			model.setViewName("redirect:/board/"+category+"/"+seq);
-			return model;
+			return new ResponseEntity<>("삭제 되었습니다.", HttpStatus.OK);
 		}else {
-			// 실패하면 그냥 화면 다시보여줌
-			model.setViewName("redirect:/board/"+category+"/"+seq);
-			return model;
+			// 실패하면
+			return new ResponseEntity<>("실패 하였습니다.", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
