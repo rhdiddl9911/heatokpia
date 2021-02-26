@@ -19,7 +19,14 @@ public class NoticeService {
 		noticeMapper.save(data);
 	}
 	
-	public List<NoticeBoard> getNoticeList(){
-		return noticeMapper.findTitleList();
+	public List<NoticeBoard> getNoticeList(String category){
+		if(category == null) {
+			return noticeMapper.findTitleList();
+		}
+		if(category.equals("공지사항")) {
+			return noticeMapper.findTitleListByCategory(0);
+		}else {
+			return noticeMapper.findTitleListByCategory(1);
+		}
 	}
 }

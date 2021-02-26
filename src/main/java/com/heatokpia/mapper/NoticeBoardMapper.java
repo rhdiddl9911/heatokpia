@@ -12,4 +12,6 @@ public interface NoticeBoardMapper {
 	public void save(NoticeBoard data);
 	
 	public List<NoticeBoard> findTitleList();
+	
+	public List<NoticeBoard> findTitleListByCategory(int category);
 }

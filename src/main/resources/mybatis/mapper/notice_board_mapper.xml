@@ -24,5 +24,11 @@
 		]]>
 	</select>
 	
-	
+	<select id="findTitleListByCategory" parameterType="_int" resultType="NoticeBoard">
+		<![CDATA[
+			SELECT seq, title, createdate, category
+			FROM notice_board
+			WHERE category = #{category}
+		]]>
+	</select>
 </mapper>
