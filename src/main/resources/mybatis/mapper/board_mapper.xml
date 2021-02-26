@@ -5,7 +5,7 @@
 
 	<select id="findById" parameterType="int" resultType="Board">
 	 <![CDATA[
-	 		SELECT *
+	 		SELECT seq, title, name, createdate, id, content
 	 		FROM board
 	 		WHERE seq = #{seq}
 		]]>
