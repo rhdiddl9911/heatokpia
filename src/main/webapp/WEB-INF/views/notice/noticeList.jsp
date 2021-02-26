@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmf" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +10,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+		<c:if test="${param.category != null}">
+			<c:set var="paramCategory" value="&category=${param.category}"/>
+		</c:if>
+		<c:if test="${param.searchArea != null}">
+			<c:set var="paramSearcharea" value="&searchArea=${param.searchArea}"/>
+		</c:if>
+		<c:if test="${param.search != null}">
+			<c:set var="paramSearch" value="&search=${param.search}"/>
+		</c:if>
 <div>
-<button onclick="location.href='/board/${category}/new'">글쓰기</button>
+<sec:authorize access="hasRole('ADMIN')">
+<button onclick="location.href='admin/notice/write'">작성</button>
+</sec:authorize>
 </div>
 
 <div class="board wrap">
-	<a href="/notice?category=공지사항&page=1">공지사항</a>
-	<a href="/notice?category=이벤트&page=1">이벤트</a>
+	<a href="javascript:location.replace('/notice?page=1')">전체</a>
+	<a href="javascript:location.replace('/notice?page=1&category=공지사항')">공지사항</a>
+	<a href="javascript:location.replace('/notice?page=1&category=이벤트')">이벤트</a>
 	<table class="board">
 		<tr>
 			<th>카테고리</th>
@@ -34,7 +46,7 @@
 	</table>
 	<div>
 	<span>
-		<form name="search" action="/notice" method="get">
+		<form name="search" action="/notice?page=1${paramCategory}" method="get">
 		<input type="hidden" name="page" value="${1}">
 		<select name="searchArea">
 			<option value="title">제목</option>
@@ -45,35 +57,22 @@
 		</form>
 	</span>
 	<span>
+		<c:set var="urlparams" value="${paramCategory}${paramSearcharea}${paramSearch}"/>
+		
 		<fmf:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
 		<fmf:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
 		
 		<c:if test="${start-10>0}">
-			<c:if test="${param.search == null}">
-				<a href="/board/${category}?page=${start-10}"> 이전페이지 </a>
-			</c:if>
-			<c:if test="${!(param.search == null)}">
-				<a href="/board/${category}?page=${start-10}&searchArea=${param.searchArea}&search=${param.search}"> 이전페이지 </a>
-			</c:if>
+			<a href="/notice?page=${start-10}${urlparams}"> 이전페이지 </a>
 		</c:if>
 		
+		
 		<c:forEach var="pageNum" begin="${start}" end="${end}">
-			<c:if test="${param.search == null}">
-				<a href="/board/${category}?page=${pageNum}"><c:out value="${pageNum}"/></a>
-			</c:if>
-			<c:if test="${!(param.search == null)}">
-				<a href="/board/${category}?page=${pageNum}&searchArea=${param.searchArea}&search=${param.search}"><c:out value="${pageNum}"/></a>
-			</c:if>
+			<a href="/notice?page=${pageNum}${urlparams}"><c:out value="${pageNum}"/></a>
 		</c:forEach>
 		
 		<c:if test="${end<maxPage}">
-			<c:if test="${param.search == null}">
-				<a href="/board/${category}?page=${end+1}"> 이후페이지 </a>
-			</c:if>
-			<c:if test="${!(param.search == null)}">
-				<a href="/board/${category}?page=${end+1}&searchArea=${param.searchArea}&search=${param.search}"> 이전페이지 </a>
-			</c:if>
-			
+			<a href="/notice?page=${end+1}${urlparams}"> 이전페이지 </a>
 		</c:if>
 		
 		<c:forEach var="boardData" items="${boardList}">

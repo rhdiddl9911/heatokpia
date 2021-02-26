@@ -35,10 +35,11 @@ public class NoticeController {
 			model.addObject("page", 1);
 			return model;
 		}
-		int maxPage = service.getMaxPage(category);
+		
+		int maxPage = service.getMaxPage(category, searchArea, search);
 		
 		model.addObject("maxPage", maxPage);
-		model.addObject("noticeList", service.getNoticeList(page, category));
+		model.addObject("noticeList", service.getNoticeList(page, category, searchArea, search));
 		return model;
 	}
 	

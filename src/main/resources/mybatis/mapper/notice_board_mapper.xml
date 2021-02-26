@@ -21,7 +21,7 @@
 		<![CDATA[
 		SELECT *
 			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
-					FROM (SELECT * 
+					FROM (SELECT seq, title, createdate, category
 							FROM notice_board 
 							ORDER BY seq DESC) Z
 				)
@@ -33,12 +33,39 @@
 		<![CDATA[
 		SELECT *
 			FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
-					FROM (SELECT * 
+					FROM (SELECT seq, title, createdate, category 
 							FROM notice_board 
-							WHERE category = #{category}
+							WHERE category = #{category} 
 							ORDER BY seq DESC) Z
 				)
 			WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findTitleListByCategoryAndSearch" parameterType="HashMap" resultType="NoticeBoard">
+		<![CDATA[
+			SELECT *
+				FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
+						FROM (SELECT seq, title, createdate, category 
+								FROM notice_board 
+								WHERE category = #{category} 
+								AND ${searchArea} LIKE '%'||#{search}||'%'
+								ORDER BY seq DESC) Z
+					)
+				WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findTitleListBySearch" parameterType="HashMap" resultType="NoticeBoard">
+		<![CDATA[
+			SELECT *
+				FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
+						FROM (SELECT seq, title, createdate, category 
+								FROM notice_board 
+								WHERE ${searchArea} LIKE '%'||#{search}||'%' 
+								ORDER BY seq DESC) Z
+					)
+				WHERE page = #{page}
 		]]>
 	</select>
 	
@@ -46,6 +73,31 @@
 	<![CDATA[
 		SELECT ceil(count(1)/10)
 		FROM notice_board
+		]]>
+	</select>
+	
+	<select id="findMaxPageByCategory" parameterType="_int" resultType="_int">
+	<![CDATA[
+		SELECT ceil(count(1)/10)
+		FROM notice_board
+		WHERE category = #{category}
+	]]>
+	</select>
+	
+	<select id="findMaxPageByCategoryAndSearch" parameterType="HashMap" resultType="_int">
+		<![CDATA[
+			SELECT ceil(count(1)/10)
+			FROM notice_board
+			WHERE category = #{category}
+				AND ${searchArea} LIKE '%'||#{search}||'%'
+		]]>
+	</select>
+	
+	<select id="findMaxPageBySearch" parameterType="HashMap" resultType="_int">
+		<![CDATA[
+			SELECT ceil(count(1)/10)
+			FROM notice_board
+			WHERE ${searchArea} LIKE '%'||#{search}||'%'
 		]]>
 	</select>
 </mapper>
