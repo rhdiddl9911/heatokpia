@@ -1,5 +1,5 @@
 --DROP TABLE NOTICE_BOARD CASCADE CONSTRAINTS;
-
+select * from NOTICE_BOARD;
 CREATE TABLE notice_board (
        seq                  INTEGER NOT NULL,
        title                VARCHAR2(300) NOT NULL,

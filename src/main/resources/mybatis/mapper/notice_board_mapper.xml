@@ -3,8 +3,16 @@
 
 <mapper namespace="com.heatokpia.mapper.NoticeBoardMapper">
 	
-	<insert id="save" parameterType="HashMap">
+	<insert id="save" parameterType="NoticeBoard">
 		<![CDATA[
+			INSERT INTO notice_board(SEQ, TITLE, CONTENT, CREATEDATE, ID)
+			VALUES (
+			seq_notice_board.NEXTVAL,
+			#{title},
+			#{content},
+			SYSDATE,
+			#{id}
+			)
 		]]>
 	</insert>
 	
