@@ -13,6 +13,9 @@
 		<span>
 			<sec:authorize access="isAuthenticated()">
 			<a>내정보</a> | <a href="/logout">로그아웃</a>
+				<sec:authorize access="hasRole('ADMIN')">
+				<span><a href="/admin">관리자</a></span>
+				</sec:authorize>
 			</sec:authorize>
 			
 			<sec:authorize access="isAnonymous()">
