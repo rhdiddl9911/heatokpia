@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.heatokpia.Service.NoticeService;
 import com.heatokpia.domain.Member;
@@ -27,9 +29,26 @@ public class AdminNoticeController {
 	private final NoticeService service;
 	
 	@GetMapping()
-	public ModelAndView noticeList() {
+	public ModelAndView noticeList(
+			@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) String searchArea,
+			@RequestParam(required = false) String search,
+			@RequestParam(required = false) String category
+			) {
 		ModelAndView model = new ModelAndView("admin/notice/adminNoticeList");
-		//model.addObject("noticeList", service.getNoticeList(1, null));
+		RedirectView listRe = new RedirectView("/admin/notice");
+		
+		// page 없이, page 0 보다 작게 접근 하였을 때 1번 페이지로 redirect
+		if(page == null || page <= 0) {
+			model.setView(listRe);
+			model.addObject("page", 1);
+			return model;
+		}
+		
+		int maxPage = service.getMaxPage(category, searchArea, search);
+		
+		model.addObject("maxPage", maxPage);
+		model.addObject("noticeList", service.getNoticeList(page, category, searchArea, search));
 		return model;
 	}
 	
