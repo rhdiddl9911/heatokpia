@@ -85,4 +85,23 @@ public class AdminBoardController {
 		return model;
 	}
 	
+	// 글 Detail반환
+	@GetMapping("/{category}/{seq}")
+	public ModelAndView boardDetail(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq) {
+		ModelAndView model = new ModelAndView("admin/board/adminboardDetail");
+		Board data = service.getBoardData(seq);
+		// 글 번호 정보가 없으면
+		if(data == null) {
+			model.setViewName("redirect:/board/"+category);
+			return model;
+		}
+		model.addObject("category", category);
+		model.addObject("boardData", data);
+		model.addObject("commentList", service.getCommentList(seq));
+		model.addObject("likeCount", service.getLikeCount(seq));
+		return model;
+	}
+	
 }
