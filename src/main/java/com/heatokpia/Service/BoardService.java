@@ -146,4 +146,18 @@ public class BoardService {
 			return false;
 		}
 	}
+	
+	// --- admin
+	public List<Board> getAdminViewList(int page, int category, String searchArea, String search){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("categorynum", category);
+		if(searchArea == null) {
+			return boardMapper.findContentPlusByCategory(map);
+		}else {
+			map.put("searchArea", searchArea);
+			map.put("search", search);
+			return boardMapper.findContentPlusByCategoryAndSearch(map);
+		}
+	}
 }

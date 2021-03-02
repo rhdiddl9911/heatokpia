@@ -117,4 +117,32 @@
 	]]>
 	</update>
 	
+	<select id="findContentPlusByCategory" parameterType="HashMap" resultType="Board">
+		<![CDATA[
+			SELECT *
+			FROM (SELECT ceil(rownum / 10) as page, B.*
+					FROM (SELECT seq, title, name, hit, createdate, content
+							FROM board
+							WHERE category=#{categorynum}
+							ORDER BY seq DESC) B
+					)
+			WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findContentPlusByCategoryAndSearch" parameterType="HashMap" resultType="Board">
+		<![CDATA[
+			SELECT *
+				FROM (SELECT ceil(rownum / 10) as page, B.*
+						FROM (SELECT seq, title, name, createdate, content
+								FROM board
+								WHERE category=#{categorynum}
+								AND ${searchArea} like '%'||#{search}||'%'
+								ORDER BY seq DESC) B
+						)
+				WHERE page = #{page}
+		]]>
+	</select>
+	
+	
 </mapper>

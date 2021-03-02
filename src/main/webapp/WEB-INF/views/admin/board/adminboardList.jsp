@@ -16,6 +16,7 @@
 		<tr>
 			<th><input type="checkbox" id="chk_all"></th>
 			<th>제목</th>
+			<th>내용</th>
 			<th>이름</th>
 			<th>생성날짜</th>
 		</tr>
@@ -24,6 +25,7 @@
 		<tr onclick="location.href='/admin/board/${category}/${boardData.seq}'">
 			<td><input type="checkbox" name="chk"></td>
 			<td><c:out value="${boardData.title}"></c:out></td>
+			<td><c:out value="${boardData.content}"></c:out></td>
 			<td><c:out value="${boardData.name}"></c:out></td>
 			<td><c:out value="${boardData.createdate}"></c:out></td>
 		</tr>

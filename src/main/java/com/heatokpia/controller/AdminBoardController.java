@@ -77,14 +77,7 @@ public class AdminBoardController {
 		}
 		
 		// boardList 구하기
-		List<Board> boardList;
-		
-		// 검색 여부에 따라 List 달리 가져옴
-		if (searchArea == null) {
-			boardList = service.getBoardList(category, page);
-		}else {
-			boardList = service.getBoardList(category, page, searchArea, search);
-		}
+		List<Board> boardList = service.getAdminViewList(page, category.getCategoryNum(), searchArea, search);
 		
 		model.addObject("category", category);
 		model.addObject("boardList", boardList);
