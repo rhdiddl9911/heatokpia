@@ -33,7 +33,7 @@
 	
 	<div>
 		<button type="button" onclick="javascript:goUp()">수정</button>
-		<button type="button" onclick="javascript:goDel()">삭제</button>
+		<button type="button" onclick="javascript:goDel(confirm('삭제 하시겠습니까?'))">삭제</button>
 	</div>
 	
 	<div>
@@ -41,7 +41,7 @@
 	<c:forEach var="comment" items="${commentList}">
 	<div>
 		<label><strong><c:out value="${comment.name}"/></strong></label><br>
-		<c:out value="${comment.content}"/><input type="button" value="삭제" onclick="">
+		<c:out value="${comment.content}"/><input type="button" value="삭제" onclick="javascript:goCommentDel(confirm('삭제하시겠습니까?'), ${comment.seq})">
 		<hr>
 	</div>
 	</c:forEach>
@@ -64,6 +64,40 @@
 			}).fail(function(){
 				alert('화면을 불러오는데 실패하였습니다.');
 			});
+		}
+	</script>
+	
+	<script>
+		function goDel(confirm){
+			if(confirm){
+				$.ajax({
+					url: "/admin/board/"+category+"/"+seq+"/del/do",
+					method: "POST"
+				}).done(function(){
+					alert('삭제되었습니다.');
+					location.replace("/admin/board/"+category)
+				}).fail(function(){
+					alert('오류');
+				});
+			}
+			
+		}
+	</script>
+	
+	<script>
+		function goCommentDel(confirm, commentseq){
+			if(confirm){
+				$.ajax({
+					url: "/admin/board/"+category+"/"+seq+"/"+commentseq+"/del/do",
+					method: "POST"
+				}).done(function(){
+					alert('삭제되었습니다.');
+					location.replace("/admin/board/"+category+"/"+seq)
+				}).fail(function(){
+					alert('오류');
+				});
+			}
+			
 		}
 	</script>
 	

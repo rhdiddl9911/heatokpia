@@ -172,4 +172,9 @@ public class BoardService {
 		data.setTitle(data.getTitle()+"(관리자 수정)");
 		boardMapper.adminUpdateBySeq(data);
 	}
+	
+	// admin 댓글 삭제
+	public void adminDeleteBoardComment(int seq) {
+		commentMapper.deleteBoardComment(seq);	
+	}
 }

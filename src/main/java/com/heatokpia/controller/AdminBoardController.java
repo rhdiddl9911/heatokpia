@@ -144,4 +144,39 @@ public class AdminBoardController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	// 글 삭제
+	@PostMapping("/{category}/{seq}/del/do")
+	public @ResponseBody ResponseEntity<?> boardDataDel(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq) {
+		
+		// 글 삭제
+		try {
+			service.deleteBoardData(seq);
+			logger.info("boardDataDel:"+seq+"---OK");
+			return new ResponseEntity<>(HttpStatus.OK);
+		}catch (Exception e) {
+			logger.error("boardDataDel:"+seq+"---Exception:"+e.toString());
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	// 댓글 삭제
+	@PostMapping("/{category}/{seq}/{commentseq}/del/do")
+	public @ResponseBody ResponseEntity<?> boardCommentDelDo(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq,
+			@PathVariable int commentseq) {
+		
+		logger.info("boardCommentDelDo");
+		// 데이터 삭제 시도
+		try{
+			service.adminDeleteBoardComment(commentseq);
+			logger.info("boardCommentDelDo:"+commentseq+"---OK");
+			return new ResponseEntity<>(HttpStatus.OK);
+		}catch (Exception e) {
+			logger.error("boardCommentDelDo:"+commentseq+"---Exception:"+e.toString());
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
 }
