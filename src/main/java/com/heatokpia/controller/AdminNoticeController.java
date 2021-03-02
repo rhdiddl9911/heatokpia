@@ -55,7 +55,7 @@ public class AdminNoticeController {
 	
 	@GetMapping("/write")
 	public ModelAndView noticeWriteView() {
-		ModelAndView model = new ModelAndView("admin/notice/writeNoticeForm");
+		ModelAndView model = new ModelAndView("admin/notice/adminNoticeWrite");
 		model.addObject("memobean", new NoticeBoard());
 		return model;
 	}
