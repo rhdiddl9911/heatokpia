@@ -32,8 +32,8 @@
 	</div>
 	
 	<div>
-		<button type="button" onclick="">수정</button>
-		<button type="button" onclick="">삭제</button>
+		<button type="button" onclick="javascript:goUp()">수정</button>
+		<button type="button" onclick="javascript:goDel()">삭제</button>
 	</div>
 	
 	<div>
@@ -54,6 +54,18 @@
 	var seq = "<c:out value='${seq}'/>";
 	</script>
 	
+	<script>
+		function goUp(){
+			$.ajax({
+				url: "/admin/board/"+category+"/"+seq+"/up",
+				method: "GET"
+			}).done(function(page){
+				$("body").html(page);
+			}).fail(function(){
+				alert('화면을 불러오는데 실패하였습니다.');
+			});
+		}
+	</script>
 	
 </body>
 </html>
