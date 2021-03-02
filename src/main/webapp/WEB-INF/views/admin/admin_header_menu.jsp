@@ -20,7 +20,7 @@
 	<nav>
 	<ul>
 		<li><a href="#">회원관리</a></li>
-		<li><a href="#">게시물관리</a></li>
+		<li><a href="/admin/manage">게시물관리</a></li>
 		<li><a href="/admin/notice">공지사항</a></li>
 		<li><a href="#">문의</a></li>
 	</ul>

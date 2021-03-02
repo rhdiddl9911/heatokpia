@@ -12,4 +12,9 @@ public class AdminController {
 	public String testAdminPage() {
 		return "admin/adminIndex";
 	}
+	
+	@GetMapping("/manage")
+	public String selectView() {
+		return "admin/boardSelect";
+	}
 }
