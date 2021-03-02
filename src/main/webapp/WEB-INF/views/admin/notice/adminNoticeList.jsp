@@ -11,14 +11,15 @@
 </head>
 <body>
 
-<c:if test="${param.category != null}">
+		<c:if test="${param.category != null}">
 			<c:set var="paramCategory" value="&category=${param.category}"/>
 		</c:if>
 		<c:if test="${param.searchArea != null}">
 			<c:set var="paramSearcharea" value="&searchArea=${param.searchArea}"/>
 		</c:if>
 		<c:if test="${param.search != null}">
-			<c:set var="paramSearch" value="&search=${param.search}"/>
+		
+		<c:set var="paramSearch" value="&search=${param.search}"/>
 </c:if>
 <div>
 
@@ -32,7 +33,6 @@
 <div class="board wrap">
 	<table class="board">
 		<tr>
-			<th><input type="checkbox" id="chk_all"></th>
 			<th>카테고리</th>
 			<th>제목</th>
 			<th>생성날짜</th>
@@ -40,7 +40,6 @@
 		
 		<c:forEach var="noticeData" items="${noticeList}">
 		<tr onclick="location.href='/admin/notice/${noticeData.seq}'">
-			<td><input type="checkbox" name="chk"></td>
 			<td><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></td>
 			<td><c:out value="${noticeData.title}"></c:out></td>
 			<td><c:out value="${noticeData.createdate}"></c:out></td>
@@ -89,6 +88,5 @@
 	
 </div>
 <%@include file="../../footer.jsp" %>
-<script src="/js/check_all.js"></script>
 </body>
 </html>
