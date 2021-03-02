@@ -3,8 +3,10 @@ package com.heatokpia.Service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.heatokpia.domain.Member;
 import com.heatokpia.domain.NoticeBoard;
 import com.heatokpia.mapper.NoticeBoardMapper;
 
@@ -83,7 +85,9 @@ public class NoticeService {
 		return noticeMapper.findBySeq(seq);
 	}
 	
-	public void updateNoticeData(NoticeBoard data) {
+	// 업데이트 시도
+	public void updateNoticeData(NoticeBoard data, UserDetails member) {
+		data.setMember((Member) member);
 		noticeMapper.updateBySeq(data);
 	}
 	

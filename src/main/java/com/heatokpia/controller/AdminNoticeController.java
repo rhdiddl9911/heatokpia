@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,7 +70,6 @@ public class AdminNoticeController {
 	@PostMapping("/write")
 	public ModelAndView noticeWriteDo(NoticeBoard data, @AuthenticationPrincipal Member member) {
 		ModelAndView model = new ModelAndView("redirect:/admin/notice");
-		System.out.println(member.toString());
 		data.setMember(member);
 		service.insertBoard(data);
 		return model;
@@ -96,9 +96,12 @@ public class AdminNoticeController {
 	@PostMapping("/up/do")
 	public @ResponseBody ResponseEntity<?> noticeUpdate(
 			@RequestBody @Valid NoticeBoard notice,
-			@AuthenticationPrincipal Member member){
-		notice.setMember(member);
-		service.updateNoticeData(notice);
+			@AuthenticationPrincipal UserDetails member){
+		
+		service.updateNoticeData(notice, member);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 	// 삭제 수행
 	@PostMapping("/del/do")
 	public @ResponseBody ResponseEntity<?> noticeDelete(
