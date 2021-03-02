@@ -129,4 +129,19 @@ public class AdminBoardController {
 		return model;
 		
 	}
+	
+	// 글 수정 시도
+	@PostMapping("/{category}/{seq}/up/do")
+	public @ResponseBody ResponseEntity<?> boardDataUpdate(
+			@PathVariable BoardCategory category,
+			@PathVariable int seq,
+			@RequestBody @Valid Board data) {
+		if(category == null) {
+			return new ResponseEntity<>("다시 시도해 주세요", HttpStatus.BAD_REQUEST);
+		}
+		// 데이터 수정시도
+		service.adminUpdateBoardData(seq, data);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 }

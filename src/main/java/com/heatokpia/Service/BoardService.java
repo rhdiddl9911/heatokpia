@@ -165,4 +165,11 @@ public class BoardService {
 	public Board getBoardDataNoHit(int seq) {
 		return boardMapper.findById(seq);
 	}
+	
+	// admin update
+	public void adminUpdateBoardData(int seq, Board data) {
+		data.setSeq(seq);
+		data.setTitle(data.getTitle()+"(관리자 수정)");
+		boardMapper.adminUpdateBySeq(data);
+	}
 }

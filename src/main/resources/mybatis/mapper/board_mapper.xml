@@ -144,5 +144,17 @@
 		]]>
 	</select>
 	
+	<update id="adminUpdateBySeq" parameterType="Board">
+		<![CDATA[
+		UPDATE board
+		
+		SET 
+		title=#{title},
+		content=#{content},
+		updatedate=SYSDATE
+		
+		WHERE seq=#{seq}
+		]]>
+	</update>
 	
 </mapper>
