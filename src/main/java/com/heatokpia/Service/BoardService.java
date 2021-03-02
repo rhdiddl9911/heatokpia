@@ -160,4 +160,10 @@ public class BoardService {
 			return boardMapper.findContentPlusByCategoryAndSearch(map);
 		}
 	}
+	
+	// seq에 따른 글 하나 반환
+	public Board getBoardDataNoHit(int seq) {
+		Board resultData = boardMapper.findById(seq);
+		return resultData;
+	}
 }

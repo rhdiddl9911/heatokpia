@@ -91,7 +91,7 @@ public class AdminBoardController {
 			@PathVariable BoardCategory category,
 			@PathVariable int seq) {
 		ModelAndView model = new ModelAndView("admin/board/adminboardDetail");
-		Board data = service.getBoardData(seq);
+		Board data = service.getBoardDataNoHit(seq);
 		// 글 번호 정보가 없으면
 		if(data == null) {
 			model.setViewName("redirect:/board/"+category);

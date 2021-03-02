@@ -15,7 +15,7 @@
 		<span class="name"><c:out value="${boardData.name}"/></span>
 		<span class="lastdate">
 		생성일 <c:out value="${boardData.createdate}"/>
-		<c:if test="${!(boardData.updatedate == null)}">
+		<c:if test="${boardData.updatedate != null}">
 			수정일 <c:out value="${boardData.updatedate}"/>
 		</c:if>
 		</span>
