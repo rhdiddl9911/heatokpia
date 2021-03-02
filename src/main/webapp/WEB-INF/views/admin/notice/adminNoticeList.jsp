@@ -18,9 +18,8 @@
 			<c:set var="paramSearcharea" value="&searchArea=${param.searchArea}"/>
 		</c:if>
 		<c:if test="${param.search != null}">
-		
-		<c:set var="paramSearch" value="&search=${param.search}"/>
-</c:if>
+			<c:set var="paramSearch" value="&search=${param.search}"/>
+		</c:if>
 <div>
 
 <select onchange="javascript:location.replace(value)" id="category">
