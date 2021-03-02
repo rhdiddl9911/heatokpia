@@ -86,4 +86,9 @@ public class NoticeService {
 	public void updateNoticeData(NoticeBoard data) {
 		noticeMapper.updateBySeq(data);
 	}
+	
+	// 삭제 시도
+	public void deleteNoticeData(int seq) {
+		noticeMapper.deleteBySeq(seq);
+	}
 }

@@ -139,4 +139,12 @@
 			WHERE seq = #{seq}
 		]]>
 	</update>
+	
+	<delete id="deleteBySeq" parameterType="_int">
+		<![CDATA[
+			DELETE 
+			FROM notice_board
+			WHERE seq = #{seq}
+		]]>
+	</delete>
 </mapper>

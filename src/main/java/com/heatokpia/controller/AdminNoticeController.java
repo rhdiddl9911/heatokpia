@@ -99,6 +99,12 @@ public class AdminNoticeController {
 			@AuthenticationPrincipal Member member){
 		notice.setMember(member);
 		service.updateNoticeData(notice);
+	// 삭제 수행
+	@PostMapping("/del/do")
+	public @ResponseBody ResponseEntity<?> noticeDelete(
+			@RequestParam("seq") int seq){
+		
+		service.deleteNoticeData(seq);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 			

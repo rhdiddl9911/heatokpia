@@ -21,7 +21,7 @@
 	</div>
 	
 	<input type="button" value="수정" onclick="javascript:goUpdate(${noticeData.seq})">
-	<input type="button" value="삭제" onclick="">
+	<input type="button" value="삭제" onclick="javascript:deleteDo(confirm('정말 삭제 하시겠습니까?'),${noticeData.seq})">
 	
 	<%@include file="../../footer.jsp" %>
 	
@@ -39,6 +39,28 @@
 		}).fail(function(){
 			alert('화면을 불러오는데 실패하였습니다.');
 		});
+	}
+	</script>
+	
+	<script>
+	function deleteDo(confirm, seq){
+		if (confirm){
+			$.ajax({
+				url: "/admin/notice/del/do",
+				method: "POST",
+				data: {
+					seq : seq*1
+				}
+			}).done(function(){
+				alert("삭제 되었습니다.");
+				location.replace("/admin/notice");
+			}).fail(function(error){
+				alert("삭제 실패");
+				return;
+			});
+		}else{
+			
+		}
 	}
 	</script>
 </body>

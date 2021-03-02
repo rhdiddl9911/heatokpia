@@ -43,4 +43,7 @@ public interface NoticeBoardMapper {
 	
 	// 글 하나 수정
 	public void updateBySeq(NoticeBoard data);
+	
+	// 글 하나 삭제
+	public void deleteBySeq(int seq);
 }
