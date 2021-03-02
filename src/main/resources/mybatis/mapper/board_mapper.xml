@@ -5,7 +5,7 @@
 
 	<select id="findById" parameterType="int" resultType="Board">
 	 <![CDATA[
-	 		SELECT seq, title, name, createdate, id, content, hit
+	 		SELECT seq, title, name, createdate, updatedate, id, content, hit
 	 		FROM board
 	 		WHERE seq = #{seq}
 		]]>
@@ -115,6 +115,46 @@
 		SET hit = NVL(hit,0) + 1
 		WHERE seq = #{seq}
 	]]>
+	</update>
+	
+	<select id="findContentPlusByCategory" parameterType="HashMap" resultType="Board">
+		<![CDATA[
+			SELECT *
+			FROM (SELECT ceil(rownum / 10) as page, B.*
+					FROM (SELECT seq, title, name, hit, createdate, content
+							FROM board
+							WHERE category=#{categorynum}
+							ORDER BY seq DESC) B
+					)
+			WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findContentPlusByCategoryAndSearch" parameterType="HashMap" resultType="Board">
+		<![CDATA[
+			SELECT *
+				FROM (SELECT ceil(rownum / 10) as page, B.*
+						FROM (SELECT seq, title, name, createdate, content
+								FROM board
+								WHERE category=#{categorynum}
+								AND ${searchArea} like '%'||#{search}||'%'
+								ORDER BY seq DESC) B
+						)
+				WHERE page = #{page}
+		]]>
+	</select>
+	
+	<update id="adminUpdateBySeq" parameterType="Board">
+		<![CDATA[
+		UPDATE board
+		
+		SET 
+		title=#{title},
+		content=#{content},
+		updatedate=SYSDATE
+		
+		WHERE seq=#{seq}
+		]]>
 	</update>
 	
 </mapper>

@@ -10,6 +10,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>어드민 테스트 페이지 입니다~~</h1>
+<a href="">베스트게시판</a><br>
+<a href="/admin/board/info">정보게시판</a><br>
+<a href="/admin/board/free">자유게시판</a><br>
+<a href="">뉴스게시판</a><br>
+<a href="">댓글</a><br>
+<a href="">주가코멘트</a><br>
 </body>
 </html>

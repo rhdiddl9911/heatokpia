@@ -39,4 +39,14 @@ public interface BoardMapper {
 	
 	// 글 조회수 1만큼 올리기
 	public void updateHit(int seq);
+	
+	// ---- admin
+	// 글 목록 내용 포함해서 가져오기
+	public List<Board> findContentPlusByCategory(HashMap<String, Object> categoryPage);
+	
+	// 검색 글 목록 내용 포함해서 가져오기
+	public List<Board> findContentPlusByCategoryAndSearch(HashMap<String, Object> map);
+	
+	// 글 하나 업데이트
+	public void adminUpdateBySeq(Board data);
 }

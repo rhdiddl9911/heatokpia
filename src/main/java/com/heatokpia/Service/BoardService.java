@@ -146,4 +146,35 @@ public class BoardService {
 			return false;
 		}
 	}
+	
+	// --- admin
+	public List<Board> getAdminViewList(int page, int category, String searchArea, String search){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("page", page);
+		map.put("categorynum", category);
+		if(searchArea == null) {
+			return boardMapper.findContentPlusByCategory(map);
+		}else {
+			map.put("searchArea", searchArea);
+			map.put("search", search);
+			return boardMapper.findContentPlusByCategoryAndSearch(map);
+		}
+	}
+	
+	// seq에 따른 글 하나 반환
+	public Board getBoardDataNoHit(int seq) {
+		return boardMapper.findById(seq);
+	}
+	
+	// admin update
+	public void adminUpdateBoardData(int seq, Board data) {
+		data.setSeq(seq);
+		data.setTitle(data.getTitle()+"(관리자 수정)");
+		boardMapper.adminUpdateBySeq(data);
+	}
+	
+	// admin 댓글 삭제
+	public void adminDeleteBoardComment(int seq) {
+		commentMapper.deleteBoardComment(seq);	
+	}
 }

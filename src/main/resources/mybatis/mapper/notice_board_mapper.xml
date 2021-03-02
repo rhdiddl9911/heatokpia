@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heatokpia.mapper.NoticeBoardMapper">
+
+	<resultMap type="Member" id="Member">
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	</resultMap>
+
+	<resultMap type="NoticeBoard" id="NoticeBoard">
+		<result column="seq" property="seq"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="createdate" property="createdate"/>
+		<result column="updatedate" property="updatedate"/>
+		<result column="category" property="category"/>
+		<collection property="member" resultMap="Member"/>
+	</resultMap>
+
+	<insert id="save" parameterType="NoticeBoard">
+		<![CDATA[
+			INSERT INTO notice_board(SEQ, TITLE, CONTENT, CREATEDATE, ID, CATEGORY)
+			VALUES (
+			seq_notice_board.NEXTVAL,
+			#{title},
+			#{content},
+			SYSDATE,
+			#{member.id},
+			#{category}
+			)
+		]]>
+	</insert>
+	
+	<select id="findTitleList" parameterType="_int" resultType="NoticeBoard">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
+					FROM (SELECT seq, title, createdate, category
+							FROM notice_board 
+							ORDER BY seq DESC) Z
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
+	<select id="findTitleListByCategory" parameterType="_int" resultType="NoticeBoard">
+		<![CDATA[
+		SELECT *
+			FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
+					FROM (SELECT seq, title, createdate, category 
+							FROM notice_board 
+							WHERE category = #{category} 
+							ORDER BY seq DESC) Z
+				)
+			WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findTitleListByCategoryAndSearch" parameterType="HashMap" resultType="NoticeBoard">
+		<![CDATA[
+			SELECT *
+				FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
+						FROM (SELECT seq, title, createdate, category 
+								FROM notice_board 
+								WHERE category = #{category} 
+								AND ${searchArea} LIKE '%'||#{search}||'%'
+								ORDER BY seq DESC) Z
+					)
+				WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findTitleListBySearch" parameterType="HashMap" resultType="NoticeBoard">
+		<![CDATA[
+			SELECT *
+				FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, Z.*
+						FROM (SELECT seq, title, createdate, category 
+								FROM notice_board 
+								WHERE ${searchArea} LIKE '%'||#{search}||'%' 
+								ORDER BY seq DESC) Z
+					)
+				WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findMaxPage" resultType="_int">
+	<![CDATA[
+		SELECT ceil(count(1)/10)
+		FROM notice_board
+		]]>
+	</select>
+	
+	<select id="findMaxPageByCategory" parameterType="_int" resultType="_int">
+	<![CDATA[
+		SELECT ceil(count(1)/10)
+		FROM notice_board
+		WHERE category = #{category}
+	]]>
+	</select>
+	
+	<select id="findMaxPageByCategoryAndSearch" parameterType="HashMap" resultType="_int">
+		<![CDATA[
+			SELECT ceil(count(1)/10)
+			FROM notice_board
+			WHERE category = #{category}
+				AND ${searchArea} LIKE '%'||#{search}||'%'
+		]]>
+	</select>
+	
+	<select id="findMaxPageBySearch" parameterType="HashMap" resultType="_int">
+		<![CDATA[
+			SELECT ceil(count(1)/10)
+			FROM notice_board
+			WHERE ${searchArea} LIKE '%'||#{search}||'%'
+		]]>
+	</select>
+	
+	<select id="findBySeq" parameterType="_int" resultMap="NoticeBoard">
+		<![CDATA[
+			SELECT n.seq, n.title, n.content, n.createdate, n.updatedate, n.category,
+					n.id, m.name
+			FROM notice_board n
+				JOIN member m
+					ON n.id = m.id
+			WHERE n.seq = #{seq}
+		]]>
+	</select>
+	
+	<update id="updateBySeq" parameterType="NoticeBoard">
+		<![CDATA[
+			UPDATE notice_board
+			SET 
+			title = #{title},
+			content = #{content},
+			updatedate = SYSDATE,
+			id = #{member.id},
+			category = #{category}
+			WHERE seq = #{seq}
+		]]>
+	</update>
+	
+	<delete id="deleteBySeq" parameterType="_int">
+		<![CDATA[
+			DELETE 
+			FROM notice_board
+			WHERE seq = #{seq}
+		]]>
+	</delete>
+</mapper>
