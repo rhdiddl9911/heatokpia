@@ -2,15 +2,21 @@ package com.heatokpia.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -75,6 +81,25 @@ public class AdminNoticeController {
 		ModelAndView model = new ModelAndView("admin/notice/adminNoticeDetail");
 		model.addObject("noticeData", service.getNoticeData(seq));
 		return model;
+	}
+	
+	// 업데이트 폼
+	@GetMapping("/up")
+	public ModelAndView noticeUpdateView(
+			@RequestParam int seq) {
+		ModelAndView model = new ModelAndView("admin/notice/adminNoticeUpdate");
+		model.addObject("noticeData", service.getNoticeData(seq));
+		return model;
+	}
+	
+	// 업데이트 수행
+	@PostMapping("/up/do")
+	public @ResponseBody ResponseEntity<?> noticeUpdate(
+			@RequestBody @Valid NoticeBoard notice,
+			@AuthenticationPrincipal Member member){
+		notice.setMember(member);
+		service.updateNoticeData(notice);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 			
 }

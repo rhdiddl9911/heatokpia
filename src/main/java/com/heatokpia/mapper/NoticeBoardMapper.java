@@ -40,4 +40,7 @@ public interface NoticeBoardMapper {
 	
 	// 글하나 반환
 	public NoticeBoard findBySeq(int seq);
+	
+	// 글 하나 수정
+	public void updateBySeq(NoticeBoard data);
 }

@@ -126,4 +126,17 @@
 			WHERE n.seq = #{seq}
 		]]>
 	</select>
+	
+	<update id="updateBySeq" parameterType="NoticeBoard">
+		<![CDATA[
+			UPDATE notice_board
+			SET 
+			title = #{title},
+			content = #{content},
+			updatedate = SYSDATE,
+			id = #{member.id},
+			category = #{category}
+			WHERE seq = #{seq}
+		]]>
+	</update>
 </mapper>

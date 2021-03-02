@@ -82,4 +82,8 @@ public class NoticeService {
 	public NoticeBoard getNoticeData(int seq) {
 		return noticeMapper.findBySeq(seq);
 	}
+	
+	public void updateNoticeData(NoticeBoard data) {
+		noticeMapper.updateBySeq(data);
+	}
 }

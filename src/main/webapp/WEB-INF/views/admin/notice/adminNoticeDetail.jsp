@@ -20,10 +20,26 @@
 		<c:out value="${noticeData.content}"/>
 	</div>
 	
-	<input type="button" value="수정">
-	<input type="button" value="삭제">
+	<input type="button" value="수정" onclick="javascript:goUpdate(${noticeData.seq})">
+	<input type="button" value="삭제" onclick="">
 	
 	<%@include file="../../footer.jsp" %>
 	
+	
+	<script>
+	function goUpdate(seq){
+		$.ajax({
+			url: "/admin/notice/up",
+			method: "GET",
+			data: {
+				"seq": seq
+			}
+		}).done(function(page){
+			$("body").html(page);
+		}).fail(function(){
+			alert('화면을 불러오는데 실패하였습니다.');
+		});
+	}
+	</script>
 </body>
 </html>
