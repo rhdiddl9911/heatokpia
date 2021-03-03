@@ -27,7 +27,7 @@ public class SupportQ {
 	@NotBlank(message = "내용을 입력해주세요")
 	private String content;
 	private boolean anser;
-	private Member qMember;
+	private Member qmember;
 	private String createdate;
 	
 }
