@@ -16,7 +16,7 @@
 
 	<div>
 		<span><a href="/support/my">내 질문 내역 보기</a></span>
-		<span><a href="/support/qwrite">질문 하러 가기</a></span>
+		<span><a href="/support/my/new">질문 하러 가기</a></span>
 	</div>
 	
 <%@include file="../footer.jsp" %>
