@@ -36,6 +36,27 @@ public class AdminNewsController {
 	// redirect NEWSList
 	RedirectView listRe = new RedirectView("/admin/news");
 	
+	@GetMapping()
+	public ModelAndView adminNewsHome(
+			@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) String searchArea,
+			@RequestParam(required = false) String search
+			) {
+		ModelAndView model = new ModelAndView("admin/news/adminNewsList");
+		
+		// page 없이, page 0 보다 작게 접근 하였을 때 1번 페이지로 redirect
+		if(page == null || page <= 0) {
+			model.setView(listRe);
+			model.addObject("page", 1);
+			return model;
+		}
+		
+		int maxPage = service.getMaxPage(searchArea, search);
+		
+		model.addObject("maxPage", maxPage);
+		model.addObject("newsList", service.getTitleList(page, searchArea, search));
+		return model;
+	}
 	
 	@GetMapping("/new")
 	public ModelAndView adminNewsWriteView() {

@@ -33,5 +33,45 @@
 		]]>
 	</insert>
 	
+	<select id="findTitleList" parameterType="_int" resultType="News">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, A.*
+					FROM (SELECT seq, title, authorship, url
+							FROM news 
+							ORDER BY seq DESC) A
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
+	<select id="findTitleListBySearch" parameterType="HashMap" resultType="News">
+		<![CDATA[
+			SELECT *
+				FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, A.*
+						FROM (SELECT seq, title, authorship, url
+								FROM news 
+								WHERE ${searchArea} LIKE '%'||#{search}||'%'
+								ORDER BY seq DESC) A
+					)
+				WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findMaxPage" resultType="_int">
+	<![CDATA[
+		SELECT ceil(count(1)/10)
+		FROM news
+		]]>
+	</select>
+	
+	<select id="findMaxPageBySearch" parameterType="HashMap" resultType="_int">
+		<![CDATA[
+			SELECT ceil(count(1)/10)
+			FROM news
+			WHERE ${searchArea} LIKE '%'||#{search}||'%'
+		]]>
+	</select>
+	
 	
 </mapper>
