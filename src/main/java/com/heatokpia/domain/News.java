@@ -3,24 +3,11 @@ package com.heatokpia.domain;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import lombok.Data;
 
 // NEWS table과 매핑시켜줄 도메인입니다.
 @Data
 public class News {
-
-	/*
-	 * 
-	 *  seq                  INTEGER NOT NULL,
-       title                VARCHAR2(600) NOT NULL,
-       content              CLOB NOT NULL,
-       authorship           VARCHAR2(300) NULL,
-       createdate           DATE NOT NULL,
-       id                   VARCHAR2(20) NOT NULL,
-       url                  VARCHAR2(200) NULL,
-	 */
 	
 	private int seq;
 	
