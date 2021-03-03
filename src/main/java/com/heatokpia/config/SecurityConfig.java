@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		// 권한 접근 url 설정
 		http.authorizeRequests().antMatchers("/").permitAll();
-		//http.authorizeRequests().antMatchers("/member/**").authenticated();
+		http.authorizeRequests().antMatchers("/support/my/**").authenticated();
 		http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
 
 		http.csrf().disable();
