@@ -31,7 +31,7 @@
 		<li><a href="/news">뉴스</a></li>
 		<li><a href="Best">주가정보</a></li>
 		<li><a href="/notice">공지사항</a></li>
-		<li><a href="Best">고객지원</a></li>
+		<li><a href="/support">고객지원</a></li>
 	</ul>
 	</nav>
 	
