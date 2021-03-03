@@ -3,8 +3,11 @@ package com.heatokpia.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.heatokpia.domain.News;
 
+@Mapper
 public interface NewsMapper {
 
 	// 새로운 뉴스 insert 
