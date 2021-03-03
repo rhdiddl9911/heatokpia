@@ -85,7 +85,7 @@ public class AdminNewsController {
 	}
 	
 	@GetMapping("/{seq}")
-	public ModelAndView noticeDetail(
+	public ModelAndView adminNewsDetail(
 			@PathVariable int seq) {
 		ModelAndView model = new ModelAndView("admin/news/adminNewsDetail");
 		model.addObject("newsData", service.getNewsData(seq));
@@ -94,7 +94,7 @@ public class AdminNewsController {
 	
 	// 삭제 수행
 	@PostMapping("/{seq}/del/do")
-	public @ResponseBody ResponseEntity<?> noticeDelete(
+	public @ResponseBody ResponseEntity<?> adminNewsDeleteDo(
 			@PathVariable int seq){
 		
 		service.deleteNewsData(seq);
