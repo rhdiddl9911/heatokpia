@@ -1,3 +1,5 @@
+DROP TABLE news CASCADE CONSTRAINTS;
+
 CREATE TABLE news (
        seq                  INTEGER NOT NULL,
        title                VARCHAR2(600) NOT NULL,
