@@ -49,4 +49,12 @@ public class NewsService {
 		}
 		return result == 0 ? 1 : result;
 	}
+	
+	public News getNewsData(int seq) {
+		return newsMapper.findBySeq(seq);
+	}
+	
+	public void deleteNewsData(int seq) {
+		newsMapper.deleteBySeq(seq);
+	}
 }

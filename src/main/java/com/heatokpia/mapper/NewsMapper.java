@@ -21,4 +21,10 @@ public interface NewsMapper {
 	
 	// 뉴스 Title List MaxPage Search있을때 - map : String searchArea, String search
 	public int findMaxPageBySearch(HashMap<String, Object> map);
+	
+	// 뉴스 글 번호에 따른 글 하나 반환
+	public News findBySeq(int seq);
+	
+	// 뉴스 글번호로 뉴스 삭제
+	public void deleteBySeq(int seq);
 }

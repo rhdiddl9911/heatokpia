@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.heatokpia.Service.NewsService;
 import com.heatokpia.domain.News;
+import com.heatokpia.domain.NoticeBoard;
 
 import lombok.RequiredArgsConstructor;
 
@@ -79,6 +81,23 @@ public class AdminNewsController {
 		
 		// 데이터 입력 시도
 		service.insertNews(data, member);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/{seq}")
+	public ModelAndView noticeDetail(
+			@PathVariable int seq) {
+		ModelAndView model = new ModelAndView("admin/news/adminNewsDetail");
+		model.addObject("newsData", service.getNewsData(seq));
+		return model;
+	}
+	
+	// 삭제 수행
+	@PostMapping("/{seq}/del/do")
+	public @ResponseBody ResponseEntity<?> noticeDelete(
+			@PathVariable int seq){
+		
+		service.deleteNewsData(seq);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

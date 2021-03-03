@@ -28,7 +28,7 @@
 				#{authorship},
 				#{url},
 				SYSDATE,
-				#{member.username}
+				#{member.id}
 			)
 		]]>
 	</insert>
@@ -73,5 +73,23 @@
 		]]>
 	</select>
 	
+	<select id="findBySeq" parameterType="_int" resultMap="News">
+		<![CDATA[
+			SELECT n.seq, n.title, n.content, n.createdate, n.authorship, n.url,
+					n.id, m.name
+			FROM news n
+				JOIN member m
+					ON n.id = m.id
+			WHERE n.seq = #{seq}
+		]]>
+	</select>
+	
+	<delete id="deleteBySeq" parameterType="_int">
+		<![CDATA[
+			DELETE 
+			FROM news
+			WHERE seq = #{seq}
+		]]>
+	</delete>
 	
 </mapper>
