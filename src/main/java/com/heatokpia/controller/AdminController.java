@@ -15,6 +15,6 @@ public class AdminController {
 	
 	@GetMapping("/manage")
 	public String selectView() {
-		return "admin/boardSelect";
+		return "admin/adminboardSelect";
 	}
 }
