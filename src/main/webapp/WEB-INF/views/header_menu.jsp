@@ -28,7 +28,7 @@
 		<li><a href="#">BEST</a></li>
 		<li><a href="/board/free">자유게시판</a></li>
 		<li><a href="/board/info">정보게시판</a></li>
-		<li><a href="Best">뉴스</a></li>
+		<li><a href="/news">뉴스</a></li>
 		<li><a href="Best">주가정보</a></li>
 		<li><a href="/notice">공지사항</a></li>
 		<li><a href="Best">고객지원</a></li>
