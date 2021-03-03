@@ -38,33 +38,34 @@
 	
 	<div>
 	<span>
-		<form name="search" action="/admin/news?page=1${paramCategory}" method="get">
+		<form name="search" action="/admin/news?page=1" method="get">
 		<input type="hidden" name="page" value="${1}">
 		<select name="searchArea">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
+			<option value="authorship">출처</option>
 		</select>
 		<input type="text" name="search" placeholder="검색어를 입력해주세요">
 		<input type="submit" value="검색">
 		</form>
 	</span>
 	<span>
-		<c:set var="urlparams" value="${paramCategory}${paramSearcharea}${paramSearch}"/>
+		<c:set var="urlparams" value="${paramSearcharea}${paramSearch}"/>
 		
 		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
 		<fmt:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
 		
 		<c:if test="${start-10>0}">
-			<a href="/admin/notice?page=${start-10}${urlparams}"> 이전페이지 </a>
+			<a href="/admin/news?page=${start-10}${urlparams}"> 이전페이지 </a>
 		</c:if>
 		
 		
 		<c:forEach var="pageNum" begin="${start}" end="${end}">
-			<a href="/admin/notice?page=${pageNum}${urlparams}"><c:out value="${pageNum}"/></a>
+			<a href="/admin/news?page=${pageNum}${urlparams}"><c:out value="${pageNum}"/></a>
 		</c:forEach>
 		
 		<c:if test="${end<maxPage}">
-			<a href="/admin/notice?page=${end+1}${urlparams}"> 이전페이지 </a>
+			<a href="/admin/news?page=${end+1}${urlparams}"> 이전페이지 </a>
 		</c:if>
 		
 	</span>
