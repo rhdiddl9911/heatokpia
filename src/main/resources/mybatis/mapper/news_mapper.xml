@@ -78,7 +78,7 @@
 			SELECT n.seq, n.title, n.content, n.createdate, n.authorship, n.url,
 					n.id, m.name
 			FROM news n
-				JOIN member m
+				INNER JOIN member m
 					ON n.id = m.id
 			WHERE n.seq = #{seq}
 		]]>
