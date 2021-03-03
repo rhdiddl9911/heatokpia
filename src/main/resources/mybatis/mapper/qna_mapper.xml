@@ -6,6 +6,7 @@
 	<resultMap type="Member" id="Member">
 	<result column="id" property="id"/>
 	<result column="name" property="name"/>
+	<result column="email" property="email"/>
 	</resultMap>
 
 	<resultMap type="SupportQ" id="SupportQ">
@@ -36,5 +37,41 @@
 			)
 		]]>
 	</insert>
+	
+	<select id="findQTitleListByAnser" parameterType="HashMap" resultType="SupportQ">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/5) AS PAGE, A.*
+					FROM (SELECT seq, title, createdate
+							FROM q_board 
+							]]>
+							<if test="anser == false">
+								WHERE anser IS NULL
+							</if>
+							<if test="anser == true">
+								WHERE anser IS NOT NULL
+							</if>
+							<![CDATA[
+								AND id = #{id}
+							ORDER BY seq DESC) A
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
+	<select id="findQTitleListPlusEmail" parameterType="_int" resultType="SupportQ">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, A.*
+					FROM (SELECT q.seq, q.title, q.content, q.anser, m.email
+							FROM q_board q
+							INNER JOIN member m
+								ON q.id = m.id
+							ORDER BY seq DESC) A
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
 	
 </mapper>

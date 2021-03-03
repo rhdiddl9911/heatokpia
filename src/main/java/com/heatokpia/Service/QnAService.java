@@ -32,4 +32,8 @@ public class QnAService {
 		return qnaMapper.findQTitleListByAnser(map);
 	}
 	
+	public List<SupportQ> getAdminQList(int page){
+		return qnaMapper.findQTitleListPlusEmail(page);
+	}
+	
 }

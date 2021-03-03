@@ -14,4 +14,6 @@ public interface QnAMapper {
 	
 	// map - int page, boolean anser, String id필요
 	public List<SupportQ> findQTitleListByAnser(HashMap<String, Object> map);
+	
+	public List<SupportQ> findQTitleListPlusEmail(int page);
 }
