@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,4 +43,18 @@ public class MemberSupportController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@GetMapping()
+	public ModelAndView myQList(
+			@RequestParam(required = false) Integer page,
+			@RequestParam(required = false) Integer fpage,
+			@AuthenticationPrincipal UserDetails member) {
+		
+		if(page == null) page = 1;
+		if(fpage == null) fpage = 1;
+		
+		ModelAndView model = new ModelAndView("support/qnaQList");
+		model.addObject("nonfinishQList", service.getQList(page, false, member));
+		model.addObject("finishQList", service.getQList(page, true, member));
+		return model;
+	}
 }
