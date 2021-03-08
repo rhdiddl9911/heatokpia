@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>자유/정보게시판</title>
 
-<link rel="stylesheet" type="text/css" href="/css/admin/board.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/admin/board.css"/>
 
 </head>
 <body>
@@ -74,6 +74,6 @@
 	
 
 <%@include file="../../footer.jsp" %>
-<script src="/js/check_all.js"></script>
+<script src="/static/js/check_all.js"></script>
 </body>
 </html>

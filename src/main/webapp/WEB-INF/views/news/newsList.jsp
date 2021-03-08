@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>뉴스</title>
 
-<link rel="stylesheet" type="text/css" href="/css/board/board.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/board/board.css"/>
 </head>
 
 <body>
@@ -73,7 +73,7 @@
 	
 </div>
 <%@include file="../footer.jsp" %>
-<script src="/js/check_all.js"></script>
+<script src="/static/js/check_all.js"></script>
 
 </body>
 </html>

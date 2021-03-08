@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>관리자 - 문의 상세</title>
 
-<link rel="stylesheet" type="text/css" href="/css/board/board_detail.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/board/board_detail.css"/>
 
 </head>
 <body>
@@ -40,7 +40,7 @@
 </div>
 
 <%@include file="../../footer.jsp" %>
-<script src="/js/jquery.serializeObject.min.js"></script>
+<script src="/static/js/jquery.serializeObject.min.js"></script>
 
 </body>
 

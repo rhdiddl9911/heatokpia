@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>나의 문의 목록</title>
 
-<link rel="stylesheet" type="text/css" href="/css/board/board.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/board/board.css"/>
 
 </head>
 <body>

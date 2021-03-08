@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>게시판 글 수정</title>
 
-<link rel="stylesheet" type="text/css" href="/css/board/board_write.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/board/board_write.css"/>
 
 </head>
 <body>
@@ -32,7 +32,7 @@
 
 	
 <%@include file="../footer.jsp" %>
-<script src="/js/jquery.serializeObject.min.js"></script>
+<script src="/static/js/jquery.serializeObject.min.js"></script>
 <script>
 	function writeDo(category, seq){
 		sendData = $("#write").serializeObject();

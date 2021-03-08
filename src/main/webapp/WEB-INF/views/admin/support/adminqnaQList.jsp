@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>관리자 - 문의 답변</title>
 
-<link rel="stylesheet" type="text/css" href="/css/board/board.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/board/board.css"/>
 
 </head>
 <body>
