@@ -14,7 +14,7 @@
 </head>
 <body>
 
-	<div>문의 등록</div>
+	<div><strong>문의 등록</strong></div>
 	<div id="writeForm">
 		<form id="write">
 			<div class="title">
