@@ -1,0 +1,91 @@
+@charset "EUC-KR";
+
+#detailwrap{
+	border-bottom: solid 3px #2C3E50;
+
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+}
+
+#writeinfo{
+	border-bottom: solid 1px #aaa;
+	border-top: solid 3px #2C3E50;
+	padding: 1em 0;
+}
+
+#writeinfo .name{
+	color: #aaa;
+}
+#writeinfo .lastdate{
+	float: right;
+	color: #aaa;
+}
+
+.content{
+	padding: 1em 0;
+}
+
+#countinfo{
+	margin: 1em auto;
+	text-align: center;
+}
+
+#likebtn{
+	color: #fff;
+	background: #2C3E50;
+	border: 0;
+}
+
+#btn{
+	float: right;
+	margin: 1em 0;
+}
+
+#btn button{
+	margin: 0 0 0 1em;
+}
+
+#commentWrite{
+	clear: both;
+	border-top: solid 2px #aaa;
+	border-bottom: solid 2px #aaa;
+	height: 10em;
+	padding: 1em 0;
+}
+
+	#commentForm .content{
+		padding: 0;
+		margin: 0.5em 0;
+		width: 100%;
+		height: 3em;
+		line-height: 1em;
+	}
+
+	#commentForm input[type="button"]{
+		float: right;
+	}
+
+
+#comment{
+	clear: both;
+}
+
+#comment .item{
+	clear: both;
+	border-bottom: solid 1px #aaa;
+	padding: 1em 0;
+	position: relative;
+}
+
+#comment .item .content{
+	padding: 0;
+	margin: 0;
+	width: 95%;
+}
+
+#comment .item input[type="button"]{
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin: 1em;
+}

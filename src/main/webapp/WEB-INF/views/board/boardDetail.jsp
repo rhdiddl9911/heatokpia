@@ -7,53 +7,61 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>글 상세</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board_detail.css"/>
+
 </head>
 <body>
-	<h1><c:out value="${boardData.title}"/></h1>
-	<div>
-		<span class="name"><c:out value="${boardData.name}"/></span>
-		<span class="lastdate">
-		<c:if test="${(boardData.updatedate == null)}">
-			<c:out value="${boardData.createdate}"/>
-		</c:if>
-		<c:if test="${!(boardData.updatedate == null)}">
-			<c:out value="${boardData.updatedate}"/>
-		</c:if>
-		</span>
-	</div>
-	<div>
-		<label>조회수: </label><c:out value="${boardData.hit}"/>
-	</div>
-	<div class="content">
-		<c:out value="${boardData.content}"/>
+	<div id="detailwrap">
+		<h1><c:out value="${boardData.title}"/></h1>
+		<div id="writeinfo">
+			<span class="name"><c:out value="${boardData.name}"/></span>
+			<span class="lastdate">
+			<c:if test="${(boardData.updatedate == null)}">
+				<c:out value="${boardData.createdate}"/>
+			</c:if>
+			<c:if test="${!(boardData.updatedate == null)}">
+				<c:out value="${boardData.updatedate}"/>
+			</c:if>
+			</span>
+		</div>
+		
+		<div class="content">
+			<c:out value="${boardData.content}"/>
+		</div>
+		
+		<div id="countinfo">
+		<div><label>조회수: </label><c:out value="${boardData.hit}"/></div>
+		<button onclick="javascript:likeThis()" id="likebtn">추천(<c:out value="${likeCount}"/>)</button>
+		</div>
 	</div>
 	
-	<div>
-		<c:out value="${likeCount}"/><button onclick="javascript:likeThis()">좋아요</button>
-	</div>
-	
-	<div>
+	<div id="btn">
 	<form action="/board/${category}/${seq}/pass" method="post" name="passcheck">
 		<input type="hidden" name="method" id="method">
 		<button onclick="javascript:goPass('up')" type="button">수정</button><button onclick="javascript:goPass('del')" type="button">삭제</button>
 	</form>
 	</div>
 	
-	<div>
+	<div id="commentWrite">
 	<h4>댓글</h4>
 	<form name="commentForm" id="commentForm" method="post" action="">
+		<textarea name="content" class="content"></textarea>
 		<input type="text" name="name" placeholder="닉네임">
-		<input type="password" name="password" placeholder="비밀번호"><br>
-		<input type="text" name="content">
+		<input type="password" name="password" placeholder="비밀번호">
 		<input type="button" value="댓글 입력" onclick="javascript:commentWrite()">
 	</form>
-	<hr>
+	</div>
+	
+	<div id="comment">
 	<c:forEach var="comment" items="${commentList}">
-	<div>
-		<label><strong><c:out value="${comment.name}"/></strong></label><br>
-		<c:out value="${comment.content}"/><input type="button" onclick="javascript:goPass('${comment.seq}')" value="삭제">
-		<hr>
+	<div class="item">
+		<label><strong><c:out value="${comment.name}"/></strong></label>
+		<div class="content">
+		<c:out value="${comment.content}"/>
+		</div>
+		<input type="button" onclick="javascript:goPass('${comment.seq}')" value="삭제">
 	</div>
 	</c:forEach>
 	</div>

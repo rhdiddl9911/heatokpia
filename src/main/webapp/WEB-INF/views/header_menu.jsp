@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 
 <link rel="stylesheet" type="text/css" href="/css/header_menu.css"/>
+<link rel="stylesheet" type="text/css" href="/css/common.css"/>
 
 <div id="wrap">
 	<div id="inner">

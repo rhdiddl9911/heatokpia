@@ -7,7 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지 사항</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board.css"/>
 
 </head>
 <body>
@@ -26,27 +28,31 @@
 </sec:authorize>
 </div>
 
+	<div id="categorySelect">
+	<a href="javascript:location.replace('/notice?page=1')" class='<c:if test="${param.category==null}">select</c:if>'>전체</a>
+	<a href="javascript:location.replace('/notice?page=1&category=공지사항')" class="<c:if test="${param.category=='공지사항'}">select</c:if>">공지사항</a>
+	<a href="javascript:location.replace('/notice?page=1&category=이벤트')" class="<c:if test="${param.category=='이벤트'}">select</c:if>">이벤트</a>
+	</div>
+	
 <div class="board wrap">
-	<a href="javascript:location.replace('/notice?page=1')">전체</a>
-	<a href="javascript:location.replace('/notice?page=1&category=공지사항')">공지사항</a>
-	<a href="javascript:location.replace('/notice?page=1&category=이벤트')">이벤트</a>
-	<table class="board">
-		<tr>
-			<th>카테고리</th>
-			<th>제목</th>
-			<th>생성날짜</th>
-		</tr>
+	<div class="board">
+		<div class="board head">
+			<span>카테고리</span>
+			<span>제목</span>
+			<span>생성날짜</span>
+		</div>
 		
 		<c:forEach var="noticeData" items="${noticeList}">
-		<tr onclick="location.href='/notice/${noticeData.seq}'">
-			<td><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></td>
-			<td><c:out value="${noticeData.title}"></c:out></td>
-			<td><c:out value="${noticeData.createdate}"></c:out></td>
-		</tr>
+		<div onclick="location.href='/notice/${noticeData.seq}'" class="board item">
+			<span><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></span>
+			<span><c:out value="${noticeData.title}"></c:out></span>
+			<span><c:out value="${noticeData.createdate}"></c:out></span>
+		</div>
 		</c:forEach>
-	</table>
-	<div>
-	<span>
+</div>
+
+	<div id="boardfooter">
+	<div class="search">
 		<form name="search" action="/notice?page=1${paramCategory}" method="get">
 		<input type="hidden" name="page" value="${1}">
 		<select name="searchArea">
@@ -56,8 +62,8 @@
 		<input type="text" name="search" placeholder="검색어를 입력해주세요">
 		<input type="submit" value="검색">
 		</form>
-	</span>
-	<span>
+	</div>
+	<div class="pagingnation">
 		<c:set var="urlparams" value="${paramCategory}${paramSearcharea}${paramSearch}"/>
 		
 		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
@@ -78,7 +84,7 @@
 		
 		<c:forEach var="boardData" items="${boardList}">
 		</c:forEach>
-	</span>
+	</div>
 	</div>
 	
 </div>

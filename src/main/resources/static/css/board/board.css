@@ -1,0 +1,99 @@
+@charset "EUC-KR";
+
+#boardinfo{
+	position: relative;
+}
+
+#boardinfo label{
+	font-size: 1.5em;
+}
+
+#boardinfo button,input[type="button"]{
+	position: absolute;
+	right: 0;
+	margin: 0 1em;
+}
+
+.board.wrap{
+	border-top: solid 2px #2C3E50;
+	border-bottom: solid 2px #aaa;
+	margin: 1em 0;
+}
+
+.board{
+	position: relative;
+	width: 100%;
+}
+
+.board.head{
+	border-bottom: solid 2px #2C3E50;
+	padding: 1em 0;
+	font-size: 1.1em;
+}
+
+.board.item{
+	border-bottom: solid 1px #ddd;
+	padding: 1em 0;
+}
+
+.board.item:last-child{
+	margin: 0;
+}
+
+.board.item:hover{
+	background: #ecf1f9;
+	cursor:pointer;
+}
+
+.board span{
+	display: inline-block;
+	width: 6em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.board span:first-child{
+	width: 65%;
+}
+
+.board span:last-child{
+	float: right;
+	right: 0;
+	width: 20%;
+	text-align: center;
+}
+
+#boardfooter{
+	padding: 0;
+	margin: 1em 0;
+}
+
+#boardfooter .search{
+	display: inline-block;
+	width: 40%;
+}
+
+#boardfooter .pagingnation{
+	display: inline-block;
+	width: 55%;
+}
+
+#categorySelect{
+	
+}
+
+#categorySelect a{
+	color: #aaa;
+	text-decoration: none;
+	font-weight: 900;
+}
+
+#categorySelect a:hover{
+	color: #2C3E50;
+}
+
+#categorySelect .select{
+	color: #2C3E50;
+}
+

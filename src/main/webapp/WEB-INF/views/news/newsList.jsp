@@ -7,8 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>뉴스</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board.css"/>
 </head>
+
 <body>
 		<c:if test="${param.searchArea != null}">
 			<c:set var="paramSearcharea" value="&searchArea=${param.searchArea}"/>
@@ -19,23 +22,21 @@
 
 <div class="board wrap">
 	<div class="board">
-		<div id="">
+		<div class="board head">
 			<span>제목</span>
 			<span>출처</span>
 		</div>
 		
 		<c:forEach var="newsData" items="${newsList}">
-			<div>
-				<div id="listitem" onclick="location.href='news/${newsData.seq}'">
-					<span><c:out value="${newsData.title}"/></span>
-					<span><c:out value="${newsData.authorship}"/>(<a href="<c:out value="${newsData.url}"/>">URL</a>)</span>
-				</div>
+			<div onclick="location.href='news/${newsData.seq}'" class="board item">
+				<span><c:out value="${newsData.title}"/></span>
+				<span><c:out value="${newsData.authorship}"/>(<a href="<c:out value="${newsData.url}"/>">URL</a>)</span>
 			</div>
 		</c:forEach>
 	</div>
 	
-	<div>
-	<span>
+	<div id="boardfooter">
+	<div class="search">
 		<form name="search" action="/news?page=1" method="get">
 		<input type="hidden" name="page" value="${1}">
 		<select name="searchArea">
@@ -46,8 +47,8 @@
 		<input type="text" name="search" placeholder="검색어를 입력해주세요">
 		<input type="submit" value="검색">
 		</form>
-	</span>
-	<span>
+	</div>
+	<div class="pagingnation">
 		<c:set var="urlparams" value="${paramSearcharea}${paramSearch}"/>
 		
 		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
@@ -66,7 +67,7 @@
 			<a href="/news?page=${end+1}${urlparams}"> 이전페이지 </a>
 		</c:if>
 		
-	</span>
+	</div>
 	</div>
 	
 </div>

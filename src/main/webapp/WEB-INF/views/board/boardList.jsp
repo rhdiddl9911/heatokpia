@@ -7,31 +7,42 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board.css"/>
+
 </head>
 <body>
 
-<div>
-<button onclick="location.href='/board/${category}/new'">글쓰기</button>
+<div id="boardinfo">
+	<label>
+	<c:if test="${category == 'free'}">자유게시판</c:if>
+	<c:if test="${category =='info'}">정보게시판</c:if>
+	</label>
+	<button onclick="location.href='/board/${category}/new'" class="primary">글쓰기</button>
 </div>
 
 <div class="board wrap">
-	<table class="board">
-		<tr>
-			<th>제목</th>
-			<th>이름</th>
-			<th>생성날짜</th>
-		</tr>
+	<div class="board">
+		<div class="board head">
+			<span>제목</span>
+			<span>이름</span>
+			<span>생성날짜</span>
+		</div>
 		
 		<c:forEach var="boardData" items="${boardList}">
-		<tr onclick="location.href='/board/${category}/${boardData.seq}'">
-			<td><c:out value="${boardData.title}"></c:out></td>
-			<td><c:out value="${boardData.name}"></c:out></td>
-			<td><c:out value="${boardData.createdate}"></c:out></td>
-		</tr>
+		<div onclick="location.href='/board/${category}/${boardData.seq}'" class="board item">
+			<span><c:out value="${boardData.title}"/></span>
+			<span><c:out value="${boardData.title}"/></span>
+			<span><c:out value="${boardData.createdate}"/></span>
+		</div>
 		</c:forEach>
-	</table>
-	<div>
+		
+		</div>
+</div>
+
+<div id="boardfooter">
+	<div class="search">
 	<span>
 		<form name="search" action="/board/${category}" method="get">
 		<input type="hidden" name="page" value="${1}">
@@ -44,46 +55,43 @@
 		<input type="submit" value="검색">
 		</form>
 	</span>
-	<span>
-		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
-		<fmt:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
-		
-		<c:if test="${start-10>0}">
-			<c:if test="${param.search == null}">
-				<a href="/board/${category}?page=${start-10}"> 이전페이지 </a>
-			</c:if>
-			<c:if test="${!(param.search == null)}">
-				<a href="/board/${category}?page=${start-10}&searchArea=${param.searchArea}&search=${param.search}"> 이전페이지 </a>
-			</c:if>
-		</c:if>
-		
-		<c:forEach var="pageNum" begin="${start}" end="${end}">
-			<c:if test="${param.search == null}">
-				<a href="/board/${category}?page=${pageNum}"><c:out value="${pageNum}"/></a>
-			</c:if>
-			<c:if test="${!(param.search == null)}">
-				<a href="/board/${category}?page=${pageNum}&searchArea=${param.searchArea}&search=${param.search}"><c:out value="${pageNum}"/></a>
-			</c:if>
-		</c:forEach>
-		
-		<c:if test="${end<maxPage}">
-			<c:if test="${param.search == null}">
-				<a href="/board/${category}?page=${end+1}"> 이후페이지 </a>
-			</c:if>
-			<c:if test="${!(param.search == null)}">
-				<a href="/board/${category}?page=${end+1}&searchArea=${param.searchArea}&search=${param.search}"> 이전페이지 </a>
+	</div>
+		<div class="pagingnation">
+			<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
+			<fmt:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
+			
+			<c:if test="${start-10>0}">
+				<c:if test="${param.search == null}">
+					<a href="/board/${category}?page=${start-10}">이전페이지 </a>
+				</c:if>
+				<c:if test="${!(param.search == null)}">
+					<a href="/board/${category}?page=${start-10}&searchArea=${param.searchArea}&search=${param.search}">이전페이지 </a>
+				</c:if>
 			</c:if>
 			
-		</c:if>
-		
-		<c:forEach var="boardData" items="${boardList}">
-		</c:forEach>
-	</span>
-	</div>
-	
+			<c:forEach var="pageNum" begin="${start}" end="${end}">
+				<c:if test="${param.search == null}">
+					<a href="/board/${category}?page=${pageNum}"><c:out value="${pageNum}"/></a>
+				</c:if>
+				<c:if test="${!(param.search == null)}">
+					<a href="/board/${category}?page=${pageNum}&searchArea=${param.searchArea}&search=${param.search}"><c:out value="${pageNum}"/></a>
+				</c:if>
+			</c:forEach>
+			
+			<c:if test="${end<maxPage}">
+				<c:if test="${param.search == null}">
+					<a href="/board/${category}?page=${end+1}">이후페이지 </a>
+				</c:if>
+				<c:if test="${!(param.search == null)}">
+					<a href="/board/${category}?page=${end+1}&searchArea=${param.searchArea}&search=${param.search}">이후페이지 </a>
+				</c:if>
+				
+			</c:if>
+			
+			<c:forEach var="boardData" items="${boardList}">
+			</c:forEach>
+		</div>
 </div>
-
-
 
 </body>
 </html>

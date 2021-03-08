@@ -1,0 +1,37 @@
+@charset "EUC-KR";
+
+#inner{
+	width: 50em;
+	margin: 0 auto;
+	padding: 1em;
+}
+
+button,input[type=button]{
+	background: #aaa;
+	font-size: 1em;
+	padding: 0.5em 1em;
+	border:0;
+	border-radius: 0.3em;
+	outline: 0;
+}
+
+button, input[type=button]:hover{
+	cursor: pointer;
+}
+
+button.primary,input[type=button].primary{
+	background: #2C3E50;
+	font-size: 1em;
+	padding: 0.5em 1em;
+	border: 0;
+	outline: 0;
+	color: #fff;
+}
+
+button:hover, input[type=button]:hover{
+	cursor: pointer;
+}
+
+button.primary:hover, input[type=button].primary:hover{
+	cursor: pointer;
+}
