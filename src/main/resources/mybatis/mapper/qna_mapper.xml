@@ -63,7 +63,7 @@
 		]]>
 	</select>
 	
-	<select id="findQTitleListPlusEmail" parameterType="_int" resultType="SupportQ">
+	<select id="findQTitleListPlusEmail" parameterType="_int" resultMap="SupportQ">
 		<![CDATA[
 		SELECT *
 			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, A.*
@@ -77,7 +77,7 @@
 		]]>
 	</select>
 	
-	<select id="findQTitleListPlusEmailOrderByASC" parameterType="_int" resultType="SupportQ">
+	<select id="findQTitleListPlusEmailOrderByASC" parameterType="_int" resultMap="SupportQ">
 		<![CDATA[
 		SELECT *
 			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, A.*
