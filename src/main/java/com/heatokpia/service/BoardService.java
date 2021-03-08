@@ -1,4 +1,4 @@
-package com.heatokpia.Service;
+package com.heatokpia.service;
 
 import java.util.HashMap;
 import java.util.List;

@@ -7,18 +7,19 @@
 
 <!DOCTYPE html>
 
-<link rel="stylesheet" type="text/css" href="/css/header_menu.css"/>
-<link rel="stylesheet" type="text/css" href="/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/header_menu.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/common.css"/>
 
 <div id="wrap">
 	<div id="inner">
 
 <header>
 	<div>
-		<img src="/img/logo_heatok.png" onclick="location.href='/'" style="cursor:pointer;">
+		<img src="/static/img/logo_heatok.png" onclick="location.href='/'" style="cursor:pointer;">
 		<span>
 			<sec:authorize access="isAuthenticated()">
-			<a>내정보</a> | <a href="/logout">로그아웃</a>
+			<a>내정보</a> | 
+			<form method="post" action="/logout"><input type="submit" value="로그아웃"></form>
 				<sec:authorize access="hasRole('ADMIN')">
 				<span><a href="/admin">관리자</a></span>
 				</sec:authorize>
@@ -42,3 +43,5 @@
 	</nav>
 	
 </header>
+
+<script src="/static/js/jquery-3.5.1.js"></script>

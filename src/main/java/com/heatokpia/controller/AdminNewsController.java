@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.heatokpia.Service.NewsService;
 import com.heatokpia.domain.News;
 import com.heatokpia.domain.NoticeBoard;
+import com.heatokpia.service.NewsService;
 
 import lombok.RequiredArgsConstructor;
 

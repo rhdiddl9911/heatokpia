@@ -1,4 +1,4 @@
-package com.heatokpia.Service;
+package com.heatokpia.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -33,6 +33,11 @@ public class MemberDetailsService implements UserDetailsService{
 	public Member save(Member member) {
 		member.setPassword(passwordEncoder.encode(member.getPassword()));
 		memMapper.save(member);
+		return member;
+	}
+	
+	public Member findById(String id) {
+		Member member = memMapper.findById(id);
 		return member;
 	}
 	

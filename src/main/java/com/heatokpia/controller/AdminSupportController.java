@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.heatokpia.Service.QnAService;
 import com.heatokpia.domain.Member;
 import com.heatokpia.domain.SupportA;
 import com.heatokpia.dto.SupportQnA;
+import com.heatokpia.service.QnAService;
 
 import lombok.RequiredArgsConstructor;
 

@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.heatokpia.Service.BoardService;
 import com.heatokpia.domain.Board;
 import com.heatokpia.domain.BoardCategory;
 import com.heatokpia.dto.BoardNonMemberDTO;
+import com.heatokpia.service.BoardService;
 import com.heatokpia.utils.ClientIP;
 
 import lombok.RequiredArgsConstructor;

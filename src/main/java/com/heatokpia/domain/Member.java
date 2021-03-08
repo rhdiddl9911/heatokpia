@@ -3,6 +3,10 @@ package com.heatokpia.domain;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,9 +21,21 @@ public class Member implements UserDetails{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Size(max = 20, message = "아이디가 너무 깁니다.")
+	@NotBlank(message = "아이디를 입력해주세요")
+	@Pattern(regexp = "^[A-Za-z0-9]+$", message = "아이디는 영문, 숫자만 가능합니다.")
 	private String id;
+	
+	@Size(max = 60, message = "비밀번호가 너무 깁니다.")
+	@NotBlank(message = "비밀번호를 입력해주세요")
+	@Pattern(regexp = "^[A-Za-z0-9]+$", message = "비밀번호는 영문, 숫자만 가능합니다.")
 	private String password;
+	
+	@NotBlank(message = "이메일을 입력해주세요")
 	private String email;
+	
+	@Size(max = 10, message = "이름이 너무 깁니다.")
+	@NotBlank(message = "이름을 입력해주세요")
 	private String name;
 	private boolean satus;
 	private MemberRole role;

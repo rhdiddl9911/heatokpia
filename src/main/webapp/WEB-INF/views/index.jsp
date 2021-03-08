@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>메인</title>
 
-<link rel="stylesheet" type="text/css" href="/css/board/board.css"/>
+<link rel="stylesheet" type="text/css" href="/static/css/board/board.css"/>
 
 </head>
 <body>

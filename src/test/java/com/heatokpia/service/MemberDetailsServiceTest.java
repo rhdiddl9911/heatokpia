@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.heatokpia.Service.MemberDetailsService;
 import com.heatokpia.domain.Member;
 import com.heatokpia.domain.MemberRole;
+import com.heatokpia.service.MemberDetailsService;
 
 @SpringBootTest
 public class MemberDetailsServiceTest {

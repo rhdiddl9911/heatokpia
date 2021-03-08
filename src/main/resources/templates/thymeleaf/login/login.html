@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="thymeleaf/cmm/layout_login">
+
+<section layout:fragment="f-content">
+	<div class="login_wrapper" style="margin: calc(50vh - 193px) auto 0px;">
+		<h1><img th:src="@{/static/img/title.png}" width="200" height="auto" alt="title" id="btn_loginHome"></h1>
+		<form method="post" th:action="@{/login}">
+			<div>
+				<input type="text" name="id" class="form-control" placeholder="ID" autocomplete="off" required/>
+			</div>
+			<div style="margin-bottom: 50px;">
+				<input type="password" name="password" class="form-control" placeholder="비밀번호" autocomplete="off" required/>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary btn-large form-control" id="btn_login">로그인</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-danger btn-large form-control" id="btn_joinForm">회원가입</button>
+			</div>
+		</form>
+		<hr class="separator"/>
+		<div>
+			<h1>HeaTokpia</h1>
+			<p>©2021 All Rights Reserved.</p>
+		</div>
+	</div>
+</section>
+
+<th:block layout:fragment="f-script">
+<script>
+$(function() {
+	$(document.body).delegate(":input", "keyup", function (e) {
+		if (e.which == 13)
+			$("#btn_login").trigger("click");
+	});
+	
+	$("#btn_login").on("click", function() {
+		var email = $("input[name='email']").val(), password = $("input[name='password']").val(), id = $("input[name='id']").val();
+		if (id == ""){
+			alert("아이디를 입력하세요");
+			return false;
+		}else if (email == "") {
+			alert("이메일을 입력하세요");
+			return false;
+		} else if (password == "") {
+			alert("비밀번호를 입력하세요");
+			return false;
+		}
+		$(this).closest("form").submit();
+	});
+	
+	$("#btn_joinForm").on("click", function() {
+		location.href = "[[@{/join}]]";
+	});
+});
+</script>
+</th:block>
