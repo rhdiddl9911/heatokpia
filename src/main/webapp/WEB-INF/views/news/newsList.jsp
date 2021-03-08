@@ -20,6 +20,7 @@
 			<c:set var="paramSearch" value="&search=${param.search}"/>
 		</c:if>
 
+<h2>뉴스</h2>
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">

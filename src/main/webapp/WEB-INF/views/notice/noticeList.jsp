@@ -27,7 +27,7 @@
 <button onclick="location.href='admin/notice/write'">작성</button>
 </sec:authorize>
 </div>
-
+	<h2>공지사항</h2>
 	<div id="categorySelect">
 	<a href="javascript:location.replace('/notice?page=1')" class='<c:if test="${param.category==null}">select</c:if>'>전체</a>
 	<a href="javascript:location.replace('/notice?page=1&category=공지사항')" class="<c:if test="${param.category=='공지사항'}">select</c:if>">공지사항</a>

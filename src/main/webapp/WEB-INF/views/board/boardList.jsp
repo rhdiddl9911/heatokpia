@@ -39,11 +39,10 @@
 		</c:forEach>
 		
 		</div>
-</div>
+
 
 <div id="boardfooter">
 	<div class="search">
-	<span>
 		<form name="search" action="/board/${category}" method="get">
 		<input type="hidden" name="page" value="${1}">
 		<select name="searchArea">
@@ -54,7 +53,6 @@
 		<input type="text" name="search" placeholder="검색어를 입력해주세요">
 		<input type="submit" value="검색">
 		</form>
-	</span>
 	</div>
 		<div class="pagingnation">
 			<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
@@ -92,6 +90,6 @@
 			</c:forEach>
 		</div>
 </div>
-
+</div>
 </body>
 </html>
