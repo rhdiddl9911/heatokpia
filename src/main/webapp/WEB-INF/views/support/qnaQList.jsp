@@ -35,7 +35,9 @@
 		</div>
 	</div>
 	
-	<br><br>
+	<br>
+	<button onclick="location.href='/support/my/new'" class="primary" style="float: right;">질문 하러 가기</button>
+	<br>
 	
 	<h4>종료된 문의</h4>
 	<div class="board wrap">
@@ -52,6 +54,7 @@
 	</c:forEach>
 		</div>
 	</div>
+	
 	
 <%@include file="../footer.jsp" %>
 
