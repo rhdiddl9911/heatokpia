@@ -1,0 +1,28 @@
+@charset "EUC-KR";
+
+#writeForm{
+	margin: 1em 0;
+}
+
+#writeForm .title{
+	margin: 1em 0;
+}
+	#writeForm .title input[type="text"]{
+		font-size: 1em;
+		width: 100%;
+	}
+
+#writeForm .content{
+	margin: 1em 0;
+	height: 10em;
+}
+
+#writeForm textarea{
+	height: 100%;
+	width: 100%;
+	line-height: 1em;
+}
+
+#btn{
+	float: right;
+}
