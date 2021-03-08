@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heatokpia.mapper.NewsMapper">
+	
+	<resultMap type="Member" id="Member">
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	</resultMap>
+
+	<resultMap type="News" id="News">
+		<result column="seq" property="seq"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="authorship" property="authorship"/>
+		<result column="url" property="url"/>
+		<result column="createdate" property="createdate"/>
+		<collection property="member" resultMap="Member"/>
+	</resultMap>
+	
+	<insert id="save" parameterType="News">
+		<![CDATA[
+			INSERT INTO news(seq, title, content, authorship, url, createdate, id)
+			VALUES (
+				seq_news.NEXTVAL,
+				#{title},
+				#{content},
+				#{authorship},
+				#{url},
+				SYSDATE,
+				#{member.id}
+			)
+		]]>
+	</insert>
+	
+	<select id="findTitleList" parameterType="_int" resultType="News">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, A.*
+					FROM (SELECT seq, title, authorship, url
+							FROM news 
+							ORDER BY seq DESC) A
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
+	<select id="findTitleListBySearch" parameterType="HashMap" resultType="News">
+		<![CDATA[
+			SELECT *
+				FROM ( SELECT CEIL(ROWNUM/10) AS PAGE, A.*
+						FROM (SELECT seq, title, authorship, url
+								FROM news 
+								WHERE ${searchArea} LIKE '%'||#{search}||'%'
+								ORDER BY seq DESC) A
+					)
+				WHERE page = #{page}
+		]]>
+	</select>
+	
+	<select id="findMaxPage" resultType="_int">
+	<![CDATA[
+		SELECT ceil(count(1)/10)
+		FROM news
+		]]>
+	</select>
+	
+	<select id="findMaxPageBySearch" parameterType="HashMap" resultType="_int">
+		<![CDATA[
+			SELECT ceil(count(1)/10)
+			FROM news
+			WHERE ${searchArea} LIKE '%'||#{search}||'%'
+		]]>
+	</select>
+	
+	<select id="findBySeq" parameterType="_int" resultMap="News">
+		<![CDATA[
+			SELECT n.seq, n.title, n.content, n.createdate, n.authorship, n.url,
+					n.id, m.name
+			FROM news n
+				INNER JOIN member m
+					ON n.id = m.id
+			WHERE n.seq = #{seq}
+		]]>
+	</select>
+	
+	<delete id="deleteBySeq" parameterType="_int">
+		<![CDATA[
+			DELETE 
+			FROM news
+			WHERE seq = #{seq}
+		]]>
+	</delete>
+	
+</mapper>

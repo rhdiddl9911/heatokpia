@@ -10,11 +10,11 @@ public class AdminController {
 
 	@GetMapping("")
 	public String testAdminPage() {
-		return "admin/adminIndex";
+		return "redirect:/admin/manage";
 	}
 	
 	@GetMapping("/manage")
 	public String selectView() {
-		return "admin/boardSelect";
+		return "admin/adminboardSelect";
 	}
 }

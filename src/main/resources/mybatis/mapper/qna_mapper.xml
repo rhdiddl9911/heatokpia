@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heatokpia.mapper.QnAMapper">
+	
+	<resultMap type="Member" id="Member">
+	<result column="id" property="id"/>
+	<result column="name" property="name"/>
+	<result column="email" property="email"/>
+	</resultMap>
+
+	<resultMap type="SupportQ" id="SupportQ">
+		<result column="seq" property="seq"/>
+		<result column="title" property="title"/>
+		<result column="content" property="content"/>
+		<result column="anser" property="anser"/>
+		<result column="createdate" property="createdate"/>
+		<collection property="qmember" resultMap="Member"/>
+	</resultMap>
+	
+	<resultMap type="SupportA" id="SupportA">
+		<result column="q_seq" property="qSeq"/>
+		<result column="content" property="content"/>
+		<result column="createdate" property="createdate"/>
+		<collection property="amember" resultMap="Member"/>
+	</resultMap>
+	
+	<insert id="saveQ" parameterType="SupportQ">
+		<![CDATA[
+			INSERT INTO q_board(seq, title, content, createdate, id)
+			VALUES (
+				seq_q_board.NEXTVAL,
+				#{title},
+				#{content},
+				SYSDATE,
+				#{qmember.id}
+			)
+		]]>
+	</insert>
+	
+	<select id="findQTitleListByAnser" parameterType="HashMap" resultType="SupportQ">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/5) AS PAGE, A.*
+					FROM (SELECT seq, title, createdate
+							FROM q_board 
+							]]>
+							<if test="anser == false">
+							<![CDATA[
+								WHERE anser IS NULL
+							]]>
+							</if>
+							<if test="anser != false">
+							<![CDATA[
+								WHERE anser IS NOT NULL
+							]]>
+							</if>
+							<![CDATA[
+								AND id = #{id}
+							ORDER BY seq DESC) A
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
+	<select id="findQTitleListPlusEmail" parameterType="_int" resultType="SupportQ">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, A.*
+					FROM (SELECT q.seq, q.title, q.content, q.anser, m.email
+							FROM q_board q
+							INNER JOIN member m
+								ON q.id = m.id
+							ORDER BY seq DESC) A
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
+	<select id="findQTitleListPlusEmailOrderByASC" parameterType="_int" resultType="SupportQ">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, A.*
+					FROM (SELECT q.seq, q.title, q.content, q.anser, q.createdate, m.email
+							FROM q_board q
+							INNER JOIN member m
+								ON q.id = m.id
+							WHERE q.anser IS NULL
+							ORDER BY seq ASC) A
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
+	<select id="findByQSeq" parameterType="_int" resultMap="SupportQ">
+		<![CDATA[
+		SELECT q.seq, q.title, q.content, q.anser, q.createdate, m.name, m.email, m.id
+			FROM q_board q
+			INNER JOIN member m
+				ON q.id = m.id
+			WHERE q.seq = #{seq}
+		]]>
+	</select>
+	
+	<select id="findByASeq" parameterType="_int" resultMap="SupportA">
+		<![CDATA[
+		SELECT a.q_seq, a.content, a.createdate, m.name, m.email
+			FROM a_board a
+			INNER JOIN member m
+				ON a.id = m.id
+			WHERE a.q_seq = #{seq}
+		]]>
+	</select>
+	
+	<insert id="saveA" parameterType="SupportA">
+		<![CDATA[
+			INSERT INTO a_board(q_seq, content, createdate, id)
+			VALUES (
+				#{qSeq},
+				#{content},
+				SYSDATE,
+				#{amember.id}
+			)
+		]]>
+	</insert>
+	
+</mapper>

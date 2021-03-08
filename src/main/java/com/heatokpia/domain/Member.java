@@ -37,6 +37,10 @@ public class Member implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		ArrayList<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
+			//DB에 저장된 룰이 없으면 member ROLE 리턴
+			if(role == null) {
+				this.role = MemberRole.ROLE_MEMBER;
+			}
 		roles.add(new SimpleGrantedAuthority(role.toString()));
 		return roles;
 	}
