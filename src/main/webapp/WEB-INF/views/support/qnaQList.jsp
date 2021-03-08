@@ -27,7 +27,7 @@
 			</div>
 		</c:if>
 		<c:forEach var="qData" items="${nonfinishQList}">
-			<div class="board item">
+			<div onclick="location.href='/support/my/${qData.seq}'" class="board item" >
 				<span><c:out value="${qData.title}"/></span>
 				<span><c:out value="${qData.createdate}"/></span>
 			</div>
