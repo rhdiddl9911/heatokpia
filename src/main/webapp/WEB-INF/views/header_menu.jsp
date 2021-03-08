@@ -15,7 +15,7 @@
 
 <header>
 	<div>
-		<img src="/img/logo_heatok.png">
+		<img src="/img/logo_heatok.png" onclick="location.href='/'" style="cursor:pointer;">
 		<span>
 			<sec:authorize access="isAuthenticated()">
 			<a>내정보</a> | <a href="/logout">로그아웃</a>

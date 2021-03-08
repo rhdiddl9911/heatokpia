@@ -6,14 +6,16 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
+
 <link rel="stylesheet" type="text/css" href="/css/header_menu.css"/>
+<link rel="stylesheet" type="text/css" href="/css/common.css"/>
 
 <div id="wrap">
 	<div id="inner">
 	
 <header>
 	<div>
-		<img src="/img/logo_heatok.png">
+		<img src="/img/logo_heatok.png" onclick="location.href='/'" style="cursor:pointer;">
 		<span>
 			<sec:authorize access="hasRole('ADMIN')">
 			<span><a href="/logout">로그아웃</a></span> <span>관리자</span>

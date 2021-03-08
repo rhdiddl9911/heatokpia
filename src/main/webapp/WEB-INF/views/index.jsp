@@ -9,7 +9,7 @@
 
 </head>
 <body>
-
+	<h1>홈 정보</h1>
 <%@include file="footer.jsp" %>
 </body>
 </html>
