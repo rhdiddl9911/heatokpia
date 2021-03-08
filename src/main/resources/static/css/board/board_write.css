@@ -26,3 +26,12 @@
 #btn{
 	float: right;
 }
+
+#passForm{
+	text-align: center;
+	margin: 10em;
+}
+
+#passbtn{
+	margin: 1em 0;
+}

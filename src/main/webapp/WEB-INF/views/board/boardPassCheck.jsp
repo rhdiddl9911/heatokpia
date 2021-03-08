@@ -7,14 +7,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비번확인</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board_write.css"/>
+
 </head>
 <body>
+	<div id="passForm">
+		<h1>비밀번호를 입력하세요 </h1>
 	<form action="" method="post" id="passcheck">
 		<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
-		<input type="button" onclick="javascript:passCheck('${method}')" value="확인">
-		<input type="button" onclick="javascript:location.reload();" value="취소">
+		
+		<div id="passbtn">
+			<input type="button" onclick="javascript:passCheck('${method}')" value="확인">
+			<input type="button" onclick="javascript:location.reload();" value="취소">
+		</div>
+		
 	</form>
+	</div>
 	
 <%@include file="../footer.jsp" %>
 <script src="/js/jquery.serializeObject.min.js"></script>
