@@ -27,13 +27,13 @@
 
 .board.head{
 	border-bottom: solid 2px #2C3E50;
-	padding: 1em 0;
+	padding: 0.5em 0;
 	font-size: 1.1em;
 }
 
 .board.item{
 	border-bottom: solid 1px #ddd;
-	padding: 1em 0;
+	padding: 0.4em 0;
 }
 
 .board.item:last-child{
