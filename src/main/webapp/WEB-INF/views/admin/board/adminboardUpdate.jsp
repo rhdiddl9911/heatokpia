@@ -7,16 +7,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 글 수정</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board_write.css"/>
+
 </head>
 <body>
-<form action="" id="write" method="post">
-	<div><span class=".v_name"></span><span></span></div>
-	<input type="text" name="title" placeholder="제목" value="${boardData.title}"><br>
-	<input type="text" name="content" placeholder="내용" value="${boardData.content}"><br>
-	<input type="button" onclick="javascript:location.reload()" value="취소">
-	<input type="button" onclick="javascript:writeDo('${category}', ${seq})" value="수정">
-	</form>
+<div id="writeForm">
+		<form action="" id="write" method="post">
+		<input type="text" name="name" placeholder="NAME" value="${boardData.name}">
+		<input type="password" name="password" placeholder="PW">
+		<div class="title">
+			<input type="text" name="title" placeholder="제목" value="${boardData.title}">
+		</div>
+		<div class="content">
+			<textarea name="content"  placeholder="내용">${boardData.content}</textarea>
+		</div>
+		<div id="btn">
+			<input type="button" onclick="javascript:location.reload()" value="취소">
+			<input type="button" onclick="javascript:writeDo('${category}', ${seq})" value="수정" class="primary">
+		</div>
+		</form>
+</div>
 	
 <%@include file="../../footer.jsp" %>
 <script src="/js/jquery.serializeObject.min.js"></script>

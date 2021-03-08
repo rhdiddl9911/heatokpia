@@ -7,32 +7,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자유/정보게시판</title>
+
+<link rel="stylesheet" type="text/css" href="/css/admin/board.css"/>
+
 </head>
 <body>
 
 <div class="board wrap">
-	<table class="board">
-		<tr>
-			<th><input type="checkbox" id="chk_all"></th>
-			<th>제목</th>
-			<th>내용</th>
-			<th>이름</th>
-			<th>생성날짜</th>
-		</tr>
-		
 		<c:forEach var="boardData" items="${boardList}">
-		<tr onclick="location.href='/admin/board/${category}/${boardData.seq}'">
-			<td><input type="checkbox" name="chk"></td>
-			<td><c:out value="${boardData.title}"></c:out></td>
-			<td><c:out value="${boardData.content}"></c:out></td>
-			<td><c:out value="${boardData.name}"></c:out></td>
-			<td><c:out value="${boardData.createdate}"></c:out></td>
-		</tr>
+			<div class="board line">
+				<div class="board head">
+				<span><input type="checkbox" name="chk"></span>
+				<span><label>이름:</label><c:out value="${boardData.name}"/></span>
+				<span><label>생성날짜:</label><c:out value="${boardData.createdate}"/></span>
+				</div>
+			<div onclick="location.href='/admin/board/${category}/${boardData.seq}'" class="board item">
+				<div><label>제목:</label><c:out value="${boardData.title}"/></div>
+				<div><label>내용:</label><c:out value="${boardData.content}"/></div>
+			</div>
+		</div>
 		</c:forEach>
-	</table>
-	<div>
-	<span>
+
+</div>
+
+	<div id="boardfooter">
+	<div class="search">
 		<form name="search" action="/admin/board/${category}" method="get">
 		<input type="hidden" name="page" value="${1}">
 		<select name="searchArea">
@@ -43,8 +43,8 @@
 		<input type="text" name="search" placeholder="검색어를 입력해주세요">
 		<input type="submit" value="검색">
 		</form>
-	</span>
-	<span>
+	</div>
+	<div class="pagingnation">
 		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
 		<fmt:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
 		
@@ -69,11 +69,9 @@
 		<c:if test="${end<maxPage}">
 			<a href="/admin/board/${category}?page=${end+1}${urlparams}"> 이후페이지 </a>
 		</c:if>
-		
-	</span>
+	</div>
 	</div>
 	
-</div>
 
 <%@include file="../../footer.jsp" %>
 <script src="/js/check_all.js"></script>
