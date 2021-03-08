@@ -1,0 +1,34 @@
+@charset "EUC-KR";
+
+
+#inner{
+	width: 50em;
+	margin: 0 auto;
+	padding: 1em;
+}
+
+header {
+	margin: 2em 0;
+}
+
+nav{
+	background: #2C3E50;
+	height: 4em;
+}
+
+#menulist {
+	style:none;
+	padding: 0.8em;
+	font-size: 1.2em;
+}
+#menulist li{
+	display: inline-block;
+	margin: 0 0.5em;
+}
+#menulist li a{
+	text-decoration: none;
+	color: #eee;
+}
+#menulist li a:hover{
+	color: #fff;
+}
