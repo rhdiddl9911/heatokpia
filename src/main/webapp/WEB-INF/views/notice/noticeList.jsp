@@ -37,15 +37,15 @@
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">
-			<span><strong>카테고리</strong></span>
 			<span><strong>제목</strong></span>
+			<span><strong>카테고리</strong></span>
 			<span><strong>생성날짜</strong></span>
 		</div>
 		
 		<c:forEach var="noticeData" items="${noticeList}">
 		<div onclick="location.href='/notice/${noticeData.seq}'" class="board item">
-			<span><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></span>
 			<span><c:out value="${noticeData.title}"></c:out></span>
+			<span><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></span>
 			<span><c:out value="${noticeData.createdate}"></c:out></span>
 		</div>
 		</c:forEach>
