@@ -66,10 +66,8 @@ public class MemberSupportController {
 		ModelAndView model = new ModelAndView("support/qnaDetails");
 		
 		SupportQnA result = service.getQnA(seq);
-		
 		model.addObject("question", result.getQuestion());
 		model.addObject("anser", result.getAnser());
-		System.out.println( result.getAnser().toString());
 		return model;
 	}
 }
