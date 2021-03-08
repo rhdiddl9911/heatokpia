@@ -18,6 +18,8 @@ import lombok.RequiredArgsConstructor;
 public class NoticeController {
 
 	private final NoticeService service;
+
+	RedirectView listRe = new RedirectView("/notice");
 	
 	@GetMapping("")
 	public ModelAndView list(
@@ -27,8 +29,6 @@ public class NoticeController {
 			@RequestParam(required = false) String category) {
 		
 		ModelAndView model = new ModelAndView("notice/noticeList");
-		
-		RedirectView listRe = new RedirectView("/notice");
 		
 		// page 없이, page 0 보다 작게 접근 하였을 때 1번 페이지로 redirect
 		if(page == null || page <= 0) {

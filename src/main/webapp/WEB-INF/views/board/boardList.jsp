@@ -50,7 +50,7 @@
 			<option value="content">내용</option>
 			<option value="name">이름</option>
 		</select>
-		<input type="text" name="search" placeholder="검색어를 입력해주세요">
+		<input type="text" name="search" placeholder="검색어를 입력해주세요" value="${param.search}">
 		<input type="submit" value="검색">
 		</form>
 	</div>
@@ -58,33 +58,39 @@
 			<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
 			<fmt:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
 			
+			<div class="prenav">
 			<c:if test="${start-10>0}">
 				<c:if test="${param.search == null}">
-					<a href="/board/${category}?page=${start-10}">이전페이지 </a>
+					<a href="/board/${category}?page=${start-10}">이전페이지</a>
 				</c:if>
 				<c:if test="${!(param.search == null)}">
-					<a href="/board/${category}?page=${start-10}&searchArea=${param.searchArea}&search=${param.search}">이전페이지 </a>
+					<a href="/board/${category}?page=${start-10}&searchArea=${param.searchArea}&search=${param.search}">이전페이지</a>
 				</c:if>
 			</c:if>
+			</div>
+			
 			
 			<c:forEach var="pageNum" begin="${start}" end="${end}">
+			<div class="page <c:if test='${pageNum==param.page}'>on</c:if>">
 				<c:if test="${param.search == null}">
 					<a href="/board/${category}?page=${pageNum}"><c:out value="${pageNum}"/></a>
 				</c:if>
 				<c:if test="${!(param.search == null)}">
 					<a href="/board/${category}?page=${pageNum}&searchArea=${param.searchArea}&search=${param.search}"><c:out value="${pageNum}"/></a>
 				</c:if>
+			</div>
 			</c:forEach>
 			
+			<div class="postnav">
 			<c:if test="${end<maxPage}">
 				<c:if test="${param.search == null}">
-					<a href="/board/${category}?page=${end+1}">이후페이지 </a>
+					<a href="/board/${category}?page=${end+1}">이후페이지</a>
 				</c:if>
 				<c:if test="${!(param.search == null)}">
-					<a href="/board/${category}?page=${end+1}&searchArea=${param.searchArea}&search=${param.search}">이후페이지 </a>
+					<a href="/board/${category}?page=${end+1}&searchArea=${param.searchArea}&search=${param.search}">이후페이지</a>
 				</c:if>
-				
 			</c:if>
+			</div>
 			
 			<c:forEach var="boardData" items="${boardList}">
 			</c:forEach>

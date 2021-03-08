@@ -29,24 +29,22 @@
 	</div>
 	
 	<div style="margin-bottom: 1em;">
-		
 	<input type="text" name="authorship" placeholder="출처" style="width: 40%;">
 	<input type="text" name="url" placeholder="url" style="width: 56%;"><br>
-	
 	</div>
-	
+</form>
+
 	<div id="btn">
 	<input type="button" onclick="location.replace('/admin/news')" value="취소">
 	<input type="button" onclick="javascript:writeDo()" value="작성" class="primary">
 	</div>
-</form>
 
 </div>
 <%@include file="../../footer.jsp"%>
 </body>
 
 
-<script src="/js/jquery.serializeObject.min.js"></script>
+<script src="/static/js/jquery.serializeObject.min.js"></script>
 <script>
 	function writeDo(){
 		sendData = $("#write").serializeObject();
@@ -57,8 +55,10 @@
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(sendData)
 		}).done(function(){
+			console.log();
 			location.replace('/admin/news');
 		}).fail(function(error){
+			console.log(error);
 			var errorMessege ="";
 
 			if(error.responseJSON == null){

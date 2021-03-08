@@ -20,7 +20,7 @@
 		<span class="name"><c:out value="${newsData.member.name}"/></span>
 		<span class="authorship">
 			<span><c:out value="${newsData.authorship}"/></span>
-			<a href="<c:out value="${newsData.url}"/>"><c:out value="${newsData.url}"/></a>
+			<a href="<c:out value="${newsData.url}"/>">URL</a>
 		</span>
 	</div>
 	

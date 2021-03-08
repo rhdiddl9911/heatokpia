@@ -93,6 +93,43 @@
 	width: 55%;
 }
 
+.page{
+	text-align:center;
+	width: 1.3em;
+	display: inline-block;
+}
+
+.page a{
+	text-decoration: none;
+	width: 1em;
+	color: #000;
+	font-weight: 600;
+}
+
+.page.on, .page:hover{
+	background: #ddd;
+	border-radius: 5em;
+}
+
+.page.on a{
+	pointer-events: none;
+	cursor: default;
+}
+.prenav, .postnav{
+	width: 5em;
+	display: inline-block;
+}
+
+.prenav a, .postnav a{
+	text-decoration: none;
+	font-weight: 600;
+	color: #aaa;
+}
+
+.prenav a:hover, .postnav a:hover{
+	color: #2C3E50;
+}
+
 #categorySelect{
 	
 }
@@ -118,3 +155,5 @@
 	color: #0f5da5;
 	cursor: pointer;
 }
+
+

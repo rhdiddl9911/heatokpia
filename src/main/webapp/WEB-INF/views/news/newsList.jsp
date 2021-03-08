@@ -45,7 +45,7 @@
 			<option value="content">내용</option>
 			<option value="authorship">출처</option>
 		</select>
-		<input type="text" name="search" placeholder="검색어를 입력해주세요">
+		<input type="text" name="search" placeholder="검색어를 입력해주세요" value="${param.search}">
 		<input type="submit" value="검색">
 		</form>
 	</div>
@@ -55,18 +55,23 @@
 		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
 		<fmt:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
 		
+		<div class="prenav">
 		<c:if test="${start-10>0}">
-			<a href="/news?page=${start-10}${urlparams}"> 이전페이지 </a>
+			<a href="/news?page=${start-10}${urlparams}">이전페이지 </a>
 		</c:if>
-		
+		</div>
 		
 		<c:forEach var="pageNum" begin="${start}" end="${end}">
+		<div class="page <c:if test='${pageNum==param.page}'>on</c:if>">
 			<a href="/news?page=${pageNum}${urlparams}"><c:out value="${pageNum}"/></a>
+		</div>
 		</c:forEach>
 		
+		<div class="postnav">
 		<c:if test="${end<maxPage}">
-			<a href="/news?page=${end+1}${urlparams}"> 이전페이지 </a>
+			<a href="/news?page=${end+1}${urlparams}">이후페이지 </a>
 		</c:if>
+		</div>
 		
 	</div>
 	</div>

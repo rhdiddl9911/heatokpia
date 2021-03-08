@@ -57,13 +57,14 @@
 
 	<div id="boardfooter">
 	<div class="search">
-		<form name="search" action="/notice?page=1${paramCategory}" method="get">
+		<form name="search" action="/notice" method="get">
 		<input type="hidden" name="page" value="${1}">
+		<input type="hidden" name="category" value="${param.category}">
 		<select name="searchArea">
 			<option value="title">제목</option>
 			<option value="content">내용</option>
 		</select>
-		<input type="text" name="search" placeholder="검색어를 입력해주세요">
+		<input type="text" name="search" placeholder="검색어를 입력해주세요" value="${param.search}">
 		<input type="submit" value="검색">
 		</form>
 	</div>
@@ -73,18 +74,23 @@
 		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
 		<fmt:formatNumber var="end" type="number" pattern="0" value="${start+9 < maxPage ? start+9 : maxPage}" />
 		
+		<div class="prenav">
 		<c:if test="${start-10>0}">
 			<a href="/notice?page=${start-10}${urlparams}"> 이전페이지 </a>
 		</c:if>
-		
+		</div>
 		
 		<c:forEach var="pageNum" begin="${start}" end="${end}">
+		<div class="page <c:if test='${pageNum==param.page}'>on</c:if>">
 			<a href="/notice?page=${pageNum}${urlparams}"><c:out value="${pageNum}"/></a>
+		</div>
 		</c:forEach>
 		
+		<div class="postnav">
 		<c:if test="${end<maxPage}">
 			<a href="/notice?page=${end+1}${urlparams}"> 이전페이지 </a>
 		</c:if>
+		</div>
 		
 		<c:forEach var="boardData" items="${boardList}">
 		</c:forEach>
