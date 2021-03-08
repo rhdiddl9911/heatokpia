@@ -7,32 +7,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 공지 목록</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board.css"/>
+
 </head>
 <body>
-	<div>진행중인 문의</div>
-	<div>
-		<span>문의 제목</span>
-		<span>문의 일시</span>
-	</div>
-	<c:forEach var="qData" items="${nonfinishQList}">
-		<div>
-			<span><c:out value="${qData.title}"/></span>
-			<span><c:out value="${qData.createdate}"/></span>
+
+	<h4>진행중인 문의</h4>
+	<div class="board wrap">
+		<div class="board">
+		<div class="board head">
+			<span>문의 제목</span>
+			<span>문의 일시</span>
 		</div>
-	</c:forEach>
-	
-	<div>종료된 문의</div>
-	<div>
-		<span>문의 제목</span>
-		<span>문의 일시</span>
+		<c:if test="${nonfinishQList == null || nonfinishQList.size() == 0}">
+			<div class="board item">
+				진행 사항이 없습니다.
+			</div>
+		</c:if>
+		<c:forEach var="qData" items="${nonfinishQList}">
+			<div class="board item">
+				<span><c:out value="${qData.title}"/></span>
+				<span><c:out value="${qData.createdate}"/></span>
+			</div>
+		</c:forEach>
+		</div>
 	</div>
+	<br><br><br><br><br><br><br>
+	<h4>종료된 문의</h4>
+	<div class="board wrap">
+		<div class="board">
+		<div class="board head">
+			<span>문의 제목</span>
+			<span>문의 일시</span>
+		</div>
 	<c:forEach var="qData" items="${finishQList}">
-		<div onclick="location.href='/support/my/${qData.seq}'">
+		<div onclick="location.href='/support/my/${qData.seq}'" class="board item">
 			<span><c:out value="${qData.title}"/></span>
 			<span><c:out value="${qData.createdate}"/></span>
 		</div>
 	</c:forEach>
+		</div>
+	</div>
+	
 <%@include file="../footer.jsp" %>
 
 </body>

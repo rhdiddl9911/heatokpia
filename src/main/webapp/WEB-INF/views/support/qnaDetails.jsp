@@ -7,17 +7,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의 상세</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board_detail.css"/>
+
 </head>
 <body>
 	
 <div>내 문의</div>
 
-<div>
-	<div>${question.title}</div>
-	<div>${question.content}</div>
-	<div><span><label>답변자:</label>${anser.amember.name}</span></div>
-	<div>${anser.content}</div>
+<div id="detailwrap">
+	<h2>${question.title}</h2>
+	<div id="writeinfo">
+		<span class="name">${question.qmember.name}</span>
+		<span class="lastdate">${question.createdate}</span>
+	</div>
+	<div class="content">${question.content}</div>
+	<div id="writeinfo">
+		<span class="name"><label>답변자:</label>${anser.amember.name}</span>
+		<span class="lastdate">${anser.createdate}</span>
+	</div>
+	<div class="content">${anser.content}</div>
 </div>
 
 <%@include file="../footer.jsp" %>

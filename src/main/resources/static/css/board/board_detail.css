@@ -8,7 +8,6 @@
 }
 
 #writeinfo{
-	border-bottom: solid 1px #aaa;
 	border-top: solid 3px #2C3E50;
 	padding: 1em 0;
 	color: #aaa;
@@ -33,6 +32,7 @@
 	}
 
 .content{
+	border-top: solid 1px #aaa;
 	padding: 1em 0;
 }
 
