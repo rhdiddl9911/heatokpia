@@ -7,21 +7,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의 등록</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board_write.css"/>
+
 </head>
 <body>
 
 	<div>문의 등록</div>
-	<div>
+	<div id="writeForm">
 		<form id="write">
-			<div>
+			<div class="title">
 				<input type="text" name="title" placeholder="제목을 입력해주세요">
 			</div>
-			<div>
+			<div class="content">
 				<textarea name="content" placeholder="문의 내용을 입력해주세요"></textarea>
 			</div>
+			<div id="btn">
 			<input type="button" onclick="javascript:location.href='/support/my'" value="취소">
-			<input type="button" onclick="javascript:writeDo()" value="작성">
+			<input type="button" onclick="javascript:writeDo()" value="작성" class="primary">
+			</div>
 		</form>
 	</div>
 	
