@@ -23,8 +23,8 @@
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">
-			<span>제목</span>
-			<span>출처</span>
+			<span><strong>제목</strong></span>
+			<span><strong>출처</strong></span>
 		</div>
 		
 		<c:forEach var="newsData" items="${newsList}">

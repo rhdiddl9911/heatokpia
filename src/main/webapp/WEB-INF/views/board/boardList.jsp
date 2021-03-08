@@ -15,19 +15,19 @@
 <body>
 
 <div id="boardinfo">
-	<label>
+	<label><strong>
 	<c:if test="${category == 'free'}">자유게시판</c:if>
 	<c:if test="${category =='info'}">정보게시판</c:if>
-	</label>
+	</strong></label>
 	<button onclick="location.href='/board/${category}/new'" class="primary">글쓰기</button>
 </div>
 
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">
-			<span>제목</span>
-			<span>이름</span>
-			<span>생성날짜</span>
+			<span><strong>제목</strong></span>
+			<span><strong>이름</strong></span>
+			<span><strong>생성날짜</strong></span>
 		</div>
 		
 		<c:forEach var="boardData" items="${boardList}">

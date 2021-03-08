@@ -51,9 +51,15 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	
+	text-align: center;
+}
+
+.board.head span{
 }
 
 .board span:first-child{
+	text-align: left;
 	width: 65%;
 }
 

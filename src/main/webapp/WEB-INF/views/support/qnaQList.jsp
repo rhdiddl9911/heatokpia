@@ -34,7 +34,9 @@
 		</c:forEach>
 		</div>
 	</div>
-	<br><br><br><br><br><br><br>
+	
+	<br><br>
+	
 	<h4>종료된 문의</h4>
 	<div class="board wrap">
 		<div class="board">

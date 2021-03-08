@@ -37,9 +37,9 @@
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">
-			<span>카테고리</span>
-			<span>제목</span>
-			<span>생성날짜</span>
+			<span><strong>카테고리</strong></span>
+			<span><strong>제목</strong></span>
+			<span><strong>생성날짜</strong></span>
 		</div>
 		
 		<c:forEach var="noticeData" items="${noticeList}">
