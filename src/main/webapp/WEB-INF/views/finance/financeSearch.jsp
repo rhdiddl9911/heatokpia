@@ -42,13 +42,9 @@
 					"name": name
 				}
 			}).done(function(result){
-				alert("검색하신 " +name+ " 현재 주가 : "+result)
+				alert("검색하신 " +name+ " 현재 주가 : "+result +"$")
 			}).fail(function(error){
-				var errorMessege ="";
-				errorMessege += error.responseText;
-				alert(errorMessege);
-				
-				//location.reload();
+				alert("가져오지 못했습니다. 이름을 확인해주세요");
 			});
 		}
 	</script>

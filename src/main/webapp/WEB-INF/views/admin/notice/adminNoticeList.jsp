@@ -7,7 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 공지 사항</title>
+
+<link rel="stylesheet" type="text/css" href="/static/css/board/board.css"/>
+
 </head>
 <body>
 
@@ -22,32 +25,31 @@
 		</c:if>
 <div>
 
-<select onchange="javascript:location.replace(value)" id="category">
-	<option value="/admin/notice?page=1" <c:if test="${param.category == null}"><c:out value="selected"/></c:if>>전체</option>
-	<option value="/admin/notice?page=1&category=공지사항" <c:if test="${param.category == '공지사항'}"><c:out value="selected"/></c:if>>공지사항</option>
-	<option value="/admin/notice?page=1&category=이벤트" <c:if test="${param.category == '이벤트'}"><c:out value="selected"/></c:if>>이벤트</option>
-</select>
-
+<div id="boardinfo">
+	<select onchange="javascript:location.replace(value)" id="category">
+		<option value="/admin/notice?page=1" <c:if test="${param.category == null}"><c:out value="selected"/></c:if>>전체</option>
+		<option value="/admin/notice?page=1&category=공지사항" <c:if test="${param.category == '공지사항'}"><c:out value="selected"/></c:if>>공지사항</option>
+		<option value="/admin/notice?page=1&category=이벤트" <c:if test="${param.category == '이벤트'}"><c:out value="selected"/></c:if>>이벤트</option>
+	</select>
+	<button onclick="location.href='/admin/notice/write'">작성</button>
+</div>
 </div>
 <div class="board wrap">
-	<table class="board">
-		<tr>
-			<th>카테고리</th>
-			<th>제목</th>
-			<th>생성날짜</th>
-		</tr>
-		
-		<c:forEach var="noticeData" items="${noticeList}">
-		<tr onclick="location.href='/admin/notice/${noticeData.seq}'">
-			<td><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></td>
-			<td><c:out value="${noticeData.title}"></c:out></td>
-			<td><c:out value="${noticeData.createdate}"></c:out></td>
-		</tr>
-		</c:forEach>
-	</table>
+	<div class="board head">
+		<span>제목</span>
+		<span>카테고리</span>
+		<span>생성날짜</span>
+	</div>
+	<c:forEach var="noticeData" items="${noticeList}">
+	<div onclick="location.href='/admin/notice/${noticeData.seq}'" class="board item">
+		<span><c:out value="${noticeData.title}"/></span>
+		<span><c:out value="${noticeData.category == 0? '공지사항' : '이벤트'}"/></span>
+		<span><c:out value="${noticeData.createdate}"/></span>
+	</div>
+	</c:forEach>
 	
-	<div>
-	<span>
+	<div id="boardfooter">
+	<div class="search">
 		<form name="search" action="/admin/notice?page=1${paramCategory}" method="get">
 		<input type="hidden" name="page" value="${1}">
 		<select name="searchArea">
@@ -57,8 +59,8 @@
 		<input type="text" name="search" placeholder="검색어를 입력해주세요">
 		<input type="submit" value="검색">
 		</form>
-	</span>
-	<span>
+	</div>
+	<div class="pagingnation">
 		<c:set var="urlparams" value="${paramCategory}${paramSearcharea}${paramSearch}"/>
 		
 		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
@@ -79,11 +81,10 @@
 		
 		<c:forEach var="boardData" items="${boardList}">
 		</c:forEach>
-	</span>
 	</div>
+
+</div>
 	
-	
-	<button onclick="location.href='/admin/notice/write'">작성</button>
 	
 </div>
 <%@include file="../../footer.jsp" %>

@@ -9,21 +9,39 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 뉴스 작성</title>
+
+<link rel="stylesheet" type="text/css" href="/static/css/board/board_write.css"/>
+
 </head>
 <body>
-<p><font size="4" color="black">관리자 뉴스 입력</font></p>
+<h2>관리자 뉴스 입력</h2>
 <c:url var="insertUrl" value="/admin/notice/write"/>
 
+<div id="writeForm">
+
 <form action="" id="write" method="post">
-	<input type="text" name="title" placeholder="제목"><br>
-	<textarea name="content" placeholder ="내용"></textarea><br>
-	<input type="text" name="url" placeholder="url"><br>
-	<input type="text" name="authorship" placeholder="출처"><br>
+	<div class="title">
+	<input type="text" name="title" placeholder="제목">
+	</div>
+	<div class="content">
+	<textarea name="content" placeholder ="내용"></textarea>
+	</div>
+	
+	<div style="margin-bottom: 1em;">
+		
+	<input type="text" name="authorship" placeholder="출처" style="width: 40%;">
+	<input type="text" name="url" placeholder="url" style="width: 56%;"><br>
+	
+	</div>
+	
+	<div id="btn">
 	<input type="button" onclick="location.replace('/admin/news')" value="취소">
-	<input type="button" onclick="javascript:writeDo()" value="작성">
+	<input type="button" onclick="javascript:writeDo()" value="작성" class="primary">
+	</div>
 </form>
 
+</div>
 <%@include file="../../footer.jsp"%>
 </body>
 

@@ -9,7 +9,7 @@
 }
 	#writeForm .title input[type="text"]{
 		font-size: 1em;
-		width: 100%;
+		width: 98%;
 	}
 
 #writeForm .content{
@@ -19,7 +19,7 @@
 
 #writeForm textarea{
 	height: 100%;
-	width: 100%;
+	width: 98%;
 	line-height: 1em;
 }
 

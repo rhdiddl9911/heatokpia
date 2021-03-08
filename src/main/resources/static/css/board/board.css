@@ -1,11 +1,19 @@
 @charset "EUC-KR";
 
 #boardinfo{
+	margin: 0;
+	padding: 0;
 	position: relative;
+	height: 2em;
+	vertical-align: middle;
 }
 
 #boardinfo label{
 	font-size: 1.5em;
+}
+
+#boardinfo select{
+	font-size: 1em;
 }
 
 #boardinfo button,input[type="button"]{

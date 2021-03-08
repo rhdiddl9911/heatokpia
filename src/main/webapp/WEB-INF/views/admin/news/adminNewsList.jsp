@@ -7,7 +7,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 뉴스</title>
+
+<link rel="stylesheet" type="text/css" href="/static/css/board/board.css"/>
+
 </head>
 <body>
 		<c:if test="${param.searchArea != null}">
@@ -16,28 +19,30 @@
 		<c:if test="${param.search != null}">
 			<c:set var="paramSearch" value="&search=${param.search}"/>
 		</c:if>
-
+<div id="boardinfo">
+	<label>뉴스</label>
+	<button onclick="location.href='/admin/news/new'" class="primary">작성</button>
+</div>
 <div class="board wrap">
 	<div class="board">
-		<span><input type="checkbox" id="chk_all"></span>
-		<div id="">
-			<span>제목</span>
-			<span>출처</span>
-		</div>
-		
+		<div class="board head">
+		<span style="width: 3%;"><input type="checkbox" id="chk_all"></span>
+		<span style="text-align: left;width:70%;">제목</span>
+		<span style="width:20%;">출처</span>
+	</div>
 		<c:forEach var="newsData" items="${newsList}">
-			<div>
-				<span><input type="checkbox" name="chk"></span>
-				<div id="listitem" onclick="location.href='/admin/news/${newsData.seq}'">
-					<span><c:out value="${newsData.title}"/></span>
-					<span><c:out value="${newsData.authorship}"/>(<a href="<c:out value="${newsData.url}"/>">URL</a>)</span>
+			<div class="board item">
+				<span style="width: 3%;"><input type="checkbox" name="chk"></span>
+				<div style="display: inline-block;width: 95%;" onclick="location.href='/admin/news/${newsData.seq}'">
+					<span style="width:70%;"><c:out value="${newsData.title}"/></span>
+					<span style="width:20%;"><c:out value="${newsData.authorship}"/>(<a href="<c:out value="${newsData.url}"/>">URL</a>)</span>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
 	
-	<div>
-	<span>
+	<div id="boardfooter">
+	<div class="search">
 		<form name="search" action="/admin/news?page=1" method="get">
 		<input type="hidden" name="page" value="${1}">
 		<select name="searchArea">
@@ -48,8 +53,8 @@
 		<input type="text" name="search" placeholder="검색어를 입력해주세요">
 		<input type="submit" value="검색">
 		</form>
-	</span>
-	<span>
+	</div>
+	<div class="pagingnation">
 		<c:set var="urlparams" value="${paramSearcharea}${paramSearch}"/>
 		
 		<fmt:formatNumber var="start" type="number" pattern="0" value="${Math.floor((param.page-1)/10) * 10 +1}" />
@@ -67,12 +72,9 @@
 		<c:if test="${end<maxPage}">
 			<a href="/admin/news?page=${end+1}${urlparams}"> 이전페이지 </a>
 		</c:if>
-		
-	</span>
+	</div>
 	</div>
 	
-	
-	<button onclick="location.href='/admin/news/new'">작성</button>
 	
 </div>
 <%@include file="../../footer.jsp" %>

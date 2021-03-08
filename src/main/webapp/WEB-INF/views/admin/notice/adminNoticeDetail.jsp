@@ -7,21 +7,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 공지 상세</title>
+
+<link rel="stylesheet" type="text/css" href="/static/css/board/board_detail.css"/>
+
 </head>
 <body>
-	<div>
+
+	<div id="detailwrap">
+	<h2>
 		<c:out value="${noticeData.title}"/>
+	</h2>
+	<div id="writeinfo">
+		<span class="name"><c:out value="${noticeData.member.name}"/></span>
 	</div>
-	<div>
-		<c:out value="${noticeData.member.name}"/>
-	</div>
-	<div>
+	<div class="content">
 		<c:out value="${noticeData.content}"/>
 	</div>
+	</div>
 	
+	<div id="btn">
 	<input type="button" value="수정" onclick="javascript:goUpdate(${noticeData.seq})">
-	<input type="button" value="삭제" onclick="javascript:deleteDo(confirm('정말 삭제 하시겠습니까?'),${noticeData.seq})">
+	<input type="button" value="삭제" onclick="javascript:deleteDo(confirm('정말 삭제 하시겠습니까?'),${noticeData.seq})" class="primary">
+	</div>
 	
 	<%@include file="../../footer.jsp" %>
 	
