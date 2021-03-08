@@ -75,7 +75,7 @@ public class HomeController {
 	public Map<String, Object> join(@RequestBody Member value){
 		Map<String, Object> response = new HashMap<>();
 		
-		if(memberService.findById(value.getId()) == null) {
+		if(memberService.findById(value.getId()) != null) {
 			response.put("duplicate", true);
 			return response;
 		}

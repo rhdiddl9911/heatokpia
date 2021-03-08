@@ -18,8 +18,7 @@
 		<img src="/static/img/logo_heatok.png" onclick="location.href='/'" style="cursor:pointer;">
 		<span>
 			<sec:authorize access="isAuthenticated()">
-			<a>내정보</a> | 
-			<form method="post" action="/logout"><input type="submit" value="로그아웃"></form>
+			<a>내정보</a> | <a href="/logout">로그아웃</a>
 				<sec:authorize access="hasRole('ADMIN')">
 				<span><a href="/admin">관리자</a></span>
 				</sec:authorize>
@@ -36,7 +35,7 @@
 		<li><a href="/board/free">자유게시판</a></li>
 		<li><a href="/board/info">정보게시판</a></li>
 		<li><a href="/news">뉴스</a></li>
-		<li><a href="/workzone">주가정보</a></li>
+		<li><a href="/finance">주가정보</a></li>
 		<li><a href="/notice">공지사항</a></li>
 		<li><a href="/support">고객지원</a></li>
 	</ul>

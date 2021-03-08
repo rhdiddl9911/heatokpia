@@ -80,9 +80,9 @@ $(function() {
 			success : function(res) {
 				$("#d-spin").remove();
 				if (res.duplicate) {
-					$.notify("중복된 이메일 입니다.");
-					$("input[name='email']").val("");
-					$("input[name='email']").focus();
+					$.notify("중복된 아이디입니다.");
+					$("input[name='id']").val("");
+					$("input[name='id']").focus();
 				} else if (res.success) {
 					$.notify("회원 가입 완료되었습니다.");
 					setTimeout(function() {window.location = document.referrer}, 800);						

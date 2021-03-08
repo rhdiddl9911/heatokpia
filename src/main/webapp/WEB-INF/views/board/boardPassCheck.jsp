@@ -68,7 +68,6 @@
 				
 			}).fail(function(error){
 				var errorMessege ="";
-				console.log(error);
 				errorMessege += error.responseText;
 				alert(errorMessege);
 				//location.replace("/board/"+category+"/"+seq);
