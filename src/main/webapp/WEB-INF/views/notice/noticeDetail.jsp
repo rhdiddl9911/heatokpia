@@ -7,11 +7,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지 상세</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board_detail.css"/>
+
 </head>
 <body>
+
+	<div id="detailwrap">
 	<h1><c:out value="${noticeData.title}"/></h1>
-	<div>
+	<div id="writeinfo">
+	<span class="name"><c:out value="${noticeData.member.name}"/></span>
 		<span class="lastdate">
 		<c:if test="${(noticeData.updatedate == null)}">
 			<c:out value="${noticeData.createdate}"/>
@@ -21,13 +27,10 @@
 		</c:if>
 		</span>
 	</div>
-	<div>
-		<c:out value="${noticeData.member.name}"/>
-	</div>
 	<div class="content">
 		<c:out value="${noticeData.content}"/>
 	</div>
-	
+	</div>
 	
 	<%@include file="../footer.jsp" %>
 	

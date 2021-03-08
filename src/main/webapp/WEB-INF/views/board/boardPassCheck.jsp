@@ -19,7 +19,7 @@
 		<input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요">
 		
 		<div id="passbtn">
-			<input type="button" onclick="javascript:passCheck('${method}')" value="확인">
+			<input type="button" onclick="javascript:passCheck('${method}')" value="확인" class="primary">
 			<input type="button" onclick="javascript:location.reload();" value="취소">
 		</div>
 		

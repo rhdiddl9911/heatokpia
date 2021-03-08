@@ -7,21 +7,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>뉴스 상세</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board_detail.css"/>
+
 </head>
 <body>
-	<div>
-		<c:out value="${newsData.title}"/>
+	<div id="detailwrap"></div>
+	<h1><c:out value="${newsData.title}"/></h1>
+	
+	<div id="writeinfo">
+		<span class="name"><c:out value="${newsData.member.name}"/></span>
+		<span class="authorship">
+			<span><c:out value="${newsData.authorship}"/></span>
+			<a href="<c:out value="${newsData.url}"/>"><c:out value="${newsData.url}"/></a>
+		</span>
 	</div>
-	<div>
-		<c:out value="${newsData.member.name}"/>
-	</div>
-	<div>
+	
+	<div class="content">
 		<c:out value="${newsData.content}"/>
-	</div>
-	<div>
-		<span><c:out value="${newsData.authorship}"/> ::: </span>
-		<span><a href="<c:out value="${newsData.url}"/>"><c:out value="${newsData.url}"/></a></span>
 	</div>
 	
 	<%@include file="../footer.jsp" %>
