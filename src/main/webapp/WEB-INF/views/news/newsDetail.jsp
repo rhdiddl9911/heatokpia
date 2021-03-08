@@ -13,9 +13,9 @@
 
 </head>
 <body>
-	<div id="detailwrap"></div>
-	<h1><c:out value="${newsData.title}"/></h1>
-	
+	<div style="border-top: solid 3px #2C3E50;"></div>
+	<h2><c:out value="${newsData.title}"/></h2>
+	<div id="detailwrap">
 	<div id="writeinfo">
 		<span class="name"><c:out value="${newsData.member.name}"/></span>
 		<span class="authorship">
@@ -27,7 +27,7 @@
 	<div class="content">
 		<c:out value="${newsData.content}"/>
 	</div>
-	
+	</div>
 	<%@include file="../footer.jsp" %>
 	
 </body>
