@@ -34,3 +34,18 @@ CREATE SEQUENCE seq_q_board
 INCREMENT BY 1
 MINVALUE 1
 NOCYCLE;
+
+drop TRIGGER a_intrigger;
+
+CREATE TRIGGER a_intrigger
+	AFTER INSERT ON a_board
+	FOR EACH ROW
+	BEGIN 
+		UPDATE q_board q
+		SET q.anser = 1 
+		WHERE q.seq = :new.q_seq;
+	END; 
+
+SELECT * FROM ALL_TRIGGERS;
+
+	

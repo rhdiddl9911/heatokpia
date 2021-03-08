@@ -2,12 +2,15 @@ package com.heatokpia.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.heatokpia.domain.Member;
+import com.heatokpia.domain.SupportA;
 import com.heatokpia.domain.SupportQ;
+import com.heatokpia.dto.SupportQnA;
 import com.heatokpia.mapper.QnAMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +37,33 @@ public class QnAService {
 	
 	public List<SupportQ> getAdminQList(int page){
 		return qnaMapper.findQTitleListPlusEmail(page);
+	}
+	
+	public List<SupportQ> getAdminQListNoAnser(int page){
+		return qnaMapper.findQTitleListPlusEmailOrderByASC(page);
+	}
+	
+	public SupportQnA getQnA(int seq){
+		SupportQ qresult = qnaMapper.findByQSeq(seq);
+		SupportA aresult;
+		
+		if(qresult.isAnser()) {
+			aresult = qnaMapper.findByASeq(seq);
+		}else {
+			aresult = null;
+		}
+		
+		SupportQnA result = new SupportQnA();
+		result.setQuestion(qresult);
+		result.setAnser(aresult);
+		
+		return result;
+	}
+	
+	public void insertAData(int seq, UserDetails member, SupportA data) {
+		data.setQSeq(seq);
+		data.setAmember((Member) member);
+		qnaMapper.saveA(data);
 	}
 	
 }

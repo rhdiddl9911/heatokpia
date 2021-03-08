@@ -19,10 +19,10 @@
 	</resultMap>
 	
 	<resultMap type="SupportA" id="SupportA">
-		<result column="seq" property="qSeq"/>
+		<result column="q_seq" property="qSeq"/>
 		<result column="content" property="content"/>
 		<result column="createdate" property="createdate"/>
-		<collection property="qmember" resultMap="Member"/>
+		<collection property="amember" resultMap="Member"/>
 	</resultMap>
 	
 	<insert id="saveQ" parameterType="SupportQ">
@@ -46,10 +46,14 @@
 							FROM q_board 
 							]]>
 							<if test="anser == false">
+							<![CDATA[
 								WHERE anser IS NULL
+							]]>
 							</if>
-							<if test="anser == true">
+							<if test="anser != false">
+							<![CDATA[
 								WHERE anser IS NOT NULL
+							]]>
 							</if>
 							<![CDATA[
 								AND id = #{id}
@@ -73,5 +77,51 @@
 		]]>
 	</select>
 	
+	<select id="findQTitleListPlusEmailOrderByASC" parameterType="_int" resultType="SupportQ">
+		<![CDATA[
+		SELECT *
+			FROM (SELECT CEIL(ROWNUM/10) AS PAGE, A.*
+					FROM (SELECT q.seq, q.title, q.content, q.anser, q.createdate, m.email
+							FROM q_board q
+							INNER JOIN member m
+								ON q.id = m.id
+							WHERE q.anser IS NULL
+							ORDER BY seq ASC) A
+				)
+			WHERE PAGE = #{page}
+		]]>
+	</select>
+	
+	<select id="findByQSeq" parameterType="_int" resultMap="SupportQ">
+		<![CDATA[
+		SELECT q.seq, q.title, q.content, q.anser, q.createdate, m.name, m.email, m.id
+			FROM q_board q
+			INNER JOIN member m
+				ON q.id = m.id
+			WHERE q.seq = #{seq}
+		]]>
+	</select>
+	
+	<select id="findByASeq" parameterType="_int" resultMap="SupportA">
+		<![CDATA[
+		SELECT a.q_seq, a.content, a.createdate, m.name, m.email
+			FROM a_board a
+			INNER JOIN member m
+				ON a.id = m.id
+			WHERE a.q_seq = #{seq}
+		]]>
+	</select>
+	
+	<insert id="saveA" parameterType="SupportA">
+		<![CDATA[
+			INSERT INTO a_board(q_seq, content, createdate, id)
+			VALUES (
+				#{qSeq},
+				#{content},
+				SYSDATE,
+				#{amember.id}
+			)
+		]]>
+	</insert>
 	
 </mapper>

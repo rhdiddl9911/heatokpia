@@ -9,6 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.heatokpia.Service.QnAService;
 import com.heatokpia.domain.SupportQ;
+import com.heatokpia.dto.SupportQnA;
 
 import lombok.RequiredArgsConstructor;
 
@@ -55,6 +57,19 @@ public class MemberSupportController {
 		ModelAndView model = new ModelAndView("support/qnaQList");
 		model.addObject("nonfinishQList", service.getQList(page, false, member));
 		model.addObject("finishQList", service.getQList(page, true, member));
+		return model;
+	}
+	
+	@GetMapping("/{seq}")
+	public ModelAndView adminQnA(
+			@PathVariable int seq) {
+		ModelAndView model = new ModelAndView("support/qnaDetails");
+		
+		SupportQnA result = service.getQnA(seq);
+		
+		model.addObject("question", result.getQuestion());
+		model.addObject("anser", result.getAnser());
+		System.out.println( result.getAnser().toString());
 		return model;
 	}
 }

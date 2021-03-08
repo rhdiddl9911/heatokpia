@@ -14,4 +14,6 @@ public class SuppoprtController {
 		ModelAndView model = new ModelAndView("support/qnaIndex");
 		return model;
 	}
+	
+	// 이 아래 자주 묻는 질문 Detail 추가
 }

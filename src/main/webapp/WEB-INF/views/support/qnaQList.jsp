@@ -26,13 +26,11 @@
 	<div>
 		<span>문의 제목</span>
 		<span>문의 일시</span>
-		<span>답변자</span>
 	</div>
 	<c:forEach var="qData" items="${finishQList}">
 		<div onclick="location.href='/support/my/${qData.seq}'">
-			<span><c:out value=""/></span>
-			<span><c:out value=""/></span>
-			<span><c:out value=""/></span>
+			<span><c:out value="${qData.title}"/></span>
+			<span><c:out value="${qData.createdate}"/></span>
 		</div>
 	</c:forEach>
 <%@include file="../footer.jsp" %>
