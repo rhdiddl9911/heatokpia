@@ -111,3 +111,10 @@
 	color: #2C3E50;
 }
 
+.link{
+	
+}
+.link:hover{
+	color: #0f5da5;
+	cursor: pointer;
+}

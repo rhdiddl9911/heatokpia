@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<h4>공지사항</h4>
+<h4 class="link" onclick="location.href='/notice'">공지사항</h4>
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">
@@ -30,7 +30,7 @@
 		</div>
 </div>
 
-<h4>자유게시판</h4>
+<h4 class="link" onclick="location.href='/board/free'">자유게시판</h4>
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">
@@ -50,7 +50,7 @@
 		</div>
 </div>
 
-<h4>정보게시판</h4>
+<h4 class="link" onclick="location.href='/board/info'">정보게시판</h4>
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">
@@ -70,7 +70,7 @@
 		</div>
 </div>
 
-<h4>뉴스</h4>
+<h4 class="link" onclick="location.href='/news'">뉴스</h4>
 <div class="board wrap">
 	<div class="board">
 		<div class="board head">
