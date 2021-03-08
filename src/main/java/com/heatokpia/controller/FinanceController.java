@@ -22,7 +22,7 @@ import yahoofinance.YahooFinance;
 @Controller
 @RequestMapping("/finance")
 @RequiredArgsConstructor
-public class financeController {
+public class FinanceController {
 
 	@GetMapping()
 	public ModelAndView searchForm() {
