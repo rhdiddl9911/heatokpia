@@ -17,4 +17,9 @@ public class AdminController {
 	public String selectView() {
 		return "admin/adminboardSelect";
 	}
+	
+	@GetMapping("/workzone")
+	public String workzone() {
+		return "admin/adminWorkzone";
+	}
 }

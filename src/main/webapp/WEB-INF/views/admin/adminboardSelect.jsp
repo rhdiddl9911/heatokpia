@@ -7,14 +7,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리할 게시판 선택</title>
 </head>
 <body>
-<a href="">베스트게시판</a><br>
+<h2>게시물 관리</h2>
+<a href="/admin/workzone">베스트게시판</a><br>
 <a href="/admin/board/info">정보게시판</a><br>
 <a href="/admin/board/free">자유게시판</a><br>
 <a href="/admin/news">뉴스게시판</a><br>
-<a href="">댓글</a><br>
-<a href="">주가코멘트</a><br>
+<a href="/admin/workzone">댓글</a><br>
+<a href="/admin/workzone">주가코멘트</a><br>
 </body>
 </html>

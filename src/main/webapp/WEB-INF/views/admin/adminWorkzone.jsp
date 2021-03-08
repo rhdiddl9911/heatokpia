@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>준비중</title>
 </head>
 <body>
-<h1>어드민 홈</h1>
+<h1>준비중인 관리자 기능입니다.</h1>
 </body>
 </html>
