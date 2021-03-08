@@ -77,9 +77,6 @@ $(function() {
 			contentType : "application/json",
 			data : JSON.stringify(formData),
 			url : $form.attr("action"),
-			beforeSend : function(xhr){
-				xhr.setRequestHeader($("meta[name='_csrf_header']").attr("content"), $("meta[name='_csrf']").attr("content"));
-			},
 			success : function(res) {
 				$("#d-spin").remove();
 				if (res.duplicate) {

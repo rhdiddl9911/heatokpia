@@ -1,5 +1,7 @@
 package com.heatokpia.config;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import com.heatokpia.commons.handlers.WebAccessDeniedHandler;
 import com.heatokpia.domain.MemberRole;
@@ -51,7 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logout().logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl("/")
 		.and().exceptionHandling().accessDeniedHandler(webAccessDeniedHandler)		
 		.and()
-			.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+			.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+			.disable();
 		
 		// 로그인 1명만 되게, 나중에 로그인한 사람이 로그인됨
 		http.sessionManagement()
