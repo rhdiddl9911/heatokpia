@@ -7,17 +7,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 - 문의 상세</title>
+
+<link rel="stylesheet" type="text/css" href="/css/board/board_detail.css"/>
+
 </head>
 <body>
 
 <div>내 문의</div>
 
-<div>
-	<div>${question.title}</div>
-	<div>${question.content}</div>
-	<form id="write">
-	<textarea name="content" disabled="disabled" class="disabled">${anser.content}</textarea>
+<div id="detailwrap">
+	<h2>${question.title}</h2>
+	<div id="writeinfo">
+		<span class="name">${question.qmember.name}</span>
+		<span class="lastdate">${question.createdate}</span>
+	</div>
+	<div class="content">${question.content}</div>
+	
+	<div id="writeinfo">
+		<span class="name"><label>답변자:</label>${anser.amember.name}</span>
+		<span class="lastdate">${anser.createdate}</span>
+	</div>
+	<form id="write" class="content" style="height: 20em;">
+		<textarea name="content" disabled="disabled" class="disabled" style="width: 100%; height: 100%;">${anser.content}</textarea>
 	</form>
 </div>
 
