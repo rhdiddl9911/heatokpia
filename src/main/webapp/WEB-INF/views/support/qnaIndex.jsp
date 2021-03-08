@@ -35,7 +35,9 @@
 </head>
 <body>
 	<div>
-		자주 묻는 질문 영역
+		<strong>자주 묻는 질문 영역</strong>
+		<div><h2>자주 묻는 질문은</h2></div>
+		<div><h2>준비중 입니다</h2></div>
 	</div>
 
 	<div id="qnabtn">
